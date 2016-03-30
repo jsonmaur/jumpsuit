@@ -1,32 +1,16 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Router, Route, browserHistory, Link } from 'react-router'
-import _ from 'lodash'
+import { connectedComponent, statelessComponent } from './component'
+import Render from './render'
+import { setRoutes, setupRedux } from './routes'
+import { Link } from 'react-router'
 
+import React from 'react'
 global.React = React
 
-const Component = (obj) => React.createClass(obj)
-
-let routes
-const Routes = (obj) => (routes = obj)
-
-const Render = (App) => {
-  routes = _.map(routes, (component, route) => {
-    return <Route key={ route } path={ route } component={ component } />
-  })
-
-  render((
-    <Router history={ browserHistory }>
-      <Route path="/" component={ App }>
-        { routes }
-      </Route>
-    </Router>
-  ), document.getElementById('app'))
-}
-
 module.exports = {
-  Component,
-  Routes,
+  Component: connectedComponent,
+  SimpleComponent: statelessComponent,
+  Routes: setRoutes,
+  State: setupRedux,
   Render,
   Link,
 }
