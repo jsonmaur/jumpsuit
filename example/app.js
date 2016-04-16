@@ -8,7 +8,7 @@ import {
 } from '../lib'
 
 /**
- * component connected to state
+ * components connected to state
  */
 const App = Component({
   render() {
@@ -32,9 +32,6 @@ const App = Component({
   }
 })
 
-/**
- * component not connected to state
- */
 const Page1 = Component({
   render() {
     const { state: { count } } = this.props
