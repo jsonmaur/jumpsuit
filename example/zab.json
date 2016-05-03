@@ -1,9 +1,0 @@
-{
-  "name": "jumpsuit-example",
-  "routes": [
-    {
-      "src": "/**",
-      "dest": "index.html"
-    }
-  ]
-}

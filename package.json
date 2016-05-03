@@ -13,13 +13,15 @@
   "files": [
     "README.md"
   ],
+  "bin": {
+    "jumpsuit": "bin/jumpsuit"
+  },
   "scripts": {
-    "build": "babel src -d lib --no-comments",
-    "watch": "npm run build -- -s -w"
+    "build": "babel src -d lib",
+    "watch": "npm run build -- -w",
+    "start": "node server.js"
   },
   "dependencies": {
-    "babel-preset-stage-0": "6.5.0",
-    "lodash": "4.6.1",
     "react": "0.14.8",
     "react-dom": "0.14.8",
     "react-redux": "4.4.1",
@@ -31,7 +33,13 @@
   },
   "devDependencies": {
     "babel-cli": "6.6.5",
+    "babel-core": "^6.8.0",
+    "babel-loader": "^6.2.4",
     "babel-preset-es2015": "6.6.0",
-    "babel-preset-react": "6.5.0"
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
   }
 }
