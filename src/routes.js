@@ -15,8 +15,18 @@ export function setupRedux(obj) {
   })
 
   const middleware = applyMiddleware(thunk, routerMiddleware(browserHistory))
-  STORE = createStore(reducers, compose(middleware))
+  STORE = createStore(reducers, compose(
+    middleware,
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ))
   HISTORY = syncHistoryWithStore(browserHistory, STORE)
+
+  if (module.onReload) {
+    module.onReload(() => {
+      STORE.replaceReducer(reducers)
+      return true
+    })
+  }
 }
 
 let ROUTES
