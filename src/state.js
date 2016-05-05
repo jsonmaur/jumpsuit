@@ -2,21 +2,17 @@ import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
 
 export default function (name, actions){
-
   const state = {
     dispatchers: {},
   }
-
   const intialState = actions.initial || {}
   delete actions.initial
-
   state.reducer = (state = intialState, action = {}) => {
     if(!actions[`${name}_${action.type}`]){
       return state
     }
-    return Object.assign({}, state, actions[`${name}_${action.type}`](action.payload))
+    return Object.assign({}, state, actions[`${name}_${action.type}`](state, action.payload))
   }
-
   dispatchers[name] = actions.map((action, type) => {
     return function (payload) {
       // TODO: need the dispatch method from somewhere....
@@ -31,17 +27,10 @@ export default function (name, actions){
 }
 
 
-export function create (states) {
-
-  [{
-    name: '',
-    reducer: (reducer),
-    dispatchers: {ACTION_TYPE: proxied_function}
-  }]
+export function combine (states) {
   // TODO: handle single state and combined state as well
-
   const allReducers = {}
-  const allDispatchers = {}
+  const dispatchers = {}
 
   states.forEach((d) => {
     if(allReducers[d.name]){
@@ -49,7 +38,7 @@ export function create (states) {
       return
     }
     allReducers[d.name] = d.reducer
-    allDispatchers[d.name] = d.dispatchers
+    dispatchers[d.name] = d.dispatchers
   })
 
   // The middleware
@@ -66,17 +55,12 @@ export function create (states) {
     module.onReload(() => {
       store.replaceReducer(rootReducer)
       return true
-    });
+    })
   }
   // TODO: Handle webpack HMR
-  // else if(module.hot) {
-  //   module.hot.accept('./modules/reducer', () => {
-  //     store.replaceReducer(require('./modules/reducer'));
-  //   });
-  // }
 
   return {
     store,
-    allDispatchers,
+    dispatchers,
   }
 }

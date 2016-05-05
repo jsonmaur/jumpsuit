@@ -3,17 +3,17 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { handleActions, createAction } from 'redux-actions'
 import thunk from 'redux-thunk'
+import State from './state'
 
-export default function (Component, data) {
-  const reducer = handleActions(data, data.initial)
+export default function (state, routes) {
 
-  // const reducers = combineReducers({})
-  const middleware = applyMiddleware(thunk)
-  const enhancer = compose(middleware)
-  const store = createStore(reducer, enhancer)
+  // Detect a single state
+  if(state.name){
+    state = State.combine([state])
+  }
 
   return render((
-    <Provider store={ store }>
+    <Provider store={ state.store }>
       <Component />
     </Provider>
   ), document.getElementById('app'))
