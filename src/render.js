@@ -1,20 +1,20 @@
+import React from 'react'
 import { render } from 'react-dom'
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import { Router, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
-import { handleActions, createAction } from 'redux-actions'
-import thunk from 'redux-thunk'
-import State from './state'
+import { combine } from './rootReducer'
 
-export default function (state, routes) {
+export default function (stores, routes) {
+  const base = <Router history={ browserHistory }>{ routes }</Router>
 
-  // Detect a single state
-  if(state.name){
-    state = State.combine([state])
+  let child = { base }
+  if (process.env.NODE_ENV === 'development') {
+    const DevTools = require('./devtools').default
+    child = <div>{ base }<DevTools /></div>
   }
 
-  return render((
-    <Provider store={ state.store }>
-      <Component />
-    </Provider>
-  ), document.getElementById('app'))
+  render(
+    <Provider store={ combine(stores) }>{ child }</Provider>,
+    document.getElementById('app')
+  )
 }

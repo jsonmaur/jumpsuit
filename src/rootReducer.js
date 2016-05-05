@@ -1,40 +1,41 @@
-import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 
 export function combine (states) {
-  // TODO: handle single state and combined state as well
-  const allReducers = {}
-  const dispatchers = {}
+  let devTools
+  if (process.env.NODE_ENV === 'development') {
+    devTools = require('./devtools').default
+  }
 
-  states.forEach((d) => {
-    if(allReducers[d.name]){
-      console.log('WARNING: Duplicate state found for: ', d.name, d)
-      return
+  const middleware = applyMiddleware(thunk)
+
+  const devToolsExtension = window.devToolsExtension
+    ? window.devToolsExtension()
+    : devTools.instrument()
+
+  const enhancer = devTools
+    ? compose(middleware, devToolsExtension)
+    : compose(middleware)
+
+  const rootReducer = combineReducers(states)
+  const store = createStore(rootReducer, enhancer)
+
+  for (const i in states) {
+    states[i].dispatch = (type, payload) => store.dispatch({ type, payload })
+    states[i].getState = (stateName) => {
+      if (stateName === true) return store.getState()
+      else if (typeof stateName === 'string') return store.getState()[stateName]
+
+      return store.getState()[states[i]._name]
     }
-    allReducers[d.name] = d.reducer
-    dispatchers[d.name] = d.dispatchers
-  })
-
-  // The middleware
-  const middleware = [thunk]
-  // Create the root reducers
-  const rootReducer = combineReducers(allReducers)
-  const store = createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middleware),
-    window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
-  ))
-
-  // Handle browserify HMR via livereactload
-  if (module.onReload) {
-    module.onReload(() => {
-      store.replaceReducer(rootReducer)
-      return true
-    })
   }
-  // TODO: Handle webpack HMR
 
-  return {
-    store,
-    dispatchers,
-  }
+  // if (module.onReload) {
+  //   module.onReload(() => {
+  //     // store.replaceReducer(rootReducer)
+  //     return true
+  //   })
+  // }
+
+  return store
 }
