@@ -9,8 +9,8 @@ export default function (stores, routes) {
   const base = <Router history={ browserHistory }>{ routes }</Router>
 
   let child = base
-  if (process.env.NODE_ENV === 'development' && isDevTools()) {
-    const DevTools = require('./devtools')
+  if (process.env.NODE_ENV === 'development' && !isDevTools()) {
+    const DevTools = require('./devtools').default
     child = <div>{ base }<DevTools /></div>
   }
 
