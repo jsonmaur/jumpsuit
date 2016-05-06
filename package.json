@@ -45,6 +45,7 @@
     "fs-promise": "0.5.0",
     "loose-envify": "1.1.0",
     "minimist": "1.2.0",
+    "query-string": "4.1.0",
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-redux": "4.4.5",
@@ -59,7 +60,8 @@
     "rememberify": "1.0.1",
     "serve-static": "1.10.2",
     "uglify-js": "2.6.2",
-    "uglifyify": "3.0.1"
+    "uglifyify": "3.0.1",
+    "websocket": "1.0.22"
   },
   "devDependencies": {
     "babel-cli": "6.8.0",

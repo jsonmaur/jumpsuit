@@ -7,6 +7,7 @@ import envify from 'loose-envify'
 import babelify from 'babelify'
 import { debounce } from '../utils/common'
 import server from './server'
+import { connections } from './hsr'
 import { log, error } from './emit'
 
 export default async function () {
@@ -43,7 +44,7 @@ export default async function () {
     }
   })
 
-  server()
+  await server()
 }
 
 export function asset (evt, file, outputFile) {
@@ -90,6 +91,9 @@ const dBundle = debounce((cb) => {
   stream.on('error', cb)
   stream.on('finish', () => {
     log('build is ready')
+
+    connections.forEach((c) => c.send(JSON.stringify({ type: 'refresh' })))
+
     cb()
   })
 }, 200)
