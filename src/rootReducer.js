@@ -11,7 +11,9 @@ export function combine (states) {
 
   const devToolsExtension = window.devToolsExtension
     ? window.devToolsExtension()
-    : devTools.instrument()
+    : devTools
+    ? devTools.instrument() :
+    f => f
 
   const enhancer = devTools
     ? compose(middleware, devToolsExtension)

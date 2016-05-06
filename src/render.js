@@ -7,7 +7,7 @@ import { combine } from './rootReducer'
 export default function (stores, routes) {
   const base = <Router history={ browserHistory }>{ routes }</Router>
 
-  let child = { base }
+  let child = base
   if (process.env.NODE_ENV === 'development') {
     const DevTools = require('./devtools').default
     child = <div>{ base }<DevTools /></div>
