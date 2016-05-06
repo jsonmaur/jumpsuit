@@ -1,5 +1,3 @@
-// import React from 'react'
-// import { connect } from 'react-redux'
 import Container from './container'
 import query from 'query-string'
 

@@ -2,8 +2,6 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { isDevTools } from './utils/env'
 
-// let getSavedState = () => {}
-
 export function combine (states) {
   const middleware = applyMiddleware(thunk)
   const enhancers = [middleware]
@@ -33,8 +31,6 @@ export function combine (states) {
     return rootReducer(state, action)
   }
   const store = createStore(hsrReducer, enhancer)
-
-  // getSavedState = () => store.getState()
 
   for (const i in states) {
     states[i].dispatch = (type, payload) => store.dispatch({ type, payload })
