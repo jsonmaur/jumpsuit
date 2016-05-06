@@ -16,6 +16,9 @@ export default async function () {
         process.env.NODE_ENV = 'production'
         await require('./build').default()
         break
+      case 'server':
+        await require('./server').default()
+        break
       case 'help':
       case undefined:
         await require('./help').default()

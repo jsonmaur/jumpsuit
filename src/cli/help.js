@@ -8,6 +8,7 @@ export default async function () {
 
       watch      run the watch system
       build      run the build system
+      server     run the server
 
   Options:
 

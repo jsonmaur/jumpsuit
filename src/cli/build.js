@@ -5,8 +5,11 @@ import envify from 'loose-envify'
 import babelify from 'babelify'
 import uglifyify from 'uglifyify'
 import uglify from 'uglify-js'
+import { log } from './emit'
 
 export default async function () {
+  log('building for production')
+
   const filepath = path.resolve(process.cwd(), 'src/app.js')
 
   const b = browserify({

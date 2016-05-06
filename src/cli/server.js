@@ -1,6 +1,7 @@
 import path from 'path'
 import connect from 'connect'
 import serve from 'serve-static'
+import { log } from './emit'
 
 export default function () {
   const app = connect()
@@ -14,8 +15,9 @@ export default function () {
 
     next()
   })
-  
+
   app.use(serve(root))
 
-  app.listen(8080)
+  const port = 8080
+  app.listen(port, () => log(`running at http://localhost:${port}`))
 }

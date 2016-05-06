@@ -5,8 +5,9 @@ import browserify from 'browserify'
 import rememberify from 'rememberify'
 import envify from 'loose-envify'
 import babelify from 'babelify'
+import { debounce } from '../utils/common'
 import server from './server'
-import { log } from './emit'
+import { log, error } from './emit'
 
 export default async function () {
   log('starting')
@@ -59,7 +60,7 @@ export function asset (evt, file, outputFile) {
   }
 }
 
-const entries = []
+const entries = new Set()
 const b = browserify({
   plugin: [rememberify],
   cache: {}, packageCache: {},
@@ -76,28 +77,34 @@ b.transform({
   global: true,
 }, envify)
 
-export function javascript (evt, file) {
-  const filepath = path.resolve(process.cwd(), 'src/app.js')
+const filepath = path.resolve(process.cwd(), 'src/app.js')
+b.add(filepath)
 
-  if (entries.indexOf(file) > -1) {
+const output = path.resolve(process.cwd(), 'dist/app.js')
+fs.ensureDirSync(path.dirname(output))
+
+const dBundle = debounce((cb) => {
+  const stream = fs.createWriteStream(output)
+  b.bundle().pipe(stream)
+
+  stream.on('error', cb)
+  stream.on('finish', () => {
+    log('build is ready')
+    cb()
+  })
+}, 200)
+
+export function javascript (evt, file) {
+  if (entries.has(file)) {
     rememberify.forget(b, file)
-  } else {
-    b.add(file)
-    entries.push(file)
   }
 
-  const output = path.resolve(process.cwd(), 'dist/app.js')
-  fs.ensureDirSync(path.dirname(output))
-
-  const stream = fs.createWriteStream(output)
+  entries.add(file)
 
   return new Promise((resolve, reject) => {
-    b.bundle().pipe(stream)
-
-    stream.on('error', reject)
-    stream.on('finish', () => {
-      log('build is ready')
-      resolve()
+    dBundle((err) => {
+      if (err) reject(err)
+      else resolve()
     })
   })
 }
