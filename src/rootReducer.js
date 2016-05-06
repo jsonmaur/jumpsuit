@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import { isDev, isDevTools } from './utils/env'
+import { isDevTools } from './utils/env'
 
 export function combine (states) {
   const middleware = applyMiddleware(thunk)
   const enhancers = [middleware]
 
-  if (isDev()) {
+  if (process.env.NODE_ENV === 'development') {
     const devTools = require('./devtools').default
 
     const devToolsExtension = isDevTools()
