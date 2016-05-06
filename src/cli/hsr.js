@@ -39,6 +39,7 @@ export default async function () {
         const payload = JSON.parse(msg.utf8Data)
 
         if (payload.type === 'saveState') {
+          // TODO: only add if state has actually changed (check a hash)
           SAVED_STATES[payload.ts] = payload.state
           conn.send(JSON.stringify({ type: 'savedSaved', ts: payload.ts }))
         }
