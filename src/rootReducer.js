@@ -2,23 +2,20 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 
 export function combine (states) {
-  let devTools
+  const middleware = applyMiddleware(thunk)
+  const enhancers = [middleware]
+
   if (process.env.NODE_ENV === 'development') {
-    devTools = require('./devtools').default
+    const devTools = require('./devtools').default
+
+    const devToolsExtension = window.devToolsExtension
+      ? window.devToolsExtension()
+      : devTools.instrument()
+
+    enhancers.push(devToolsExtension)
   }
 
-  const middleware = applyMiddleware(thunk)
-
-  const devToolsExtension = window.devToolsExtension
-    ? window.devToolsExtension()
-    : devTools
-    ? devTools.instrument() :
-    f => f
-
-  const enhancer = devTools
-    ? compose(middleware, devToolsExtension)
-    : compose(middleware)
-
+  const enhancer = compose(...enhancers)
   const rootReducer = combineReducers(states)
   const store = createStore(rootReducer, enhancer)
 
