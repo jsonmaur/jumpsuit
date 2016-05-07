@@ -104,7 +104,9 @@ fs.ensureDirSync(path.dirname(output))
 
 const dBundle = debounce((cb) => {
   const stream = fs.createWriteStream(output)
-  b.bundle().pipe(stream)
+  b.bundle((err) => {
+    if (err) error(err)
+  }).pipe(stream)
 
   stream.on('error', cb)
   stream.on('finish', () => {
