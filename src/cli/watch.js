@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs-extra'
+import chalk from 'chalk'
 import chokidar from 'chokidar'
 import browserify from 'browserify'
 import rememberify from 'rememberify'
@@ -72,6 +73,9 @@ const b = browserify({
   plugin: [rememberify],
   paths: [path.resolve(process.cwd(), 'src')],
   cache: {}, packageCache: {},
+  insertGlobalVars: {
+    React: (file, dir) => 'require("react")'
+  }
 })
 
 b.transform(babelify, {
@@ -92,6 +96,7 @@ const output = path.resolve(process.cwd(), 'dist/app.js')
 fs.ensureDirSync(path.dirname(output))
 
 const dBundle = debounce((cb) => {
+  const ms = Date.now()
   const stream = fs.createWriteStream(output)
   b.bundle((err) => {
     if (err) error(err)
@@ -99,7 +104,7 @@ const dBundle = debounce((cb) => {
 
   stream.on('error', cb)
   stream.on('finish', () => {
-    log('build is ready')
+    log('build is ready', chalk.dim(`(${Date.now() - ms}ms)`))
 
     triggerRefresh()
     cb()
