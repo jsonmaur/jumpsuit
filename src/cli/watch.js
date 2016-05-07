@@ -67,6 +67,7 @@ export function asset (evt, file, outputFile) {
 const entries = new Set()
 const b = browserify({
   plugin: [rememberify],
+  paths: [path.resolve(process.cwd(), 'src')],
   cache: {}, packageCache: {},
 })
 
