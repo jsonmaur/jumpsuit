@@ -1,6 +1,8 @@
+import query from 'query-string'
 import Container from './container'
 import { getDevToolsState, setDevToolsState } from './devTools'
-import query from 'query-string'
+
+const { WebSocket, location, history } = window
 
 export default Container({
   componentWillMount () {
@@ -12,8 +14,8 @@ export default Container({
       delete params.hsr
 
       const newParams = query.stringify(params)
-      const newUrl = location.href.substring(0, location.href.indexOf('?'))
-        + (newParams.length ? `?${newParams}` : '')
+      const newUrl = location.href.substring(0, location.href.indexOf('?')) +
+        (newParams.length ? `?${newParams}` : '')
 
       if (ts) history.replaceState(null, null, newUrl)
 
@@ -30,26 +32,19 @@ export default Container({
       const payload = JSON.parse(e.data)
 
       if (payload.type === 'refresh') {
-
         const params = query.parse(location.search)
         const ts = Date.now()
         params.hsr = ts
 
         const state = getDevToolsState()
         client.send(JSON.stringify({ type: 'saveState', ts, state }))
-      }
-
-      else if (payload.type === 'savedSaved') {
+      } else if (payload.type === 'savedSaved') {
         const params = query.parse(location.search)
         params.hsr = payload.ts
         location.search = query.stringify(params)
-      }
-
-      else if (payload.type === 'loadState') {
+      } else if (payload.type === 'loadState') {
         setDevToolsState(payload.state)
-      }
-
-      else {
+      } else {
         console.log(payload)
       }
     }
@@ -61,5 +56,5 @@ export default Container({
 
   render () {
     return <div />
-  }
+  },
 })

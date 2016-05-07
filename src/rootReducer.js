@@ -1,11 +1,9 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import { isDevTools } from './utils/env'
 
 export function combine (states) {
   const middleware = applyMiddleware(thunk)
   const enhancers = [middleware]
-
 
   if (process.env.NODE_ENV === 'development') {
     const devTools = require('./devtools')
@@ -38,6 +36,6 @@ export function combine (states) {
   return store
 }
 
-export function getDevToolsState(){}
+export function getDevToolsState () {}
 
-export function setDevToolsState(){}
+export function setDevToolsState () {}

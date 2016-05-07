@@ -1,6 +1,6 @@
 import http from 'http'
 import websocket from 'websocket'
-import { getFreePort } from '../utils/common'
+// import { getFreePort } from '../utils/common'
 
 export const connections = new Set()
 
@@ -12,48 +12,32 @@ export default async function () {
   const server = http.createServer()
   server.listen(port)
 
-  const ws = new websocket.server({
+  const WsServer = websocket.server
+  const ws = new WsServer({
     httpServer: server,
     autoAcceptConnections: false,
   })
 
-  // ws.on('request', (req) => {
-  //   const conn = req.accept('echo-protocol', req.origin)
-  //   conn.send('welcome')
-  //
-  //   conn.on('message', (msg) => {
-  //     // console.log('Received Message: ' + msg.utf8Data)
-  //     conn.sendUTF(msg.utf8Data)
-  //   })
-  // })
+  ws.on('request', (req) => {
+    const conn = req.accept('echo-protocol', req.origin)
+    connections.add(conn)
 
-  // return new Promise((resolve, reject) => {
-    ws.on('request', (req) => {
-      const conn = req.accept('echo-protocol', req.origin)
-      connections.add(conn)
+    conn.send(JSON.stringify(Object.keys(SAVED_STATES)))
 
-      // console.log(Object.keys(SAVED_STATES))
-      conn.send(JSON.stringify(Object.keys(SAVED_STATES)))
+    conn.on('message', (msg) => {
+      const payload = JSON.parse(msg.utf8Data)
 
-      conn.on('message', (msg) => {
-        const payload = JSON.parse(msg.utf8Data)
-
-        if (payload.type === 'saveState') {
-          // TODO: only add if state has actually changed (check a hash)
-          SAVED_STATES[payload.ts] = payload.state
-          conn.send(JSON.stringify({ type: 'savedSaved', ts: payload.ts }))
+      if (payload.type === 'saveState') {
+        // TODO: only add if state has actually changed (check a hash)
+        SAVED_STATES[payload.ts] = payload.state
+        conn.send(JSON.stringify({ type: 'savedSaved', ts: payload.ts }))
+      } else if (payload.type === 'requestState') {
+        if (SAVED_STATES[payload.ts]) {
+          conn.send(JSON.stringify({ type: 'loadState', state: SAVED_STATES[payload.ts] }))
         }
-
-        else if (payload.type === 'requestState') {
-          if (SAVED_STATES[payload.ts]) {
-            conn.send(JSON.stringify({ type: 'loadState', state: SAVED_STATES[payload.ts] }))
-          }
-        }
-      })
-
-      conn.on('close', (code) => connections.delete(conn))
-
-      // resolve(conn)
+      }
     })
-  // })
+
+    conn.on('close', (code) => connections.delete(conn))
+  })
 }

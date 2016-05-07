@@ -2,7 +2,7 @@ import tools from 'browserify-transform-tools'
 import stylus from 'stylus'
 import css from 'css'
 import shortid from 'shortid'
-import insertCss from 'insert-css'
+// import insertCss from 'insert-css'
 
 export default tools.makeStringTransform('stylusify', {
   includeExtensions: ['.styl'],
@@ -25,7 +25,7 @@ export default tools.makeStringTransform('stylusify', {
       })
     })
 
-    const modulerized = css.stringify(parsed).replace(/\n/g, '')
+    // const modulerized = css.stringify(parsed).replace(/\n/g, '')
     // insertCss(${modulerized}, { prepend: true })
     const cmd = `var style = document.createElement('STYLE')
     document.getElementsByTagName('head')[0].appendChild(style)`
