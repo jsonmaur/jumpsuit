@@ -12,7 +12,7 @@ import server from './server'
 import { connections } from './hsr'
 import { log, error } from './emit'
 
-export default async function () {
+export default async function (argv) {
   log('starting')
 
   const baseDir = path.resolve(process.cwd(), 'src')
@@ -47,7 +47,7 @@ export default async function () {
     }
   })
 
-  await server()
+  await server(argv)
 }
 
 export function asset (evt, file, outputFile) {

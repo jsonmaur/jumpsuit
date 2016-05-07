@@ -10,18 +10,18 @@ export default async function () {
     switch (cmd) {
       case 'watch':
         process.env.NODE_ENV = 'development'
-        await require('./watch').default()
+        await require('./watch').default(argv)
         break
       case 'build':
         process.env.NODE_ENV = 'production'
-        await require('./build').default()
+        await require('./build').default(argv)
         break
       case 'server':
         await require('./server').default(argv)
         break
       case 'help':
       case undefined:
-        await require('./help').default()
+        await require('./help').default(argv)
         break
       default:
         error(`"${cmd}" is not a Jumpsuit command!`)
