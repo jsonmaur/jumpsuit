@@ -1,8 +1,9 @@
 import Container from './container'
+import { getDevToolsState, setDevToolsState } from './devTools'
 import query from 'query-string'
 
 export default Container({
-  componentDidMount () {
+  componentWillMount () {
     const client = new WebSocket('ws://0.0.0.0:7000/', 'echo-protocol')
 
     client.onopen = () => {
@@ -33,9 +34,8 @@ export default Container({
         const params = query.parse(location.search)
         const ts = Date.now()
         params.hsr = ts
-        this.props.dispatch({ type: '_HSR_GET' })
-        const state = this.props._state || {}
-        delete state._state
+
+        const state = getDevToolsState()
         client.send(JSON.stringify({ type: 'saveState', ts, state }))
       }
 
@@ -46,8 +46,7 @@ export default Container({
       }
 
       else if (payload.type === 'loadState') {
-        // console.log(payload.state)
-        this.props.dispatch({ type: '_HSR_REPLACE', payload: payload.state })
+        setDevToolsState(payload.state)
       }
 
       else {
