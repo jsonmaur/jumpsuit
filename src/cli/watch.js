@@ -110,8 +110,7 @@ const dBundle = debounce((cb) => {
   stream.on('finish', () => {
     log('build is ready')
 
-    connections.forEach((c) => c.send(JSON.stringify({ type: 'refresh' })))
-
+    triggerRefresh()
     cb()
   })
 }, 200)
@@ -137,15 +136,26 @@ export function cssStyl (evt, file) {
 
   return new Promise((resolve, reject) => {
     stylus(fs.readFileSync(input, 'utf8'))
+      .set('include css', true)
+      .set('hoist atrules', true)
       .use(nib())
+      .import(path.resolve(__dirname, '../../node_modules/nib/lib/nib/index.styl'))
+      .set('paths', [
+        path.resolve(process.cwd(), 'src')
+      ])
       .render((err, css) => {
         if (err) return reject(err)
 
         fs.writeFileSync(output, css)
+        triggerRefresh()
       })
   })
 }
 
 export function resolvePreset (preset) {
   return path.resolve(__dirname, `../../node_modules/babel-preset-${preset}`)
+}
+
+export function triggerRefresh () {
+  connections.forEach((c) => c.send(JSON.stringify({ type: 'refresh' })))
 }
