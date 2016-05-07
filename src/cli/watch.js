@@ -5,14 +5,8 @@ import browserify from 'browserify'
 import rememberify from 'rememberify'
 import envify from 'loose-envify'
 import babelify from 'babelify'
-// import postcss from 'browserify-postcss'
-// import postcssModules from 'postcss-modules'
-// import sugarss from 'sugarss'
-// import modcss from 'modcss'
-// import nib from 'nib'
-// import stylify from 'stylify'
-import stylusify from './transforms/stylusify'
-// import cssModulesify from 'css-modulesify'
+import stylify from 'stylify'
+import cssModulesify from 'css-modulesify'
 import { debounce } from '../utils/common'
 import server from './server'
 import { connections } from './hsr'
@@ -41,7 +35,6 @@ export default async function () {
 
       switch (path.extname(file)) {
         case '.js':
-        case '.styl':
         case '.css':
           await javascript(evt, file)
           break
@@ -89,35 +82,15 @@ b.transform({
   global: true,
 }, envify)
 
-// b.transform(modcss, {
-//   // use: [nib()],
-//   paths: [],
-//   nib: true,
-// })
-
-// b.transform(postcss, {
-//   // a list of postcss plugins
-//   plugin: [
-//     // 'precss',
-//     // postcssModules
-//   ],
-//   // basedir where to search plugins
-//   basedir: path.resolve(__dirname, '../../'),
-//   // insert a style element to apply the styles
-//   inject: true,
-// })
-
 // b.transform(stylify, {
 //   // use: [ nib() ],
 //   // set: { compress: true }
 // })
 
-b.transform(stylusify)
-
-// b.plugin(cssModulesify, {
-//   rootDir: path.resolve(__dirname, '../'),
-//   output: path.resolve(process.cwd(), 'dist/app.css'),
-// })
+b.plugin(cssModulesify, {
+  rootDir: path.resolve(__dirname, '../'),
+  output: path.resolve(process.cwd(), 'dist/app.css'),
+})
 
 const filepath = path.resolve(process.cwd(), 'src/app.js')
 b.add(filepath)
