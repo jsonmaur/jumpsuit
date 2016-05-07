@@ -5,7 +5,7 @@ import serve from 'serve-static'
 import hsr from './hsr'
 import { log } from './emit'
 
-export default function (argv) {
+export default function (argv = {}) {
   const app = connect()
 
   const root = path.resolve(process.cwd(), 'dist')
