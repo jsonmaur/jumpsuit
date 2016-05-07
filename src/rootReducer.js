@@ -6,31 +6,17 @@ export function combine (states) {
   const middleware = applyMiddleware(thunk)
   const enhancers = [middleware]
 
+
   if (process.env.NODE_ENV === 'development') {
     const devTools = require('./devtools')
-
-    const devToolsExtension = isDevTools()
-      ? window.devToolsExtension()
-      : devTools.default.instrument()
-
+    const devToolsExtension = devTools.default.instrument()
+    // window.devToolsExtension()
     enhancers.push(devToolsExtension)
   }
 
   const enhancer = compose(...enhancers)
   const rootReducer = combineReducers(states)
-
-  const hsrReducer = (state, action) => {
-    if (action.type === '_HSR_REPLACE'){
-      state = action.payload ? action.payload : state
-    }
-
-    if (action.type === '_HSR_GET'){
-      state = { ...state, _state: state }
-    }
-
-    return rootReducer(state, action)
-  }
-  const store = createStore(hsrReducer, enhancer)
+  const store = createStore(rootReducer, enhancer)
 
   for (const i in states) {
     states[i].dispatch = (type, payload) => store.dispatch({ type, payload })
@@ -51,3 +37,7 @@ export function combine (states) {
 
   return store
 }
+
+export function getDevToolsState(){}
+
+export function setDevToolsState(){}
