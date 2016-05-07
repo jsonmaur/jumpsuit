@@ -78,7 +78,9 @@
     "coveralls": "2.11.9",
     "cross-env": "1.0.7",
     "exlint": "0.1.4",
-    "nyc": "6.4.3"
+    "nyc": "6.4.3",
+    "proxyquire": "1.7.7",
+    "sinon": "1.17.4"
   },
   "babel": {
     "presets": [
