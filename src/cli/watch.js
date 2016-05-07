@@ -5,8 +5,9 @@ import browserify from 'browserify'
 import rememberify from 'rememberify'
 import envify from 'loose-envify'
 import babelify from 'babelify'
-import stylify from 'stylify'
-import cssModulesify from 'css-modulesify'
+// import cssModulesify from 'css-modulesify'
+import stylus from 'stylus'
+import nib from 'nib'
 import { debounce } from '../utils/common'
 import server from './server'
 import { connections } from './hsr'
@@ -37,6 +38,9 @@ export default async function (argv) {
         case '.js':
         case '.css':
           await javascript(evt, file)
+          break
+        case '.styl':
+          await cssStyl(evt, file)
           break
         default:
           asset(evt, file, outputFile)
@@ -87,10 +91,10 @@ b.transform({
 //   // set: { compress: true }
 // })
 
-b.plugin(cssModulesify, {
-  rootDir: path.resolve(__dirname, '../'),
-  output: path.resolve(process.cwd(), 'dist/app.css'),
-})
+// b.plugin(cssModulesify, {
+//   rootDir: path.resolve(__dirname, '../'),
+//   output: path.resolve(process.cwd(), 'dist/app.css'),
+// })
 
 const filepath = path.resolve(process.cwd(), 'src/app.js')
 b.add(filepath)
@@ -124,6 +128,21 @@ export function javascript (evt, file) {
       if (err) reject(err)
       else resolve()
     })
+  })
+}
+
+export function cssStyl (evt, file) {
+  const input = path.resolve(process.cwd(), 'src/app.styl')
+  const output = path.resolve(process.cwd(), 'dist/app.css')
+
+  return new Promise((resolve, reject) => {
+    stylus(fs.readFileSync(input, 'utf8'))
+      .use(nib())
+      .render((err, css) => {
+        if (err) return reject(err)
+
+        fs.writeFileSync(output, css)
+      })
   })
 }
 
