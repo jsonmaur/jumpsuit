@@ -17,7 +17,7 @@ export default async function () {
         await require('./build').default()
         break
       case 'server':
-        await require('./server').default()
+        await require('./server').default(argv)
         break
       case 'help':
       case undefined:

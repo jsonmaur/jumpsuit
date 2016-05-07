@@ -5,7 +5,7 @@ import serve from 'serve-static'
 import hsr from './hsr'
 import { log } from './emit'
 
-export default function () {
+export default function (argv) {
   const app = connect()
 
   const root = path.resolve(process.cwd(), 'dist')
@@ -37,11 +37,12 @@ export default function () {
   // })
   app.use(serve(root))
 
-  const port = 8080
+  const port = argv.port || argv.p || 8080
+  const host = argv.host || argv.h || 'localhost'
 
   return new Promise((resolve, reject) => {
-    app.listen(port, () => {
-      log(`running at http://localhost:${port}`)
+    app.listen(port, host, () => {
+      log(`running at http://${host}:${port}`)
       resolve(hsr())
     })
   })

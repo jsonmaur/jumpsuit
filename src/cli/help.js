@@ -6,11 +6,12 @@ export default async function () {
 
   Commands:
 
-      watch      run the watch system
-      build      run the build system
-      server     run the server
+      watch         run the watch system
+      build         run the build system
+      server        run the server
 
   Options:
 
-      (none yet)\n`)
+      -p, --port    specify the port you want to run on
+      -h, --host    specify the host you want to run on\n`)
 }
