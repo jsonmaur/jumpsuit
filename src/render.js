@@ -8,8 +8,9 @@ import { combine } from './rootReducer'
 export default function (stores, routes) {
   const store = combine({
     ...stores,
-    routing: routerReducer
+    routing: routerReducer,
   })
+
   const syncedHistory = syncHistoryWithStore(browserHistory, store)
   const base = <Router history={ syncedHistory }>{ routes }</Router>
 

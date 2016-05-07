@@ -5,7 +5,6 @@ import browserify from 'browserify'
 import rememberify from 'rememberify'
 import envify from 'loose-envify'
 import babelify from 'babelify'
-// import cssModulesify from 'css-modulesify'
 import stylus from 'stylus'
 import nib from 'nib'
 import { debounce } from '../utils/common'
@@ -86,16 +85,6 @@ b.transform({
   global: true,
 }, envify)
 
-// b.transform(stylify, {
-//   // use: [ nib() ],
-//   // set: { compress: true }
-// })
-
-// b.plugin(cssModulesify, {
-//   rootDir: path.resolve(__dirname, '../'),
-//   output: path.resolve(process.cwd(), 'dist/app.css'),
-// })
-
 const filepath = path.resolve(process.cwd(), 'src/app.js')
 b.add(filepath)
 
@@ -143,7 +132,7 @@ export function cssStyl (evt, file) {
       .use(nib())
       .import(path.resolve(__dirname, '../../node_modules/nib/lib/nib/index.styl'))
       .set('paths', [
-        path.resolve(process.cwd(), 'src')
+        path.resolve(process.cwd(), 'src'),
       ])
       .render((err, css) => {
         if (err) return reject(err)
