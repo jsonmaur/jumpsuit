@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Router, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import { combine } from './rootReducer'
+import { combine } from './reducer'
 
 export default function (stores, routes) {
   const store = combine({

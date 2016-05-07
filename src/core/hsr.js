@@ -1,6 +1,6 @@
 import query from 'query-string'
 import Container from './container'
-import { getDevToolsState, setDevToolsState } from './devTools'
+import { getDevToolsState, setDevToolsState } from './devtools'
 
 const { WebSocket, location, history } = window
 
