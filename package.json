@@ -26,7 +26,11 @@
     "README.md"
   ],
   "scripts": {
-    "lint": "exlint src",
+    "lint": "exlint src test bin",
+    "pretest": "rm -rf .nyc_output coverage && npm run lint",
+    "test": "cross-env NODE_ENV=testing nyc ava -a",
+    "posttest": "nyc report -r=lcov",
+    "coveralls": "cat coverage/lcov.info | coveralls",
     "build": "rm -rf lib && babel src -d lib",
     "watch": "npm run build -- -w",
     "prepublish": "npm run build -- --compact --no-comments"
@@ -66,10 +70,15 @@
     "websocket": "1.0.22"
   },
   "devDependencies": {
+    "ava": "0.14.0",
     "babel-cli": "6.8.0",
     "babel-plugin-transform-runtime": "6.8.0",
     "babel-preset-stage-0": "6.5.0",
-    "exlint": "0.1.4"
+    "babel-register": "6.8.0",
+    "coveralls": "2.11.9",
+    "cross-env": "1.0.7",
+    "exlint": "0.1.4",
+    "nyc": "6.4.3"
   },
   "babel": {
     "presets": [
@@ -85,6 +94,19 @@
           "regenerator": true
         }
       ]
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "include": [
+      "src"
     ]
   }
 }
