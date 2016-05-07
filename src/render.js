@@ -2,11 +2,19 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import { combine } from './rootReducer'
 import { isDevTools } from './utils/env'
 
+
 export default function (stores, routes) {
-  const base = <Router history={ browserHistory }>{ routes }</Router>
+  const store = combine({
+    ...stores,
+    routing: routerReducer
+  })
+  const syncedHistory = syncHistoryWithStore(browserHistory, store)
+  const base = <Router history={ syncedHistory }>{ routes }</Router>
 
   let child = base
   if (process.env.NODE_ENV === 'development') {
@@ -20,7 +28,7 @@ export default function (stores, routes) {
   }
 
   render(
-    <Provider store={ combine(stores) }>{ child }</Provider>,
+    <Provider store={ store }>{ child }</Provider>,
     document.getElementById('app')
   )
 }
