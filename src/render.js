@@ -16,7 +16,7 @@ export default function (stores, routes) {
   let child = base
   if (process.env.NODE_ENV === 'development') {
     if (window.devToolsExtension) {
-      console.error('Jumpsuit doesn\'t support the Redux Dev Tools browser extension!')
+      console.warn('Jumpsuit doesn\'t support the Redux Dev Tools browser extension!')
     }
 
     const Hsr = require('./hsr').default
