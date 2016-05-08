@@ -1,13 +1,35 @@
 import path from 'path'
-import connect from 'connect'
+import express from 'express'
+import bodyParser from 'body-parser'
 import serve from 'serve-static'
 import hsr from './hsr'
 import { log } from './emit'
 
+const SAVED_STATES = {}
+
 export default function (argv) {
-  const app = connect()
+  const app = express()
+  app.use(bodyParser.json())
 
   const root = path.resolve(process.cwd(), 'dist')
+
+  app.post('/__hsr__', (req, res, next) => {
+    const { state } = req.body
+    const ts = Date.now()
+
+    SAVED_STATES[ts] = state
+    res.json({ ts })
+  })
+
+  app.get('/__hsr__/:ts', (req, res, next) => {
+    const state = SAVED_STATES[req.params.ts]
+
+    if (!state) {
+      res.send()
+    } else {
+      res.json(state)
+    }
+  })
 
   app.use((req, res, next) => {
     if (!path.extname(req.url)) {
@@ -19,8 +41,8 @@ export default function (argv) {
 
   app.use(serve(root))
 
-  const port = argv.port || argv.p || 8080
-  const host = argv.host || argv.h || 'localhost'
+  const port = process.env.PORT = argv.port || argv.p || 8080
+  const host = process.env.HOST = argv.host || argv.h || 'localhost'
 
   return new Promise((resolve, reject) => {
     app.listen(port, host, () => {

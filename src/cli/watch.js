@@ -5,6 +5,7 @@ import chokidar from 'chokidar'
 import browserify from 'browserify'
 import rememberify from 'rememberify'
 import envify from 'loose-envify'
+import envifyCustom from 'loose-envify/custom'
 import babelify from 'babelify'
 import stylus from 'stylus'
 import nib from 'nib'
@@ -13,8 +14,11 @@ import server from './server'
 import { connections } from './hsr'
 import { log, error } from './emit'
 
+let PORT
 export default async function (argv) {
   log('starting')
+
+  PORT = argv.p || argv.port || 8080
 
   const baseDir = path.resolve(process.cwd(), 'src')
   const outputDir = path.resolve(process.cwd(), 'dist')
@@ -74,7 +78,7 @@ const b = browserify({
   paths: [path.resolve(process.cwd(), 'src')],
   cache: {}, packageCache: {},
   insertGlobalVars: {
-    React: (file, dir) => 'require("react")'
+  //   React: (file, dir) => 'require("react")'
   }
 })
 
@@ -112,6 +116,12 @@ const dBundle = debounce((cb) => {
 }, 300)
 
 export function javascript (evt, file) {
+  // b.insertGlobalVars = Object.assign({}, b.insertGlobalVars, {
+  //   __PORT__: () => PORT,
+  // })
+  //
+  // console.log(b.insertGlobalVars.__PORT__())
+
   if (entries.has(file)) {
     rememberify.forget(b, file)
   }
