@@ -28,11 +28,8 @@ export default Container({
         axios.get(`http://${this.host}:${this.port}/__hsr__/${ts}`).then((res) => {
           setDevToolsState(res.data)
           console.log('HSR data loaded!')
-        }).catch((err) => console.log(err))
+        })
       }
-
-      // const payload = JSON.stringify({ type: 'requestState', ts })
-      // client.send(payload)
       console.log('HSR is ready!')
     }
 
@@ -44,26 +41,12 @@ export default Container({
       const payload = JSON.parse(e.data)
 
       if (payload.type === 'refresh') {
-        // const params = query.parse(location.search)
-        // const ts = Date.now()
-        // params.hsr = ts
-
         const state = getDevToolsState()
         axios.post(`http://${this.host}:${this.port}/__hsr__`, { state }).then((res) => {
           const params = query.parse(location.search)
           params.hsr = res.data.ts
           location.search = query.stringify(params)
         }).catch((err) => console.log(err))
-
-        // client.send(JSON.stringify({ type: 'saveState', ts, state }))
-      // } else if (payload.type === 'savedSaved') {
-        // const params = query.parse(location.search)
-        // params.hsr = payload.ts
-        // location.search = query.stringify(params)
-      // } else if (payload.type === 'loadState') {
-        // setDevToolsState(payload.state)
-      // } else {
-        // console.log(payload)
       }
 
       if (payload.type === 'cssRefresh'){
@@ -78,9 +61,9 @@ export default Container({
       }
     }
 
-    // client.onclose = () => {
-    //   console.log('echo-protocol Client Closed')
-    // }
+    client.onclose = () => {
+      console.log('HSR Connection Closed')
+    }
   },
 
   render () {
