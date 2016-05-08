@@ -10,7 +10,7 @@ const SAVED_STATES = {}
 
 export default function (argv) {
   const app = express()
-  app.use(bodyParser.json())
+  app.use(bodyParser.json({ limit: '100mb' }))
   app.use(cors())
 
   const root = path.resolve(process.cwd(), 'dist')
