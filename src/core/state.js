@@ -15,6 +15,10 @@ export default function (stateName, actions) {
   Object.keys(actions).forEach((actionName) => {
     reducerWithActions[actionName] = `${stateName}_${actionName}`
 
+    if (process.env.NODE_ENV === 'testing') {
+      reducerWithActions[`_${actionName}`] = actions[actionName]
+    }
+
     const actionFn = actions[actionName]
     delete actions[actionName]
 
