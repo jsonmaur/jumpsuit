@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import serve from 'serve-static'
 import hsr from './hsr'
 import { log } from './emit'
@@ -10,6 +11,7 @@ const SAVED_STATES = {}
 export default function (argv) {
   const app = express()
   app.use(bodyParser.json())
+  app.use(cors())
 
   const root = path.resolve(process.cwd(), 'dist')
 
