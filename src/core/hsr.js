@@ -65,6 +65,17 @@ export default Container({
       // } else {
         // console.log(payload)
       }
+
+      if (payload.type === 'cssRefresh'){
+        axios.get(`/app.css`).then((res) => {
+          const existingCssStyles = document.getElementById('__HMR_STYLES__')
+          existingCssStyles && existingCssStyles.remove()
+          const newCssStyles = document.createElement('style')
+          newCssStyles.id = "__HMR_STYLES__"
+          newCssStyles.innerHTML = res.data
+          document.head.appendChild(newCssStyles)
+        }).catch((err) => console.log(err))
+      }
     }
 
     // client.onclose = () => {

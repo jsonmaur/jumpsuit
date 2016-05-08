@@ -153,7 +153,7 @@ const dCssStyle = debounce((cb) => {
       if (err) return reject(err)
 
       fs.writeFileSync(output, css)
-      triggerRefresh()
+      triggerCssRefresh()
     })
 
 }, 300)
@@ -173,4 +173,8 @@ export function resolvePreset (preset) {
 
 export function triggerRefresh () {
   connections.forEach((c) => c.send(JSON.stringify({ type: 'refresh' })))
+}
+
+export function triggerCssRefresh () {
+  connections.forEach((c) => c.send(JSON.stringify({ type: 'cssRefresh' })))
 }
