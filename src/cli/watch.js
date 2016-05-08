@@ -109,7 +109,7 @@ const dBundle = debounce((cb) => {
     triggerRefresh()
     cb()
   })
-}, 200)
+}, 300)
 
 export function javascript (evt, file) {
   if (entries.has(file)) {
@@ -126,25 +126,34 @@ export function javascript (evt, file) {
   })
 }
 
-export function cssStyl (evt, file) {
+const dCssStyle = debounce((cb) => {
+
   const input = path.resolve(process.cwd(), 'src/app.styl')
   const output = path.resolve(process.cwd(), 'dist/app.css')
 
-  return new Promise((resolve, reject) => {
-    stylus(fs.readFileSync(input, 'utf8'))
-      .set('include css', true)
-      .set('hoist atrules', true)
-      .use(nib())
-      .import(path.resolve(__dirname, '../../node_modules/nib/lib/nib/index.styl'))
-      .set('paths', [
-        path.resolve(process.cwd(), 'src'),
-      ])
-      .render((err, css) => {
-        if (err) return reject(err)
+  stylus(fs.readFileSync(input, 'utf8'))
+    .set('include css', true)
+    .set('hoist atrules', true)
+    .use(nib())
+    .import(path.resolve(__dirname, '../../node_modules/nib/lib/nib/index.styl'))
+    .set('paths', [
+      path.resolve(process.cwd(), 'src'),
+    ])
+    .render((err, css) => {
+      if (err) return reject(err)
 
-        fs.writeFileSync(output, css)
-        triggerRefresh()
-      })
+      fs.writeFileSync(output, css)
+      triggerRefresh()
+    })
+
+}, 300)
+
+export function cssStyl (evt, file) {
+  return new Promise((resolve, reject) => {
+    dCssStyle((err) => {
+      if (err) reject(err)
+      else resolve()
+    })
   })
 }
 

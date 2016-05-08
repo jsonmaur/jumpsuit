@@ -1,6 +1,7 @@
 import http from 'http'
 import websocket from 'websocket'
 // import { getFreePort } from '../utils/common'
+import { error } from './emit'
 
 export const connections = new Set()
 
@@ -10,7 +11,9 @@ export default async function () {
   const port = 7000
 
   const server = http.createServer()
-  server.listen(port)
+  server.listen(port, (err) => {
+    if (err) error(err)
+  })
 
   const WsServer = websocket.server
   const ws = new WsServer({
@@ -38,6 +41,9 @@ export default async function () {
       }
     })
 
-    conn.on('close', (code) => connections.delete(conn))
+    conn.on('close', (code) => {
+      console.log('closing web socket', code)
+      connections.delete(conn)
+    })
   })
 }
