@@ -16,7 +16,7 @@ import { log, error } from './emit'
 
 let PORT
 export default async function (argv) {
-  log('starting')
+  log('starting...')
 
   PORT = argv.p || argv.port || 8080
 
@@ -101,6 +101,8 @@ fs.ensureDirSync(path.dirname(output))
 
 const dBundle = debounce((cb) => {
   const ms = Date.now()
+  log('building...')
+
   const stream = fs.createWriteStream(output)
   b.bundle((err) => {
     if (err) error(err)
@@ -138,6 +140,9 @@ export function javascript (evt, file) {
 
 const dCssStyle = debounce((cb) => {
 
+  const ms = Date.now()
+  log('updating styles...')
+
   const input = path.resolve(process.cwd(), 'src/app.styl')
   const output = path.resolve(process.cwd(), 'dist/app.css')
 
@@ -150,9 +155,10 @@ const dCssStyle = debounce((cb) => {
       path.resolve(process.cwd(), 'src'),
     ])
     .render((err, css) => {
-      if (err) return reject(err)
+      if (err) return cb(err)
 
       fs.writeFileSync(output, css)
+      log('styles updated', chalk.dim(`(${Date.now() - ms}ms)`))
       triggerCssRefresh()
     })
 
