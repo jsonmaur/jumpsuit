@@ -60,6 +60,7 @@ export default Container({
           const existingCssStyles = document.getElementById('__HMR_STYLES__')
           existingCssStyles && existingCssStyles.remove()
           const newCssStyles = document.createElement('style')
+          newCssStyles.type = 'text/css'
           newCssStyles.id = "__HMR_STYLES__"
           newCssStyles.innerHTML = res.data
           document.head.appendChild(newCssStyles)
