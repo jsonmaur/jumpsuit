@@ -1,11 +1,11 @@
 import query from 'query-string'
 import axios from 'axios'
-import Container from './container'
+import Component from './component'
 import { getDevToolsState, setDevToolsState } from './devtools'
 
 const { WebSocket, location, history } = window
 
-export default Container({
+export default Component({
   port: process.env.PORT,
   host: process.env.HOST,
   wsPort: process.env.WS_PORT,
