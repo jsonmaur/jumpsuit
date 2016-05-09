@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
+import { routerMiddleware } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 
 export function combine (states) {
-  const middleware = applyMiddleware(thunk)
+  const middleware = applyMiddleware(thunk, routerMiddleware(browserHistory))
   const enhancers = [middleware]
 
   if (process.env.NODE_ENV === 'development') {
@@ -26,13 +28,6 @@ export function combine (states) {
       return store.getState()[states[i]._name]
     }
   }
-
-  // if (module.onReload) {
-  //   module.onReload(() => {
-  //     // store.replaceReducer(rootReducer)
-  //     return true
-  //   })
-  // }
 
   return store
 }
