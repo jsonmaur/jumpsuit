@@ -28,7 +28,7 @@ export default Container({
         axios.get(`http://${this.host}:${this.port}/__hsr__/${ts}`).then((res) => {
           setDevToolsState(res.data)
           console.log('HSR data loaded!')
-        })
+        }).catch((err) => console.error(err))
       }
       console.log('HSR is ready!')
     }
@@ -46,18 +46,24 @@ export default Container({
           const params = query.parse(location.search)
           params.hsr = res.data.ts
           location.search = query.stringify(params)
-        }).catch((err) => console.log(err))
+        }).catch((err) => console.error(err))
       }
 
       if (payload.type === 'cssRefresh'){
         axios.get(`/app.css`).then((res) => {
+          const existingLinkTags = [].slice.call(document.getElementsByTagName('link'))
+          const foundLinkTag = existingLinkTags.filter((d) => {
+            const linkSrc =  d.href.replace(location.origin, '')
+            return linkSrc === '/app.css' || linkSrc === 'app.css'
+          })[0]
+          foundLinkTag && foundLinkTag.remove()
           const existingCssStyles = document.getElementById('__HMR_STYLES__')
           existingCssStyles && existingCssStyles.remove()
           const newCssStyles = document.createElement('style')
           newCssStyles.id = "__HMR_STYLES__"
           newCssStyles.innerHTML = res.data
           document.head.appendChild(newCssStyles)
-        }).catch((err) => console.log(err))
+        }).catch((err) => console.error(err))
       }
     }
 
