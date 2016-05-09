@@ -1,11 +1,10 @@
 import React from 'react'
 import Router, { Route, IndexRoute, Link } from 'react-router'
-import { go, goBack, goForward } from 'react-router-redux'
 
 import Component from './component'
 import Render from './render'
 import State from './state'
-import Goto from './goto'
+import { Goto, Go, GoBack, GoForward } from './routing'
 
 global.React = React
 module.exports = {
@@ -19,8 +18,8 @@ module.exports = {
   Route,
   IndexRoute,
   Goto,
-  Go: go,
-  GoBack: goBack,
-  GoForward: goForward,
-  Link: Link,
+  Go,
+  GoBack,
+  GoForward,
+  Link
 }
