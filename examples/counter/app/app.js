@@ -7,8 +7,10 @@ import counterState from 'state/counter'
 
 const { Route, IndexRoute } = Router
 Render(
-  { counter: counterState }, (
-  <Route path="/" component={ App }>
-    <IndexRoute component={ Counter } />
-  </Route>
-))
+  { counter: counterState },
+  (
+    <Route path="/" component={ App }>
+      <IndexRoute component={ Counter } />
+    </Route>
+  )
+)

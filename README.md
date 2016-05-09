@@ -8,9 +8,9 @@ A powerful & efficient front end framework, built on the industry's top technolo
 
 ## Team
 
-[![Jason Maurer](https://avatars2.githubusercontent.com/u/911274?v=3&s=100)](http://github.com/jsonmaur) | [![Tanner Linsley](https://avatars1.githubusercontent.com/u/5580297?v=3&s=100)](https://github.com/tannerlinsley)
+[![Jason Maurer](https://avatars2.githubusercontent.com/u/911274?v=3&s=100)](https://github.com/jsonmaur) | [![Tanner Linsley](https://avatars1.githubusercontent.com/u/5580297?v=3&s=100)](https://github.com/tannerlinsley)
 :-:|:-:
-[Jason Maurer](http://github.com/jsonmaur) | [Tanner Linsley](http://github.com/tannerlinsley)
+[Jason Maurer](https://github.com/jsonmaur) | [Tanner Linsley](https://github.com/tannerlinsley)
 
 ## License
 
