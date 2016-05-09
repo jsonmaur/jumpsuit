@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import serve from 'serve-static'
 import open from 'open'
+import { getConfig } from './config'
 import hsr from './hsr'
 import { log } from './emit'
 
@@ -14,7 +15,7 @@ export default function (argv) {
   app.use(bodyParser.json({ limit: '100mb' }))
   app.use(cors())
 
-  const root = path.resolve(process.cwd(), 'dist')
+  const root = path.resolve(getConfig().build)
 
   app.post('/__hsr__', (req, res, next) => {
     const { state } = req.body
@@ -44,8 +45,8 @@ export default function (argv) {
 
   app.use(serve(root))
 
-  const port = process.env.PORT = argv.port || argv.p || 8080
-  const host = process.env.HOST = argv.host || argv.h || 'localhost'
+  const port = process.env.PORT = getConfig().port || argv.port || argv.p || 8080
+  const host = process.env.HOST = getConfig().host || argv.host || argv.h || 'localhost'
 
   return new Promise((resolve, reject) => {
     app.listen(port, host, () => {

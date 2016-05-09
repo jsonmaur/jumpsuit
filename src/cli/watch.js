@@ -9,6 +9,7 @@ import babelify from 'babelify'
 import stylus from 'stylus'
 import nib from 'nib'
 import { debounce } from '../utils/common'
+import { getConfig } from './config'
 import server from './server'
 import { connections } from './hsr'
 import { getLogo, log, error } from './emit'
@@ -16,8 +17,8 @@ import { getLogo, log, error } from './emit'
 export default async function (argv) {
   console.log(chalk.dim(getLogo(1)))
 
-  const baseDir = path.resolve(process.cwd(), 'src')
-  const outputDir = path.resolve(process.cwd(), 'dist')
+  const baseDir = path.resolve(getConfig().source)
+  const outputDir = path.resolve(getConfig().build)
 
   const watcher = chokidar.watch(baseDir, {
     ignored: /[\/\\](\.)|node_modules/,
@@ -71,7 +72,7 @@ export function asset (evt, file, outputFile) {
 const entries = new Set()
 const b = browserify({
   plugin: [rememberify],
-  paths: [path.resolve(process.cwd(), 'src')],
+  paths: [path.resolve(getConfig().source)],
   cache: {}, packageCache: {},
   // insertGlobalVars: {
   //   React: (file, dir) => 'require("react")'
@@ -89,10 +90,10 @@ b.transform({
   global: true,
 }, envify)
 
-const filepath = path.resolve(process.cwd(), 'src/app.js')
+const filepath = path.resolve(getConfig().source, 'app.js')
 b.add(filepath)
 
-const output = path.resolve(process.cwd(), 'dist/app.js')
+const output = path.resolve(getConfig().build, 'app.js')
 fs.ensureDirSync(path.dirname(output))
 
 const dBundle = debounce((cb) => {
@@ -132,8 +133,8 @@ const dCssStyle = debounce((cb) => {
   const ms = Date.now()
   log('updating styles...')
 
-  const input = path.resolve(process.cwd(), 'src/app.styl')
-  const output = path.resolve(process.cwd(), 'dist/app.css')
+  const input = path.resolve(getConfig().source, 'app.styl')
+  const output = path.resolve(getConfig().build, 'app.css')
 
   stylus(fs.readFileSync(input, 'utf8'))
     .set('include css', true)
@@ -141,7 +142,7 @@ const dCssStyle = debounce((cb) => {
     .use(nib())
     .import(path.resolve(__dirname, '../../node_modules/nib/lib/nib/index.styl'))
     .set('paths', [
-      path.resolve(process.cwd(), 'src'),
+      path.resolve(getConfig().source),
     ])
     .render((err, css) => {
       if (err) return cb(err)

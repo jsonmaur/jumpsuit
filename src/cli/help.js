@@ -6,7 +6,7 @@ export default async function () {
   const logo = chalk.dim(getLogo(1))
   const desc = chalk.dim(`${pkg.description} (v${pkg.version})`)
 
-  console.log(`\n${logo}
+  console.log(`${logo}
   ${desc}
 
   Usage:
@@ -18,6 +18,7 @@ export default async function () {
       watch         run the watch system
       build         run the build system
       server        run the server
+      help          display this text
 
   Options:
 

@@ -25,13 +25,6 @@ export function combine (states) {
     }
   }
 
-  // if (module.onReload) {
-  //   module.onReload(() => {
-  //     // store.replaceReducer(rootReducer)
-  //     return true
-  //   })
-  // }
-
   return store
 }
 
