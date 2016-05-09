@@ -15,6 +15,8 @@ export function combine (states) {
   const rootReducer = combineReducers(states)
   const store = createStore(rootReducer, enhancer)
 
+  getStore = () => store
+
   for (const i in states) {
     states[i].dispatch = (type, payload) => store.dispatch({ type, payload })
     states[i].getState = (stateName) => {
@@ -34,6 +36,8 @@ export function combine (states) {
 
   return store
 }
+
+export function getStore(){}
 
 export function getDevToolsState () {}
 
