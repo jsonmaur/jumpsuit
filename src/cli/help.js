@@ -12,6 +12,7 @@ export default async function () {
 
   Options:
 
+      -o, --open    open the app in your browser
       -p, --port    specify the port you want to run on
       -h, --host    specify the host you want to run on\n`)
 }

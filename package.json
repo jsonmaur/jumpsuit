@@ -53,6 +53,7 @@
     "loose-envify": "1.1.0",
     "minimist": "1.2.0",
     "nib": "1.1.0",
+    "open": "0.0.5",
     "query-string": "4.1.0",
     "react": "15.0.2",
     "react-dom": "15.0.2",

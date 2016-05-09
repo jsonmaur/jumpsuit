@@ -3,6 +3,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import serve from 'serve-static'
+import open from 'open'
 import hsr from './hsr'
 import { log } from './emit'
 
@@ -48,7 +49,11 @@ export default function (argv) {
 
   return new Promise((resolve, reject) => {
     app.listen(port, host, () => {
-      log(`running at http://${host}:${port}`)
+      const uri = `http://${host}:${port}`
+
+      if (argv.o || argv.open) open(uri)
+      log('running at', uri)
+
       resolve(hsr())
     })
   })
