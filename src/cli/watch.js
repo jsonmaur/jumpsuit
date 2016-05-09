@@ -11,10 +11,10 @@ import nib from 'nib'
 import { debounce } from '../utils/common'
 import server from './server'
 import { connections } from './hsr'
-import { log, error } from './emit'
+import { getLogo, log, error } from './emit'
 
 export default async function (argv) {
-  log('starting...')
+  console.log(chalk.dim(getLogo(1)))
 
   const baseDir = path.resolve(process.cwd(), 'src')
   const outputDir = path.resolve(process.cwd(), 'dist')

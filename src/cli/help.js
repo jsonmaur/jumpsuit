@@ -1,5 +1,14 @@
+import chalk from 'chalk'
+import pkg from '../../package.json'
+import { getLogo } from './emit'
+
 export default async function () {
-  console.log(`
+  const logo = chalk.dim(getLogo(1))
+  const desc = chalk.dim(`${pkg.description} (v${pkg.version})`)
+
+  console.log(`\n${logo}
+  ${desc}
+
   Usage:
 
       jumpsuit <command> [options]
