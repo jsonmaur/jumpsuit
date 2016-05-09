@@ -23,7 +23,7 @@ export default DevTools.createDevTools(
   <JumpsuitDockMonitor
     toggleVisibilityKey='ctrl-h'
     changePositionKey='ctrl-p'
-    defaultIsVisible={ true }>
+    defaultIsVisible={ false }>
     <LogMonitor theme='tomorrow' />
   </JumpsuitDockMonitor>
 )
