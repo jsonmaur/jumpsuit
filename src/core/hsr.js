@@ -49,11 +49,11 @@ export default Component({
         }).catch((err) => console.error(err))
       }
 
-      if (payload.type === 'cssRefresh'){
-        axios.get(`/app.css`).then((res) => {
+      if (payload.type === 'cssRefresh') {
+        axios.get('/app.css').then((res) => {
           const existingLinkTags = [].slice.call(document.getElementsByTagName('link'))
           const foundLinkTag = existingLinkTags.filter((d) => {
-            const linkSrc =  d.href.replace(location.origin, '')
+            const linkSrc = d.href.replace(location.origin, '')
             return linkSrc === '/app.css' || linkSrc === 'app.css'
           })[0]
           foundLinkTag && foundLinkTag.remove()
@@ -61,7 +61,7 @@ export default Component({
           existingCssStyles && existingCssStyles.remove()
           const newCssStyles = document.createElement('style')
           newCssStyles.type = 'text/css'
-          newCssStyles.id = "__HMR_STYLES__"
+          newCssStyles.id = '__HMR_STYLES__'
           newCssStyles.innerHTML = res.data
           document.head.appendChild(newCssStyles)
         }).catch((err) => console.error(err))

@@ -3,7 +3,5 @@ import { connect } from 'react-redux'
 
 export default function (options, connectFn) {
   const container = React.createClass(options)
-  if (!connectFn) return container
-
-  return connect(connectFn)(container)
+  return connectFn ? connect(connectFn)(container) : container
 }
