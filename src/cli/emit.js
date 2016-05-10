@@ -27,8 +27,8 @@ export function pending (msg) {
   process.stdout.write(`  ${ARROW} ${msg}... `)
 }
 
-export function pendingDone (time = '') {
-  if (time !== '') time = chalk.dim(`(${time}ms)`)
+export function pendingDone (time) {
+  if (time) time = chalk.dim(`(${time}ms)`)
   process.stdout.write(`${CHECKMARK} ${time}\n`)
 }
 

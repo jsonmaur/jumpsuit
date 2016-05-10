@@ -3,9 +3,9 @@ import fs from 'fs-promise'
 import glob from 'glob'
 import chokidar from 'chokidar'
 import { debounce } from '../utils/common'
+import server from './server'
 import { getConfig } from './config'
 import { outputLogo, pending, pendingDone, error } from './emit'
-import server from './server'
 import { buildAsset } from './compilers/assets'
 import { buildJs } from './compilers/javascript'
 import { buildStylus } from './compilers/stylus'
@@ -57,7 +57,6 @@ export async function handleEvent (evt, file) {
         break
       case 'styl':
         await buildStylus(evt, file)
-        // await new Promise((resolve) => setTimeout(resolve, 1000))
         break
       default:
         await buildAsset(evt, file)

@@ -4,6 +4,8 @@ import browserify from 'browserify'
 import rememberify from 'rememberify'
 import babelify from 'babelify'
 import envify from 'loose-envify'
+import uglifyify from 'uglifyify'
+import uglify from 'uglify-js'
 import { debounce, resolveModule } from '../../utils/common'
 import { triggerRefresh } from '../hsr'
 import { getConfig } from '../config'
@@ -15,6 +17,7 @@ export function initBundle () {
   const b = browserify({
     plugin: [rememberify],
     paths: [path.resolve(getConfig().source)],
+    debug: process.env.NODE_ENV === 'development',
     cache: {}, packageCache: {},
   })
 
@@ -29,6 +32,12 @@ export function initBundle () {
     global: true,
   }, envify)
 
+  if (process.env.NODE_ENV === 'production') {
+    b.transform({
+      global: true,
+    }, uglifyify)
+  }
+
   return b
 }
 
@@ -36,8 +45,13 @@ const createBundle = debounce((cb) => {
   const file = path.resolve(getConfig().output, path.basename(getConfig().entry))
 
   const stream = fs.createWriteStream(file)
-    .on('error', (err) => {
-      if (err) cb(err)
+    .on('error', cb)
+    .on('finish', () => {
+      if (process.env.NODE_ENV === 'production') {
+        const code = fs.readFileSync(file, 'utf8')
+        const newCode = uglify.minify(code, { fromString: true })
+        fs.writeFileSync(file, newCode.code)
+      }
     })
 
   bundler.bundle((err) => {
