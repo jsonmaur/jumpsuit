@@ -1,8 +1,8 @@
 # Jumpsuit
 
-[![Build Status](https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master)](https://travis-ci.org/jumpsuit/jumpsuit)
-[![Coverage Status](https://coveralls.io/repos/github/jumpsuit/jumpsuit/badge.svg?branch=master)](https://coveralls.io/github/jumpsuit/jumpsuit?branch=master)
-[![Join the chat at https://gitter.im/jumpsuit/jumpsuit.js](https://badges.gitter.im/jumpsuit/jumpsuit.js.svg)](https://gitter.im/jumpsuit/jumpsuit.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/zab/jumpsuit.svg?branch=master)](https://travis-ci.org/zab/jumpsuit)
+[![Coverage Status](https://coveralls.io/repos/github/zab/jumpsuit/badge.svg?branch=master)](https://coveralls.io/github/zab/jumpsuit?branch=master)
+[![Join the chat at https://gitter.im/zab/jumpsuit](https://badges.gitter.im/zab/jumpsuit.js.svg)](https://gitter.im/zab/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A powerful & efficient front end framework, built on the industry's top technologies
 
