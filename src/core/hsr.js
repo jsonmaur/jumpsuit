@@ -64,23 +64,20 @@ export default Component({
       if (payload.type === 'css_refresh') {
         const allLinks = Array.from(document.getElementsByTagName('link'))
         const link = allLinks.find((e) => e.href.match(/app\.css(?:\?[0-9]+)?$/))
-        const href = link.href || '/app.css'
 
         const newLink = document.createElement('LINK')
         newLink.type = 'text/css'
         newLink.rel = 'stylesheet'
-        newLink.href = href
+        newLink.href = link.href
           .replace(location.origin, '')
           .replace(/\?[0-9]+/, '') + `?${Date.now()}`
 
         document.head.appendChild(newLink)
 
         /* prevents flash of unstyled content */
-        const varNames = 'sheet' in newLink ? ['sheet', 'cssRules'] : ['styleSheet', 'rules']
+        const vars = 'sheet' in newLink ? ['sheet', 'cssRules'] : ['styleSheet', 'rules']
         const isLoaded = setInterval(() => {
-          const a = varNames[0]
-          const b = varNames[1]
-          if (newLink[a] && newLink[a][b].length) {
+          if (newLink[vars[0]] && newLink[vars[0]][vars[1]].length) {
             link && link.remove()
             clearInterval(isLoaded)
           }
