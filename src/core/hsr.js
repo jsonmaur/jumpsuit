@@ -39,7 +39,9 @@ export default Component({
         history.replaceState(null, null, newUrl)
 
         axios.get(`${this._hsrUrl()}/${ts}`).then((res) => {
-          setDevToolsState(res.data)
+          // We need to set the state outside of the axios stack
+          // so potential stack traces are accurate
+          setTimeout(() => {setDevToolsState(res.data)}, 1)
           console.info('HSR data loaded')
         }).catch((err) => console.error(err))
       }
