@@ -23,6 +23,7 @@
   "files": [
     "bin/",
     "lib/",
+    "assets/",
     "README.md"
   ],
   "scripts": {
