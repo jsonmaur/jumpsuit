@@ -62,21 +62,29 @@ export default Component({
       }
 
       if (payload.type === 'css_refresh') {
-        axios.get('/app.css').then((res) => {
-          const allLinks = Array.from(document.getElementsByTagName('link'))
-          const link = allLinks.find((e) => e.href.match(/app\.css$/))
-          link && link.remove()
+        const allLinks = Array.from(document.getElementsByTagName('link'))
+        const link = allLinks.find((e) => e.href.match(/app\.css(?:\?[0-9]+)?$/))
+        const href = link.href || '/app.css'
 
-          const allStyles = document.getElementById('_HSR_STYLES_')
-          allStyles && allStyles.remove()
+        const newLink = document.createElement('LINK')
+        newLink.type = 'text/css'
+        newLink.rel = 'stylesheet'
+        newLink.href = href
+          .replace(location.origin, '')
+          .replace(/\?[0-9]+/, '') + `?${Date.now()}`
 
-          const newStyles = document.createElement('STYLE')
-          newStyles.type = 'text/css'
-          newStyles.id = '_HSR_STYLES_'
-          newStyles.innerHTML = res.data
+        document.head.appendChild(newLink)
 
-          document.head.appendChild(newStyles)
-        }).catch((err) => console.error(err))
+        /* prevents flash of unstyled content */
+        const varNames = 'sheet' in newLink ? ['sheet', 'cssRules'] : ['styleSheet', 'rules']
+        const isLoaded = setInterval(() => {
+          const a = varNames[0]
+          const b = varNames[1]
+          if (newLink[a] && newLink[a][b].length) {
+            link && link.remove()
+            clearInterval(isLoaded)
+          }
+        }, 10)
       }
     }
   },

@@ -14,14 +14,14 @@ export default async function () {
 
   Commands:
 
-      watch         run the watch system
-      build         run the build system
-      server        run the server
-      help          display this text
+      watch           build initial app and wait for file changes
+      build           create a production-ready version of app
+      server          run the static server
 
   Options:
 
-      -o, --open    open the app in your browser
-      -p, --port    specify the port you want to run on
-      -h, --host    specify the host you want to run on\n`)
+      -o, --open      open the app in your browser
+      -p, --port      specify the port you want to run on
+      -h, --host      specify the host you want to run on
+      -v, --version   show jumpsuit version number\n`)
 }
