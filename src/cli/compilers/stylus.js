@@ -31,11 +31,20 @@ const createBundle = debounce((cb) => {
     })
 }, { wait: 300 })
 
+let firstRun = true
 export function buildStylus (evt, file) {
+  // console.log(evt, file)
   return new Promise((resolve, reject) => {
+    if (firstRun && !file.match(new RegExp(`${getConfig().entryStyl}$`))) {
+      return resolve()
+    }
+
+    // resolve()
     createBundle((err) => {
       if (err) reject(err)
       else resolve()
+
+      firstRun = false
     })
   })
 }

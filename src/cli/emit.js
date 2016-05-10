@@ -28,7 +28,7 @@ export function pending (msg) {
 }
 
 export function pendingDone (time = '') {
-  if (time) time = chalk.dim(`(${time}ms)`)
+  if (time !== '') time = chalk.dim(`(${time}ms)`)
   process.stdout.write(`${CHECKMARK} ${time}\n`)
 }
 

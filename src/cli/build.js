@@ -57,6 +57,7 @@ export async function handleEvent (evt, file) {
         break
       case 'styl':
         await buildStylus(evt, file)
+        // await new Promise((resolve) => setTimeout(resolve, 1000))
         break
       default:
         await buildAsset(evt, file)
