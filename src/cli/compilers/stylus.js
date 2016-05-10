@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import stylus from 'stylus'
 import nib from 'nib'
-import clean from 'clean-css'
+import Clean from 'clean-css'
 import { debounce, resolveModule } from '../../utils/common'
 import { getConfig } from '../config'
 import { triggerRefresh } from '../hsr'
@@ -29,13 +29,13 @@ const createBundle = debounce((cb) => {
       if (err) return cb(err)
 
       if (process.env.NODE_ENV === 'production') {
-        css = new clean().minify(css).styles
+        css = new Clean().minify(css).styles
       }
 
       fs.writeFileSync(output, css)
+      triggerRefresh('css_refresh')
 
       cb()
-      triggerRefresh('cssRefresh')
     })
 }, { wait: 300 })
 

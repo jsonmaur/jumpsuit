@@ -1,35 +1,32 @@
-import { push, go} from 'react-router-redux'
-import { getStore } from './reducer'
+import { push, go } from 'react-router-redux'
+import { STORE } from './reducer'
 
-export default function Goto(params){
-
-  // Back
-  if(params.back){
-    return go(-(params.back === true ? 1 : params.back))
+export default function (params = {}) {
+  if (params.back) {
+    const amount = params.back === true ? -1 : -(Math.abs(params.back))
+    return go(amount)
   }
 
-  // Forward
-  if(params.forward){
-    return go(params.forward === true ? 1 : params.forward)
+  if (params.forward) {
+    const amount = params.forward === true ? 1 : Math.abs(params.forward)
+    return go(amount)
   }
 
-  const store = getStore()
-  const state = store.getState()
+  const state = STORE.getState()
 
-  // Replace State
-  if(params.replace){
-    const newParams = Object.assign({}, params)
+  if (params.replace) {
+    const newParams = { ...params }
     delete newParams.replace
-    return store.dispatch(push(newParams))
+
+    return STORE.dispatch(push(newParams))
   }
 
-  // Upsert State
   const location = state.routing.locationBeforeTransitions
-  const newParams = Object.assign({
+  const newParams = Object.assign({}, {
     hash: location.hash,
     pathname: location.pathname,
   }, params)
-  newParams.query = Object.assign({}, location.query, newParams.query)
-  return store.dispatch(push(newParams))
 
+  newParams.query = Object.assign({}, location.query, newParams.query)
+  return STORE.dispatch(push(newParams))
 }

@@ -15,6 +15,7 @@ export default function (stateName, actions) {
   Object.keys(actions).forEach((actionName) => {
     reducerWithActions[actionName] = `${stateName}_${actionName}`
 
+    /* makes actions available directly when testing */
     if (process.env.NODE_ENV === 'testing') {
       reducerWithActions[`_${actionName}`] = actions[actionName]
     }

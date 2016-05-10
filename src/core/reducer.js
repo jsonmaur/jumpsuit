@@ -3,6 +3,8 @@ import { routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 
+export let STORE
+
 export function combine (states) {
   const middleware = applyMiddleware(thunk, routerMiddleware(browserHistory))
   const enhancers = [middleware]
@@ -15,9 +17,9 @@ export function combine (states) {
 
   const enhancer = compose(...enhancers)
   const rootReducer = combineReducers(states)
-  const store = createStore(rootReducer, enhancer)
 
-  getStore = () => store
+  const store = createStore(rootReducer, enhancer)
+  STORE = store
 
   for (const i in states) {
     states[i].dispatch = (type, payload) => store.dispatch({ type, payload })
@@ -32,8 +34,5 @@ export function combine (states) {
   return store
 }
 
-export function getStore(){}
-
 export function getDevToolsState () {}
-
 export function setDevToolsState () {}

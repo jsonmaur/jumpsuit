@@ -19,6 +19,9 @@ export function initBundle () {
     paths: [path.resolve(getConfig().source)],
     debug: process.env.NODE_ENV === 'development',
     cache: {}, packageCache: {},
+    insertGlobalVars: {
+      React: (file, basedir) => 'require("react")',
+    },
   })
 
   b.transform(babelify, {
