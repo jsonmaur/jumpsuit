@@ -1,13 +1,12 @@
 import chalk from 'chalk'
 import pkg from '../../package.json'
-import { getLogo } from './emit'
+import { outputLogo } from './emit'
 
 export default async function () {
-  const logo = chalk.dim(getLogo(1))
   const desc = chalk.dim(`${pkg.description} (v${pkg.version})`)
 
-  console.log(`${logo}
-  ${desc}
+  outputLogo({ indent: 1 })
+  console.log(`  ${desc}
 
   Usage:
 

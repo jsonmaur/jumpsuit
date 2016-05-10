@@ -10,7 +10,7 @@ export default async function () {
     switch (cmd) {
       case 'watch':
         process.env.NODE_ENV = 'development'
-        await require('./watch').default(argv)
+        await require('./build').watch(argv)
         break
       case 'build':
         process.env.NODE_ENV = 'production'

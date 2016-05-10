@@ -1,3 +1,4 @@
+import path from 'path'
 import net from 'net'
 
 /**
@@ -64,11 +65,11 @@ export function deepGet (obj = {}, path = '') {
  * Only call a function once within a given timeframe,
  * no matter how many times it is actually called.
  * @param {function} fn - The functiont to call
- * @param {integer} wait - The limit time (in ms)
  * @return {function} The debounced function to call
  */
-export function debounce (fn, wait = 100) {
+export function debounce (fn, options = {}) {
   typeCheck(fn, 'function')
+  options.wait = options.wait || 100
 
   let timeout
   return function () {
@@ -77,9 +78,7 @@ export function debounce (fn, wait = 100) {
     timeout = setTimeout(() => {
       timeout = null
       fn.apply(this, arguments)
-    }, wait)
-
-    if (!timeout) fn.apply(this, arguments)
+    }, options.wait)
   }
 }
 
@@ -98,4 +97,16 @@ export function getFreePort () {
       server.close(() => resolve(port))
     })
   })
+}
+
+/**
+ * Lets you resolve a module using either the CWD, or a dirname.
+ * @param {string} moduleName - The name of the module you want
+ * @param {string} base - The base you want to resolve from
+ * @param {integer} upLevel - The number of directories you want to go up when resolving
+ * @return {string} The absolute path for the module
+ */
+export function resolveModule (moduleName, base = '', upLevel = 0) {
+  const goBack = Array(upLevel + 1).join('../')
+  return path.resolve(base, `${goBack}node_modules/${moduleName}`)
 }

@@ -5,14 +5,11 @@ import { error } from './emit'
 
 export const connections = new Set()
 
-// const SAVED_STATES = {}
 export default async function () {
   const port = process.env.WS_PORT = await getFreePort()
 
   const server = http.createServer()
-  server.listen(port, (err) => {
-    if (err) error(err)
-  })
+  server.listen(port, error)
 
   const WsServer = websocket.server
   const ws = new WsServer({
@@ -22,27 +19,13 @@ export default async function () {
 
   ws.on('request', (req) => {
     const conn = req.accept('echo-protocol', req.origin)
+
     connections.add(conn)
-
-    // conn.send(JSON.stringify(Object.keys(SAVED_STATES)))
-
-    // conn.on('message', (msg) => {
-      // const payload = JSON.parse(msg.utf8Data)
-
-      // if (payload.type === 'saveState') {
-        // TODO: only add if state has actually changed (check a hash)
-        // SAVED_STATES[payload.ts] = payload.state
-        // conn.send(JSON.stringify({ type: 'savedSaved', ts: payload.ts }))
-      // } else if (payload.type === 'requestState') {
-      //   if (SAVED_STATES[payload.ts]) {
-      //     conn.send(JSON.stringify({ type: 'loadState', state: SAVED_STATES[payload.ts] }))
-      //   }
-      // }
-    // })
-
-    // conn.on('close', (code) => {
-    //   console.log('closing web socket', code)
-    //   connections.delete(conn)
-    // })
+    conn.on('close', () => connections.delete(conn))
   })
+}
+
+export function triggerRefresh (type = 'refresh') {
+  const payload = JSON.stringify({ type })
+  connections.forEach((c) => c.send(payload))
 }

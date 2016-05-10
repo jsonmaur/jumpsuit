@@ -27,14 +27,14 @@ export default Component({
         history.replaceState(null, null, newUrl)
         axios.get(`http://${this.host}:${this.port}/__hsr__/${ts}`).then((res) => {
           setDevToolsState(res.data)
-          console.log('HSR data loaded!')
+          console.info('HSR data loaded!')
         }).catch((err) => console.error(err))
       }
-      console.log('HSR is ready!')
+      console.info('HSR is ready!')
     }
 
     client.onerror = () => {
-      console.log('HSR Connection Error!')
+      console.error('HSR connection error!')
     }
 
     client.onmessage = (e) => {
@@ -69,7 +69,7 @@ export default Component({
     }
 
     client.onclose = () => {
-      console.log('HSR Connection Closed')
+      console.warn('HSR connection closed')
     }
   },
 

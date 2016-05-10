@@ -1,7 +1,7 @@
 {
   "name": "jumpsuit-counter-example",
+  "version": "1.0.0",
   "jumpsuit": {
-    "source": "app",
-    "build": "dist"
+    "source": "app"
   }
 }

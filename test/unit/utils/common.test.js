@@ -41,7 +41,7 @@ test('deepGet', (t) => {
 test('debounce', (t) => {
   const clock = sinon.useFakeTimers()
   const spy = sinon.spy()
-  const bounce = common.debounce(spy, 100)
+  const bounce = common.debounce(spy, { wait: 100 })
   bounce()
   bounce()
   clock.tick(90)

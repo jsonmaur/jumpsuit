@@ -1,51 +1,73 @@
 import path from 'path'
-import fs from 'fs-extra'
-import browserify from 'browserify'
-import envify from 'loose-envify'
-import babelify from 'babelify'
-import uglifyify from 'uglifyify'
-import uglify from 'uglify-js'
-import { log } from './emit'
+import fs from 'fs-promise'
+import glob from 'glob'
+import chokidar from 'chokidar'
+import { debounce } from '../utils/common'
+import { getConfig } from './config'
+import { outputLogo, pending, pendingDone, error } from './emit'
+import server from './server'
+import { buildAsset } from './compilers/assets'
+import { buildJs } from './compilers/javascript'
+import { buildStylus } from './compilers/stylus'
 
-export default async function () {
-  log('building for production')
+export default function (argv) {
+  outputLogo({ indent: 1 })
 
-  const filepath = path.resolve(process.cwd(), 'src/app.js')
-
-  const b = browserify({
-    entries: [filepath],
-  })
-
-  b.transform(babelify, {
-    presets: [
-      resolvePreset('es2015'),
-      resolvePreset('react'),
-    ],
-  })
-
-  b.transform({
-    global: true,
-  }, envify)
-
-  b.transform({
-    global: true,
-  }, uglifyify)
-
-  const output = path.resolve(process.cwd(), 'dist/app.js')
-
-  fs.ensureDirSync(path.dirname(output))
-  const stream = fs.createWriteStream(output)
-
-  b.bundle().pipe(stream)
-
-  stream.on('finish', () => {
-    const content = fs.readFileSync(output, 'utf8')
-    const result = uglify.minify(content, { fromString: true })
-
-    fs.writeFileSync(output, result.code)
+  glob(`${getConfig().source}/**/*`, { nodir: true }, (err, files) => {
+    if (err) return error(err)
+    files.forEach(async (file) => await handleEvent('add', file))
   })
 }
 
-export function resolvePreset (preset) {
-  return path.resolve(__dirname, `../../node_modules/babel-preset-${preset}`)
+export async function watch (argv) {
+  outputLogo({ indent: 1 })
+
+  const { source, output } = getConfig()
+
+  fs.emptyDirSync(output)
+  const watcher = chokidar.watch(source, {
+    persistent: true,
+    ignored: /[\/\\](\.)|node_modules|bower_components/,
+  })
+
+  watcher.on('all', handleEvent)
+  await server(argv)
+}
+
+let evtCount = 0
+let buildTime
+const isBuilding = debounce(() => pending('building'))
+const isDone = debounce((time) => pendingDone(time))
+
+export async function handleEvent (evt, file) {
+  try {
+    /* skip dir events */
+    if (evt.match(/Dir$/)) return
+
+    /* output build message and start timer */
+    if (++evtCount === 1) {
+      buildTime = Date.now()
+      isBuilding()
+    }
+
+    /* determine action based on file extension */
+    switch (path.extname(file).slice(1)) {
+      case 'js':
+        await buildJs(evt, file)
+        break
+      case 'styl':
+        await buildStylus(evt, file)
+        break
+      default:
+        await buildAsset(evt, file)
+        break
+    }
+
+    /* output build complete and build time */
+    if (--evtCount === 0) {
+      isDone(Date.now() - buildTime)
+    }
+  } catch (err) {
+    error(err)
+  }
 }
