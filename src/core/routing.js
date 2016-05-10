@@ -1,24 +1,29 @@
-import { push, go, goBack, goForward } from 'react-router-redux'
+import { push, go} from 'react-router-redux'
 import { getStore } from './reducer'
 
 export function Goto(params){
   const store = getStore()
-  const { routing } = store.getState()
-  const newParams = Object.assign({pathname: routing.locationBeforeTransitions.pathname}, params)
-  return store.dispatch(push(newParams))
+  return store.dispatch(push(params))
 }
 
 export function Go(params){
   const store = getStore()
-  return store.dispatch(go(params))
+  const state = store.getState()
+  const location = state.routing.locationBeforeTransitions
+  const newParams = Object.assign({
+      hash: location.hash,
+      pathname: location.pathname,
+    }, params)
+  newParams.query = Object.assign({}, location.query, newParams.query)
+  return store.dispatch(push(newParams))
 }
 
-export function GoBack(params){
-  const store = getStore()
-  return store.dispatch(goBack(params))
+export function GoBack(amount){
+  amount = typeof amount === 'undefined' ? 1 : amount
+  return go(-(amount))
 }
 
 export function GoForward(params){
-  const store = getStore()
-  return store.dispatch(goForward(params))
+  amount = typeof amount === 'undefined' ? 1 : amount
+  return go(amount)
 }
