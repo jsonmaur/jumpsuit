@@ -3,7 +3,8 @@ import path from 'path'
 import stylus from 'stylus'
 import nib from 'nib'
 import Clean from 'clean-css'
-import { debounce, resolveModule } from '../../utils/common'
+import resolve from 'resolve'
+import { debounce } from '../../utils/common'
 import { getConfig } from '../config'
 import { triggerRefresh } from '../hsr'
 
@@ -13,8 +14,9 @@ const createBundle = debounce((cb) => {
     path.basename(getConfig().entryStyl, '.styl')
   ) + '.css'
 
-  const nibBase = resolveModule('nib', __dirname, 3)
-  const nibFile = `${nibBase}/lib/nib/index.styl`
+  const nibFile = resolve.sync('nib/lib/nib/index.styl', {
+    basedir: process.cwd(),
+  })
 
   stylus(fs.readFileSync(getConfig().entryStyl, 'utf8'))
     .set('filename', getConfig().entryStyl)
