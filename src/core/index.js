@@ -4,7 +4,7 @@ import Router, { Route, IndexRoute, Link } from 'react-router'
 import Component from './component'
 import Render from './render'
 import State from './state'
-import { Goto, Go, GoBack, GoForward } from './routing'
+import Goto from './routing'
 
 global.React = React
 module.exports = {
@@ -18,8 +18,5 @@ module.exports = {
   Route,
   IndexRoute,
   Goto,
-  Go,
-  GoBack,
-  GoForward,
   Link
 }
