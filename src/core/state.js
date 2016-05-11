@@ -13,17 +13,18 @@ export default function (stateName, actions) {
   reducerWithActions._name = stateName
 
   Object.keys(actions).forEach((actionName) => {
-    reducerWithActions[actionName] = `${stateName}_${actionName}`
+    // Alias the action dispatcher to the state under the action name
+    reducerWithActions[actionName] = (payload) => {
+      return reducerWithActions.dispatch({
+        type: `${stateName}_${actionName}`,
+        payload
+       })
+    }
 
     /* makes actions available directly when testing */
     if (process.env.NODE_ENV === 'testing') {
       reducerWithActions[`_${actionName}`] = actions[actionName]
     }
-
-    const actionFn = actions[actionName]
-    delete actions[actionName]
-
-    actions[reducerWithActions[actionName]] = actionFn
   })
 
   return reducerWithActions
