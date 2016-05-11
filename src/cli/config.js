@@ -6,6 +6,7 @@ const defaults = {
   entry: 'app.js',
   entryStyl: 'app.styl', // wont be needed once css modules work
   assets: 'assets',
+  cssModules: true,
 
   indexFile: {
     // template: 'assets/index.html', // auto-generates if undefined
@@ -20,7 +21,9 @@ const defaults = {
     // other zab server options
   },
 
-  // transforms: [],
+  // browserifyTransforms: [],
+  // postcssPlugins: [],
+
   // build: {
   //   development: {
   //     sourceMaps: true, // only internal

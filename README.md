@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/zab/jumpsuit/badge.svg?branch=master)](https://coveralls.io/github/zab/jumpsuit?branch=master)
 [![Join the chat at https://gitter.im/zab/jumpsuit](https://badges.gitter.im/zab/jumpsuit.js.svg)](https://gitter.im/zab/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-A powerful & efficient front end framework, built on the industry's top technologies
+A powerful & efficient front end framework, built on the industry's best technologies.
 
 ## Team
 

@@ -6,6 +6,7 @@ import babelify from 'babelify'
 import envify from 'loose-envify'
 import uglifyify from 'uglifyify'
 import uglify from 'uglify-js'
+import postcss from '../transforms/postcss'
 import { debounce, resolveModule } from '../../utils/common'
 import { triggerRefresh } from '../hsr'
 import { getConfig } from '../config'
@@ -21,6 +22,7 @@ export function initBundle () {
     cache: {}, packageCache: {},
     insertGlobalVars: {
       React: (file, basedir) => 'require("react")',
+      _INSERT_CSS: (file, basedir) => 'require("insert-css")',
     },
   })
 
@@ -31,6 +33,7 @@ export function initBundle () {
     ],
   })
 
+
   b.transform({
     global: true,
   }, envify)
@@ -40,6 +43,8 @@ export function initBundle () {
       global: true,
     }, uglifyify)
   }
+
+  b.transform(postcss)
 
   return b
 }
