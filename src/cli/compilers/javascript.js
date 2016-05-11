@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import minimatch from 'minimatch'
 import browserify from 'browserify'
-import rememberify from 'rememberify'
+import forgetify from 'forgetify'
 import babelify from 'babelify'
 import envify from 'loose-envify'
 import uglifyify from 'uglifyify'
@@ -18,7 +18,7 @@ const entries = new Set()
 
 export function initBundle () {
   const b = browserify({
-    plugin: [rememberify],
+    plugin: [forgetify],
     paths: [path.resolve(getConfig().source)],
     debug: process.env.NODE_ENV === 'development',
     cache: {}, packageCache: {},
@@ -89,10 +89,10 @@ export function buildJs (evt, file) {
       return resolve()
     }
 
-    rememberify.forget(bundler, file)
+    forgetify.forget(bundler, file)
     getConfig().browserify.rebundles.forEach((f) => {
       if (minimatch(file, f.match)) {
-        rememberify.forget(bundler, path.resolve(f.file))
+        forgetify.forget(bundler, path.resolve(f.file))
       }
     })
 
