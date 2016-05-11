@@ -1,13 +1,14 @@
 import { Component } from 'jumpsuit'
-import styles from './index.css'
+import styles from './Button.sss'
 
 export default Component({
   render () {
     return (
-      <div>
-        <h1 className={ styles.title }>Hello World</h1>
+      <button
+        className={ styles.primary }
+        { ...this.props }>
         { this.props.children }
-      </div>
+      </button>
     )
   }
 })

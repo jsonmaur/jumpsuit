@@ -1,7 +1,10 @@
 {
   "name": "jumpsuit-counter-example",
   "version": "1.0.0",
-  "jumpsuit": {
-    "source": "app"
+  "devDependencies": {
+    "postcss-nested": "1.0.0",
+    "postcss-simple-vars": "1.2.0",
+    "reset.css": "2.0.2",
+    "sugarss": "0.1.3"
   }
 }

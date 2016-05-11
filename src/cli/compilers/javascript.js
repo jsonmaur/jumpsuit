@@ -10,18 +10,17 @@ import uglify from 'uglify-js'
 import resolve from 'resolve'
 import postcss from '../transforms/postcss'
 import { debounce } from '../../utils/common'
+import { depTree } from '../deptree'
 import { triggerRefresh } from '../hsr'
 import { getConfig } from '../config'
 
 let bundler
-const entries = new Set()
-
 export function initBundle () {
   const b = browserify({
     plugin: [forgetify],
     paths: [path.resolve(getConfig().source)],
     debug: process.env.NODE_ENV === 'development',
-    cache: {}, packageCache: {},
+    cache: {},
     insertGlobalVars: {
       React: (file, basedir) => 'require("react")',
       _INSERT_CSS_: (file, basedir) => 'require("insert-css")',
@@ -80,6 +79,7 @@ const createBundle = debounce((cb) => {
 }, { wait: 300 })
 
 let firstRun = true
+const entries = new Set()
 export function buildJs (evt, file) {
   return new Promise((resolve, reject) => {
     if (!bundler) bundler = initBundle()
@@ -89,12 +89,15 @@ export function buildJs (evt, file) {
       return resolve()
     }
 
-    forgetify.forget(bundler, file)
+    const invalidate = new Set([file])
+    if (depTree[file]) depTree[file].forEach((f) => invalidate.add(f))
     getConfig().browserify.rebundles.forEach((f) => {
       if (minimatch(file, f.match)) {
-        forgetify.forget(bundler, path.resolve(f.file))
+        invalidate.add(path.resolve(f.file))
       }
     })
+
+    invalidate.forEach((f) => forgetify.forget(bundler, f))
 
     if (!entries.has(file)) {
       entries.add(file)

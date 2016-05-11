@@ -28,10 +28,10 @@ const defaults = {
     transforms: [],
   },
 
-  // postcss: {
-  //   plugins: [],
-  //   parsers: []
-  // },
+  postcss: {
+    plugins: [],
+    parsers: [],
+  },
 
   // build: {
   //   development: {
