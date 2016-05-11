@@ -45,5 +45,5 @@ const cssModulesPlugin = cssModules({
   getJSON (cssFilename, json) {
     fs.mkdirpSync(path.dirname(cssFilename))
     fs.writeFileSync(cssFilename, json)
-  }
+  },
 })

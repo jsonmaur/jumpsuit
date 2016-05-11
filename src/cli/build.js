@@ -54,13 +54,11 @@ export async function handleEvent (evt, file) {
     switch (path.extname(file).slice(1)) {
       case 'js':
       case 'css':
-      case 'sss':
-      case 'styl':
         await buildJs(evt, file)
         break
-      // case 'styl':
-      //   await buildStylus(evt, file)
-      //   break
+      case 'styl':
+        await buildStylus(evt, file)
+        break
       default:
         await buildAsset(evt, file)
         break
