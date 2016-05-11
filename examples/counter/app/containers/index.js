@@ -1,7 +1,5 @@
 import { Component } from 'jumpsuit'
-import globalStyles from '../styles/app.css'
 import styles from './index.css'
-console.log(globalStyles)
 
 export default Component({
   render () {

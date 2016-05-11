@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs'
 
 const defaults = {
   source: 'src',
@@ -21,8 +22,16 @@ const defaults = {
     // other zab server options
   },
 
-  // browserifyTransforms: [],
-  // postcssPlugins: [],
+  browserify: {
+    rebundles: [],
+    extensions: ['.js', '.css'],
+    transforms: [],
+  },
+
+  // postcss: {
+  //   plugins: [],
+  //   parsers: []
+  // },
 
   // build: {
   //   development: {
@@ -38,8 +47,13 @@ const defaults = {
 }
 
 export function getConfig () {
-  const pkg = require(path.resolve('package.json'))
-  const config = Object.assign({}, defaults, pkg.jumpsuit)
+  const pkgFile = path.resolve('package.json')
+  const pkg = fs.existsSync(pkgFile) ? require(pkgFile) : {}
+
+  const jmpFile = path.resolve('jumpsuit.config.js')
+  const jmp = fs.existsSync(jmpFile) ? require(jmpFile) : {}
+
+  const config = Object.assign({}, defaults, pkg.jumpsuit || {}, jmp)
 
   const needToResolve = ['source', 'output']
   needToResolve.forEach((key) => {
@@ -49,6 +63,11 @@ export function getConfig () {
   config.entry = path.resolve(config.source, config.entry)
   config.entryStyl = path.resolve(config.source, config.entryStyl)
   config.indexFile.title = config.indexFile.title || pkg.name
+
+  config.browserify = Object.assign({}, defaults.browserify, config.browserify)
+  const combinedExts = defaults.browserify.extensions
+    .concat(config.browserify.extensions)
+  config.browserify.extensions = new Set(combinedExts)
 
   return config
 }

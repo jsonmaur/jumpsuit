@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs-extra'
+import minimatch from 'minimatch'
 import browserify from 'browserify'
 import rememberify from 'rememberify'
 import babelify from 'babelify'
@@ -23,7 +24,7 @@ export function initBundle () {
     cache: {}, packageCache: {},
     insertGlobalVars: {
       React: (file, basedir) => 'require("react")',
-      _INSERT_CSS: (file, basedir) => 'require("insert-css")',
+      _INSERT_CSS_: (file, basedir) => 'require("insert-css")',
     },
   })
 
@@ -46,6 +47,14 @@ export function initBundle () {
 
   b.transform(postcss)
 
+  getConfig().browserify.transforms.forEach((t) => {
+    if (typeof t === 'string') {
+      b.transform(resolve.sync(t, { basedir: process.cwd() }))
+    } else if (typeof t === 'object' && t.transform) {
+      b.transform(t.transform, t.options)
+    }
+  })
+
   return b
 }
 
@@ -60,13 +69,13 @@ const createBundle = debounce((cb) => {
         const newCode = uglify.minify(code, { fromString: true })
         fs.writeFileSync(file, newCode.code)
       }
+
+      triggerRefresh()
     })
 
   bundler.bundle((err) => {
     if (err) cb(err)
     else cb()
-
-    triggerRefresh()
   }).pipe(stream)
 }, { wait: 300 })
 
@@ -75,11 +84,18 @@ export function buildJs (evt, file) {
   return new Promise((resolve, reject) => {
     if (!bundler) bundler = initBundle()
 
+    /* only worry about bundling the main file on first run */
     if (firstRun && !file.match(new RegExp(`${getConfig().entry}$`))) {
       return resolve()
     }
 
     rememberify.forget(bundler, file)
+    getConfig().browserify.rebundles.forEach((f) => {
+      if (minimatch(file, f.match)) {
+        rememberify.forget(bundler, path.resolve(f.file))
+      }
+    })
+
     if (!entries.has(file)) {
       entries.add(file)
       bundler.add(file)

@@ -6,9 +6,9 @@ import { debounce } from '../utils/common'
 import server from './server'
 import { getConfig } from './config'
 import { outputLogo, pending, pendingDone, error } from './emit'
-import { buildAsset } from './compilers/assets'
 import { buildJs } from './compilers/javascript'
-import { buildStylus } from './compilers/stylus'
+import { buildAsset } from './compilers/assets'
+// import { buildStylus } from './compilers/stylus'
 
 export default function (argv) {
   outputLogo({ indent: 1 })
@@ -51,18 +51,25 @@ export async function handleEvent (evt, file) {
     }
 
     /* determine action based on file extension */
-    switch (path.extname(file).slice(1)) {
-      case 'js':
-      case 'css':
-        await buildJs(evt, file)
-        break
-      case 'styl':
-        await buildStylus(evt, file)
-        break
-      default:
-        await buildAsset(evt, file)
-        break
+    const ext = path.extname(file)
+    if (getConfig().browserify.extensions.has(ext)) {
+      await buildJs(evt, file)
+    } else {
+      await buildAsset(evt, file)
     }
+
+    // switch (path.extname(file).slice(1)) {
+    //   case 'js':
+    //   case 'css':
+    //     await buildJs(evt, file)
+    //     break
+    //   // case 'styl':
+    //   //   await buildStylus(evt, file)
+    //   //   break
+    //   default:
+    //     await buildAsset(evt, file)
+    //     break
+    // }
 
     /* output build complete and build time */
     if (--evtCount === 0) {

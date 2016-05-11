@@ -30,7 +30,7 @@ export default tools.makeStringTransform('postcss', {
     .process(content, options)
     .then((res) => {
       const css = new Clean().minify(res.css).styles
-      let outputJs = `_INSERT_CSS("${css}");`
+      let outputJs = `_INSERT_CSS_("${css}");`
 
       if (getConfig().cssModules) {
         const json = fs.readFileSync(generatedName)
