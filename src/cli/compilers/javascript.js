@@ -6,8 +6,9 @@ import babelify from 'babelify'
 import envify from 'loose-envify'
 import uglifyify from 'uglifyify'
 import uglify from 'uglify-js'
+import resolve from 'resolve'
 import postcss from '../transforms/postcss'
-import { debounce, resolveModule } from '../../utils/common'
+import { debounce } from '../../utils/common'
 import { triggerRefresh } from '../hsr'
 import { getConfig } from '../config'
 
@@ -28,8 +29,8 @@ export function initBundle () {
 
   b.transform(babelify, {
     presets: [
-      resolveModule('babel-preset-es2015', __dirname, 3),
-      resolveModule('babel-preset-react', __dirname, 3),
+      resolve.sync('babel-preset-es2015', {basedir:process.cwd()}),
+      resolve.sync('babel-preset-react', {basedir:process.cwd()}),
     ],
   })
 

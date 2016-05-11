@@ -98,15 +98,3 @@ export function getFreePort () {
     })
   })
 }
-
-/**
- * Lets you resolve a module using either the CWD, or a dirname.
- * @param {string} moduleName - The name of the module you want
- * @param {string} base - The base you want to resolve from
- * @param {integer} upLevel - The number of directories you want to go up when resolving
- * @return {string} The absolute path for the module
- */
-export function resolveModule (moduleName, base = '', upLevel = 0) {
-  const goBack = Array(upLevel + 1).join('../')
-  return path.resolve(base, `${goBack}node_modules/${moduleName}`)
-}

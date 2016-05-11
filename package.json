@@ -1,6 +1,6 @@
 {
   "name": "jumpsuit",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "One framework to rule them all",
   "homepage": "http://jumpsuit.io",
   "license": "MIT",
@@ -23,6 +23,7 @@
   "files": [
     "bin/",
     "lib/",
+    "assets/",
     "README.md"
   ],
   "scripts": {
@@ -75,6 +76,7 @@
     "redux-devtools-log-monitor": "1.0.11",
     "redux-thunk": "2.0.1",
     "rememberify": "1.0.1",
+    "resolve": "^1.1.7",
     "serve-static": "1.10.2",
     "stylus": "0.54.5",
     "uglify-js": "2.6.2",
