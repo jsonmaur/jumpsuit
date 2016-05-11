@@ -3,7 +3,7 @@ import fs from 'fs-promise'
 import glob from 'glob'
 import chokidar from 'chokidar'
 import { debounce } from '../utils/common'
-import server from './server'
+import serve from './serve'
 import { getConfig } from './config'
 import { outputLogo, pending, pendingDone, error } from './emit'
 import { buildJs } from './compilers/javascript'
@@ -31,7 +31,7 @@ export async function watch (argv) {
   })
 
   watcher.on('all', handleEvent)
-  await server(argv)
+  await serve(argv)
 }
 
 let evtCount = 0

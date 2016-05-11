@@ -16,7 +16,7 @@ export default async function () {
 
       watch           build initial app and wait for file changes
       build           create a production-ready version of app
-      server          run the static server
+      serve           run the static server
 
   Options:
 
