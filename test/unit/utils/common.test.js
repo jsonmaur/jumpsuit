@@ -27,17 +27,6 @@ test('getType', (t) => {
   t.is(common.getType(function () {}), 'function')
 })
 
-test('deepGet', (t) => {
-  const shallowObj = { a: 'hi' }
-  const deepObj = { a: { b: { c: 'hi' } } }
-  t.is(common.deepGet(shallowObj, 'a'), 'hi')
-  t.is(common.deepGet(deepObj, 'a.b.c'), 'hi')
-  t.falsy(common.deepGet())
-  t.falsy(common.deepGet(deepObj, 'a.b.d'))
-  t.throws(() => common.deepGet('hi'), TypeError)
-  t.throws(() => common.deepGet(shallowObj, 1), TypeError)
-})
-
 test('debounce', (t) => {
   const clock = sinon.useFakeTimers()
   const spy = sinon.spy()

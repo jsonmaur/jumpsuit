@@ -1,5 +1,5 @@
 import { Component } from 'jumpsuit'
-import styles from './Button.sss'
+import styles from './Button.css'
 
 export default Component({
   render () {

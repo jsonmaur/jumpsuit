@@ -4,7 +4,7 @@ import glob from 'glob'
 import chokidar from 'chokidar'
 import { debounce } from '../utils/common'
 import serve from './serve'
-import { getConfig } from './config'
+import { CONFIG } from './config'
 import { outputLogo, pending, pendingDone, error } from './emit'
 import { buildJs } from './compilers/javascript'
 import { buildAsset } from './compilers/assets'
@@ -12,7 +12,7 @@ import { buildAsset } from './compilers/assets'
 export default function (argv) {
   outputLogo({ indent: 1 })
 
-  glob(`${getConfig().source}/**/*`, { nodir: true }, (err, files) => {
+  glob(`${CONFIG.sourceDir}/**/*`, { nodir: true }, (err, files) => {
     if (err) return error(err)
     files.forEach(async (file) => await handleEvent('add', file))
   })
@@ -21,10 +21,10 @@ export default function (argv) {
 export async function watch (argv) {
   outputLogo({ indent: 1 })
 
-  const { source, output } = getConfig()
+  const { sourceDir, outputDir } = CONFIG
 
-  fs.emptyDirSync(output)
-  const watcher = chokidar.watch(source, {
+  fs.emptyDirSync(outputDir)
+  const watcher = chokidar.watch(sourceDir, {
     persistent: true,
     ignored: /[\/\\](\.)|node_modules|bower_components/,
   })
@@ -51,7 +51,7 @@ export async function handleEvent (evt, file) {
   try {
     /* determine action based on file extension */
     const ext = path.extname(file)
-    if (getConfig().browserify.extensions.has(ext)) {
+    if (CONFIG.browserify.extensions.indexOf(ext) > -1) {
       await buildJs(evt, file)
     } else {
       await buildAsset(evt, file)

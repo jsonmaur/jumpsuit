@@ -15,16 +15,13 @@ export default function (stateName, actions) {
   reducerWithActions._name = stateName
 
   Object.keys(actions).forEach((actionName) => {
+    /* alias the action dispatcher to the state under the action name */
+    reducerWithActions[actionName] = (payload) => reducerWithActions.dispatch({
+      type: `${stateName}_${actionName}`,
+      payload,
+    })
 
-    // Alias the action dispatcher to the state under the action name
-    reducerWithActions[actionName] = function(payload) {
-      return reducerWithActions.dispatch({
-        type: `${stateName}_${actionName}`,
-        payload
-      })
-    }
-
-    // Prefix an alias to the action for the reducer to reference
+    /* prefix an alias to the action for the reducer to reference */
     prefixedActions[`${stateName}_${actionName}`] = actions[actionName]
 
     /* makes actions available directly when testing */

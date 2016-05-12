@@ -11,7 +11,7 @@ export function error (err, lineBreak = false) {
   // else if (process.env.NODE_ENV === 'development' && err.stack) err = err.stack
 
   if (lineBreak) console.log()
-  
+
   const msg = err.message || err.msg || err
   console.log(chalk.red(`  ${ARROW}`, strip(msg)))
 }

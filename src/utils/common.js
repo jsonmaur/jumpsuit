@@ -40,27 +40,6 @@ export function typeCheck (value, types, options = {}) {
 }
 
 /**
- * Gets a value in a deep object with the path defined as a string.
- * @param {object} obj - The object to search in
- * @param {string} path - The path to search
- * @return {any} The value found at the path
- */
-export function deepGet (obj = {}, path = '') {
-  typeCheck(obj, 'object')
-  typeCheck(path, 'string')
-
-  const paths = path.split('.')
-
-  let current = obj
-  for (const i in paths) {
-    if (current[paths[i]] === undefined) return
-    current = current[paths[i]]
-  }
-
-  return current
-}
-
-/**
  * Only call a function once within a given timeframe,
  * no matter how many times it is actually called.
  * @param {function} fn - The functiont to call

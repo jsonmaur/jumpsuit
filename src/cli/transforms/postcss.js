@@ -1,20 +1,18 @@
 import path from 'path'
 import tools from 'browserify-transform-tools'
 import postcss from 'postcss'
-import atImport from 'postcss-import'
-import cssModules from 'postcss-modules'
-import autoprefixer from 'autoprefixer'
-import MemoryFS from 'memory-fs'
-import Clean from 'clean-css'
+import postcssImport from 'postcss-import'
+import postcssModules from 'postcss-modules'
 import resolve from 'resolve'
 import minimatch from 'minimatch'
-import { getConfig } from '../config'
-import { error } from '../emit'
+import MemoryFS from 'memory-fs'
+import Clean from 'clean-css'
+import { CONFIG } from '../config'
 import { addToDepTree } from '../deptree'
 
 const fs = new MemoryFS()
 
-const cssModulesPlugin = cssModules({
+const cssModulesPlugin = postcssModules({
   getJSON (cssFilename, json) {
     fs.mkdirpSync(path.dirname(cssFilename))
     fs.writeFileSync(cssFilename, json)
@@ -22,34 +20,31 @@ const cssModulesPlugin = cssModules({
 })
 
 export default tools.makeStringTransform('postcss', {
-  includeExtensions: ['.css', '.sss'],
+  includeExtensions: CONFIG.postcss.extensions,
 }, async (content, opts, done) => {
   try {
     const options = { from: opts.file }
 
     const plugins = [
-      atImport({
+      postcssImport({
         path: [
-          getConfig().source,
+          CONFIG.sourceDir,
           path.dirname(opts.file),
           path.resolve(process.cwd(), 'node_modules'),
         ],
         onImport: (files) => {
           files.forEach((f) => {
-            if (f !== opts.file) {
-              addToDepTree(f, opts.file)
-            }
+            if (f !== opts.file) addToDepTree(f, opts.file)
           })
         },
       }),
-      autoprefixer,
     ]
 
-    if (getConfig().cssModules) {
+    if (CONFIG.postcss.modules) {
       plugins.push(cssModulesPlugin)
     }
 
-    getConfig().postcss.parsers.forEach((p) => {
+    CONFIG.postcss.parsers.forEach((p) => {
       if (typeof p === 'object') {
         if (minimatch(opts.file, p.match)) {
           options.parser = require(resolve.sync(p.name, { basedir: process.cwd() }))
@@ -59,7 +54,7 @@ export default tools.makeStringTransform('postcss', {
       }
     })
 
-    getConfig().postcss.plugins.forEach((p) => {
+    CONFIG.postcss.plugins.forEach((p) => {
       if (typeof p === 'object') {
         plugins.push(require(resolve.sync(p.name, { basedir: process.cwd() }))(p.options || {}))
       } else {
@@ -71,7 +66,7 @@ export default tools.makeStringTransform('postcss', {
     const css = new Clean().minify(res.css).styles
 
     let outputJs = `_INSERT_CSS_("${css}");`
-    if (getConfig().cssModules) {
+    if (CONFIG.postcss.modules) {
       const json = fs.readFileSync(opts.file)
       outputJs += `module.exports = ${JSON.stringify(json)};`
     }

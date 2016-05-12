@@ -12,15 +12,15 @@ import postcss from '../transforms/postcss'
 import { debounce } from '../../utils/common'
 import { depTree } from '../deptree'
 import { triggerRefresh } from '../hsr'
-import { getConfig } from '../config'
+import { CONFIG } from '../config'
 
 let bundler
 export function initBundle () {
   const b = browserify({
     plugin: [forgetify],
-    paths: [path.resolve(getConfig().source)],
+    paths: [CONFIG.sourceDir],
     debug: process.env.NODE_ENV === 'development',
-    cache: {},
+    cache: {}, packageCache: {},
     insertGlobalVars: {
       React: (file, basedir) => 'require("react")',
       _INSERT_CSS_: (file, basedir) => 'require("insert-css")',
@@ -46,7 +46,7 @@ export function initBundle () {
 
   b.transform(postcss)
 
-  getConfig().browserify.transforms.forEach((t) => {
+  CONFIG.browserify.transforms.forEach((t) => {
     if (typeof t === 'string') {
       b.transform(resolve.sync(t, { basedir: process.cwd() }))
     } else if (typeof t === 'object' && t.transform) {
@@ -58,7 +58,7 @@ export function initBundle () {
 }
 
 const createBundle = debounce((cb) => {
-  const file = path.resolve(getConfig().output, path.basename(getConfig().entry))
+  const file = path.resolve(CONFIG.outputDir, path.basename(CONFIG.entry))
 
   const stream = fs.createWriteStream(file)
     .on('error', cb)
@@ -85,7 +85,7 @@ export function buildJs (evt, file) {
     if (!bundler) bundler = initBundle()
 
     /* only worry about bundling the main file on first run */
-    if (firstRun && !file.match(new RegExp(`${getConfig().entry}$`))) {
+    if (firstRun && !file.match(new RegExp(`${CONFIG.entry}$`))) {
       return resolve()
     }
 
@@ -95,7 +95,7 @@ export function buildJs (evt, file) {
       depTree[file].forEach((f) => invalidate.add(f))
     }
 
-    getConfig().browserify.rebundles.forEach((f) => {
+    CONFIG.browserify.rebundles.forEach((f) => {
       if (minimatch(file, f.match)) {
         invalidate.add(path.resolve(f.file))
       }

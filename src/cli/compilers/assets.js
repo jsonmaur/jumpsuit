@@ -1,14 +1,11 @@
 import fs from 'fs-promise'
-import { getConfig } from '../config'
+import { CONFIG } from '../config'
 
 export async function buildAsset (evt, file) {
-  const { source, output, assets } = getConfig()
+  const { outputDir, assetsDir } = CONFIG
 
-  const outputFile = file
-    /* send file to output dir */
-    .replace(source, output)
-    /* flatten out assets dir */
-    .replace(new RegExp(`/${assets}/`), '/')
+  /* flatten out assets dir */
+  const outputFile = file.replace(assetsDir, outputDir)
 
   switch (evt) {
     case 'add':

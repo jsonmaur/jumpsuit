@@ -1,0 +1,16 @@
+@import 'styles/globals.css';
+
+.primary {
+  background: none;
+  color: $red;
+  border: 1px solid $red;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin: 0 10px;
+  cursor: pointer;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

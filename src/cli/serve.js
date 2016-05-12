@@ -5,7 +5,7 @@ import cors from 'cors'
 import serve from 'serve-static'
 import open from 'open'
 import chalk from 'chalk'
-import { getConfig } from './config'
+import { CONFIG } from './config'
 import hsr from './hsr'
 import { log } from './emit'
 
@@ -15,8 +15,6 @@ export default function (argv) {
   const app = express()
   app.use(bodyParser.json({ limit: '100mb' }))
   app.use(cors())
-
-  const root = path.resolve(getConfig().output)
 
   app.post('/__hsr__', (req, res, next) => {
     const { state } = req.body
@@ -44,10 +42,10 @@ export default function (argv) {
     next()
   })
 
-  app.use(serve(root))
+  app.use(serve(CONFIG.outputDir))
 
-  const port = process.env.PORT = argv.port || argv.p || getConfig().server.port
-  const host = process.env.HOST = argv.host || argv.h || getConfig().server.host
+  const port = process.env.PORT = argv.port || argv.p || CONFIG.server.port
+  const host = process.env.HOST = argv.host || argv.h || CONFIG.server.host
 
   return new Promise((resolve, reject) => {
     app.listen(port, host, () => {

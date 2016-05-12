@@ -1,5 +1,6 @@
 import minimist from 'minimist'
 import pkg from '../../package.json'
+import initConfig from './config'
 import { error } from './emit'
 
 const argv = minimist(process.argv.slice(2))
@@ -9,6 +10,8 @@ export default async function () {
     if (argv.v || argv.version) {
       return console.log(`v${pkg.version}`)
     }
+
+    await initConfig(argv)
 
     const cmd = argv._[0]
     switch (cmd) {

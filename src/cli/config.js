@@ -1,36 +1,39 @@
 import path from 'path'
-import fs from 'fs'
+import _ from 'lodash'
+import fs from 'fs-promise'
 
+export let CONFIG
 const defaults = {
-  source: 'src',
-  output: 'dist',
-  entry: 'app.js',
-  assets: 'assets',
-  cssModules: true,
+  sourceDir: 'src',
+  outputDir: 'dist',
+  assetsDir: 'assets', // relative to sourceDir
 
-  indexFile: {
-    // template: 'assets/index.html', // auto-generates if undefined
-    title: null,
-    // meta: {}, // key: value
-    // entry: 'div#app',
-  },
+  entry: 'app.js', // relative to sourceDir
 
   server: {
     port: 8000,
     host: 'localhost',
-    // other zab server options
   },
 
   browserify: {
+    extensions: ['.js'],
     rebundles: [],
-    extensions: ['.js', '.css'],
     transforms: [],
   },
 
   postcss: {
+    extensions: ['.css'],
     plugins: [],
     parsers: [],
+    modules: true,
   },
+
+  // indexFile: {
+    // template: 'assets/index.html', // auto-generates if undefined
+    // title: null,
+    // meta: {}, // key: value
+    // entry: 'div#app',
+  // },
 
   // build: {
   //   development: {
@@ -45,27 +48,27 @@ const defaults = {
   // },
 }
 
-export function getConfig () {
-  const pkgFile = path.resolve('package.json')
-  const pkg = fs.existsSync(pkgFile) ? require(pkgFile) : {}
+export default async function (argv) {
+  const configFile = path.resolve(argv.c || argv.config || 'jumpsuit.config.js')
 
-  const jmpFile = path.resolve('jumpsuit.config.js')
-  const jmp = fs.existsSync(jmpFile) ? require(jmpFile) : {}
+  if (!await fs.exists(configFile)) {
+    throw new Error(`"${path.basename(configFile)}" doesn't exist here!`)
+  }
 
-  const config = Object.assign({}, defaults, pkg.jumpsuit || {}, jmp)
+  const config = _.defaultsDeep(require(configFile), defaults)
 
-  const needToResolve = ['source', 'output']
-  needToResolve.forEach((key) => {
-    config[key] = path.resolve(config[key])
-  })
+  config.sourceDir = path.resolve(config.sourceDir)
+  config.outputDir = path.resolve(config.outputDir)
+  config.assetsDir = path.resolve(config.sourceDir, config.assetsDir)
+  config.entry = path.resolve(config.sourceDir, config.entry)
 
-  config.entry = path.resolve(config.source, config.entry)
-  config.indexFile.title = config.indexFile.title || pkg.name
+  config.browserify.extensions = _.uniq(config.browserify.extensions
+    .concat(defaults.browserify.extensions)
+    /* so we rebundle for postcss files */
+    .concat(config.postcss.extensions))
 
-  config.browserify = Object.assign({}, defaults.browserify, config.browserify)
-  const combinedExts = defaults.browserify.extensions
-    .concat(config.browserify.extensions)
-  config.browserify.extensions = new Set(combinedExts)
+  config.postcss.extensions = _.uniq(config.postcss.extensions
+    .concat(defaults.postcss.extensions))
 
-  return config
+  CONFIG = config
 }

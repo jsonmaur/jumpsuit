@@ -1,4 +1,4 @@
-import './styles/base.sss'
+import './styles/base.css'
 import { Render, Route, IndexRoute } from 'jumpsuit'
 
 import state from 'state'
