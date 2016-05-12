@@ -1,5 +1,5 @@
 import { Component } from 'jumpsuit'
-import { increment, decrement } from 'state/counter'
+import counterState from 'state/counter'
 
 export default Component({
   render() {
@@ -7,11 +7,18 @@ export default Component({
       <div>
         <h1>{ this.props.counter.count }</h1>
 
-        <button onClick={ increment }>Increment</button>
-        <button onClick={ decrement }>Decrement</button>
+        <button onClick={ this.increment }>Increment</button>
+        <button onClick={ this.decrement }>Decrement</button>
       </div>
     )
   },
+  increment(){
+    counterState.increment()
+  },
+  decrement(){
+    counterState.decrement()
+  },
+
 }, (state) => ({
   counter: state.counter
 }))

@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "jumpsuit": {
     "source": "app"
+  },
+  "dependencies": {
+    "jumpsuit": "0.0.7"
   }
 }

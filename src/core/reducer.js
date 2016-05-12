@@ -22,7 +22,7 @@ export function combine (states) {
   STORE = store
 
   for (const i in states) {
-    states[i].dispatch = (type, payload) => store.dispatch({ type, payload })
+    states[i].dispatch = store.dispatch
     states[i].getState = (stateName) => {
       if (stateName === true) return store.getState()
       else if (typeof stateName === 'string') return store.getState()[stateName]

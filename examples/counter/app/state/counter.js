@@ -13,11 +13,3 @@ const duck = State('counter', {
 })
 
 export default duck
-
-export function increment () {
-  duck.dispatch(duck.increment)
-}
-
-export function decrement () {
-  duck.dispatch(duck.decrement)
-}
