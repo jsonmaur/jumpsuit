@@ -90,7 +90,11 @@ export function buildJs (evt, file) {
     }
 
     const invalidate = new Set([file])
-    if (depTree[file]) depTree[file].forEach((f) => invalidate.add(f))
+
+    if (depTree[file]) {
+      depTree[file].forEach((f) => invalidate.add(f))
+    }
+
     getConfig().browserify.rebundles.forEach((f) => {
       if (minimatch(file, f.match)) {
         invalidate.add(path.resolve(f.file))

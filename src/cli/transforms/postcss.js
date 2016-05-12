@@ -4,7 +4,6 @@ import postcss from 'postcss'
 import atImport from 'postcss-import'
 import cssModules from 'postcss-modules'
 import autoprefixer from 'autoprefixer'
-// import crypto from 'crypto-extra'
 import MemoryFS from 'memory-fs'
 import Clean from 'clean-css'
 import resolve from 'resolve'
@@ -26,7 +25,6 @@ export default tools.makeStringTransform('postcss', {
   includeExtensions: ['.css', '.sss'],
 }, async (content, opts, done) => {
   try {
-    // const generatedName = path.resolve(`${crypto.randomString(5)}.css`)
     const options = { from: opts.file }
 
     const plugins = [
@@ -80,6 +78,6 @@ export default tools.makeStringTransform('postcss', {
 
     done(null, outputJs)
   } catch (err) {
-    error(err)
+    done(err)
   }
 })

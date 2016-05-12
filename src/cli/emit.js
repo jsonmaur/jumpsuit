@@ -1,15 +1,19 @@
 import fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
+import strip from 'strip-ansi'
 
 const ARROW = String.fromCharCode(0x25B8) || '=>'
 const CHECKMARK = String.fromCharCode(0x2713) || 'done'
 
-export function error (err) {
+export function error (err, lineBreak = false) {
   if (!err) return
-  else if (process.env.NODE_ENV === 'development' && err.stack) err = err.stack
+  // else if (process.env.NODE_ENV === 'development' && err.stack) err = err.stack
 
-  console.log(chalk.red(`  ${ARROW}`, err))
+  if (lineBreak) console.log()
+  
+  const msg = err.message || err.msg || err
+  console.log(chalk.red(`  ${ARROW}`, strip(msg)))
 }
 
 export function warn (...msg) {

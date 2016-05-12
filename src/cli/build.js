@@ -40,16 +40,16 @@ const isBuilding = debounce(() => pending('building'))
 const isDone = debounce((time) => pendingDone(time))
 
 export async function handleEvent (evt, file) {
+  /* skip dir events */
+  if (evt.match(/Dir$/)) return
+
+  /* output build message and start timer */
+  if (++evtCount === 1) {
+    buildTime = Date.now()
+    isBuilding()
+  }
+
   try {
-    /* skip dir events */
-    if (evt.match(/Dir$/)) return
-
-    /* output build message and start timer */
-    if (++evtCount === 1) {
-      buildTime = Date.now()
-      isBuilding()
-    }
-
     /* determine action based on file extension */
     const ext = path.extname(file)
     if (getConfig().browserify.extensions.has(ext)) {
@@ -70,12 +70,13 @@ export async function handleEvent (evt, file) {
     //     await buildAsset(evt, file)
     //     break
     // }
-
-    /* output build complete and build time */
-    if (--evtCount === 0) {
-      isDone(Date.now() - buildTime)
-    }
   } catch (err) {
-    error(err)
+    evtCount--
+    return error(err, true)
+  }
+
+  /* output build complete and build time */
+  if (--evtCount === 0) {
+    isDone(Date.now() - buildTime)
   }
 }

@@ -14,11 +14,11 @@ export default function (stateName, actions) {
 
   Object.keys(actions).forEach((actionName) => {
     // Alias the action dispatcher to the state under the action name
-    reducerWithActions[actionName] = (payload) => {
+    reducerWithActions[actionName] = function(payload) {
       return reducerWithActions.dispatch({
         type: `${stateName}_${actionName}`,
         payload
-       })
+      })
     }
 
     /* makes actions available directly when testing */
