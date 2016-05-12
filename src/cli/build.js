@@ -8,7 +8,6 @@ import { getConfig } from './config'
 import { outputLogo, pending, pendingDone, error } from './emit'
 import { buildJs } from './compilers/javascript'
 import { buildAsset } from './compilers/assets'
-// import { buildStylus } from './compilers/stylus'
 
 export default function (argv) {
   outputLogo({ indent: 1 })
@@ -57,19 +56,6 @@ export async function handleEvent (evt, file) {
     } else {
       await buildAsset(evt, file)
     }
-
-    // switch (path.extname(file).slice(1)) {
-    //   case 'js':
-    //   case 'css':
-    //     await buildJs(evt, file)
-    //     break
-    //   // case 'styl':
-    //   //   await buildStylus(evt, file)
-    //   //   break
-    //   default:
-    //     await buildAsset(evt, file)
-    //     break
-    // }
   } catch (err) {
     evtCount--
     return error(err, true)

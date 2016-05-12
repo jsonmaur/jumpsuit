@@ -61,7 +61,6 @@
     "memory-fs": "0.3.0",
     "minimatch": "3.0.0",
     "minimist": "1.2.0",
-    "nib": "1.1.0",
     "open": "0.0.5",
     "postcss": "5.0.21",
     "postcss-import": "8.1.2",
@@ -80,7 +79,6 @@
     "resolve": "^1.1.7",
     "serve-static": "1.10.2",
     "strip-ansi": "3.0.1",
-    "stylus": "0.54.5",
     "uglify-js": "2.6.2",
     "uglifyify": "3.0.1",
     "websocket": "1.0.22"

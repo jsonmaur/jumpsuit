@@ -32,7 +32,7 @@ export default tools.makeStringTransform('postcss', {
         path: [
           getConfig().source,
           path.dirname(opts.file),
-          path.resolve(process.cwd(), 'node_modules')
+          path.resolve(process.cwd(), 'node_modules'),
         ],
         onImport: (files) => {
           files.forEach((f) => {

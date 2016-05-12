@@ -5,7 +5,6 @@ const defaults = {
   source: 'src',
   output: 'dist',
   entry: 'app.js',
-  entryStyl: 'app.styl', // wont be needed once css modules work
   assets: 'assets',
   cssModules: true,
 
@@ -61,7 +60,6 @@ export function getConfig () {
   })
 
   config.entry = path.resolve(config.source, config.entry)
-  config.entryStyl = path.resolve(config.source, config.entryStyl)
   config.indexFile.title = config.indexFile.title || pkg.name
 
   config.browserify = Object.assign({}, defaults.browserify, config.browserify)
