@@ -4,6 +4,7 @@ import Component from './component'
 import Render from './render'
 import State from './state'
 import Goto from './routing'
+import { Middleware } from './reducer'
 
 module.exports = {
   /* Core */
@@ -17,4 +18,7 @@ module.exports = {
   IndexRoute,
   Goto,
   Link,
+
+  /* Redux */
+  Middleware,
 }
