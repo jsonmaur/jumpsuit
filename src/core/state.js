@@ -3,6 +3,11 @@ export default function (stateName, actions) {
   delete actions.initial
 
   const reducerWithActions = (state = intialState, action = {}) => {
+    const nameRegex = new RegExp(`^${stateName}_`)
+    if (action.type.match(nameRegex)) {
+      action.type = action.type.replace(nameRegex, '')
+    }
+    
     if (!actions[action.type]) {
       return state
     }
