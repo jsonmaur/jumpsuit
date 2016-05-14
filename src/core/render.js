@@ -1,18 +1,20 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, browserHistory } from 'react-router'
+import { Router as ReactRouter, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { combine } from './reducer'
 
-export default function (stores, routes) {
+export default function (stores, baseComponent) {
   const store = combine({
     ...stores,
     routing: routerReducer,
   })
 
   const syncedHistory = syncHistoryWithStore(browserHistory, store)
-  const base = <Router history={ syncedHistory }>{ routes }</Router>
+  const base = baseComponent.type.name === 'Router'
+    ? <ReactRouter history={ syncedHistory }>{ baseComponent }</ReactRouter>
+    : baseComponent
 
   let child = base
   if (process.env.NODE_ENV === 'development') {
@@ -31,3 +33,10 @@ export default function (stores, routes) {
     document.getElementById('app')
   )
 }
+
+export function Router (props) {
+  return <div>{ this.props }</div>
+}
+// export const Router = React.createClass({
+//   render: () => <div>{ this.props }</div>
+// })

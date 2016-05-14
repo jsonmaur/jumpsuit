@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 
 let userMiddleware = []
 
-export function Middleware(...newMiddleware){
+export function Middleware (...newMiddleware) {
   userMiddleware = [...userMiddleware, ...newMiddleware]
 }
 

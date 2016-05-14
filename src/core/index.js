@@ -1,7 +1,14 @@
-import Router, { Route, IndexRoute, Link } from 'react-router'
+import {
+  Route,
+  IndexRoute,
+  Redirect,
+  IndexRedirect,
+  Link,
+  IndexLink,
+} from 'react-router'
 
 import Component from './component'
-import Render from './render'
+import Render, { Router } from './render'
 import State from './state'
 import Goto from './routing'
 import { Middleware } from './reducer'
@@ -9,15 +16,18 @@ import { Middleware } from './reducer'
 module.exports = {
   /* Core */
   Component,
+  Router,
   Render,
   State,
+  Goto,
 
   /* React Router */
-  Router,
   Route,
   IndexRoute,
-  Goto,
+  Redirect,
+  IndexRedirect,
   Link,
+  IndexLink,
 
   /* Redux */
   Middleware,
