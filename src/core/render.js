@@ -12,7 +12,7 @@ export default function (stores, baseComponent) {
   })
 
   const syncedHistory = syncHistoryWithStore(browserHistory, store)
-  const base = baseComponent.type.name === 'Router'
+  const base = baseComponent.props._isRouteWrapper
     ? <ReactRouter history={ syncedHistory }>{ baseComponent }</ReactRouter>
     : baseComponent
 
@@ -34,9 +34,7 @@ export default function (stores, baseComponent) {
   )
 }
 
-export function Router (props) {
-  return <div>{ this.props }</div>
-}
-// export const Router = React.createClass({
-//   render: () => <div>{ this.props }</div>
-// })
+export const Router = React.createClass({
+  getDefaultProps: () => ({ _isRouteWrapper: true }),
+  render: () => <div>{ this.props.children }</div>,
+})
