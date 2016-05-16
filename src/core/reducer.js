@@ -31,8 +31,6 @@ export function combine (states) {
     states[i].dispatch = store.dispatch
     states[i].getState = (stateName) => {
       if (stateName === true) return store.getState()
-      else if (typeof stateName === 'string') return store.getState()[stateName]
-
       return store.getState()[states[i]._name]
     }
   }
