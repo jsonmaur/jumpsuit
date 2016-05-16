@@ -2,11 +2,17 @@
   <img src="assets/banner.png" alt="Jumpsuit Banner" width="100%" />
   <br /> <br />
 
-  <img src="https://travis-ci.org/zab/jumpsuit.svg?branch=master)](https://travis-ci.org/zab/jumpsuit" alt="Build Status" />
+  <a href="https://travis-ci.org/zab/jumpsuit">
+    <img src="https://travis-ci.org/zab/jumpsuit.svg?branch=master" alt="Build Status" />
+  </a>
   
-  <img src="https://coveralls.io/repos/github/zab/jumpsuit/badge.svg?branch=master)](https://coveralls.io/github/zab/jumpsuit?branch=master" alt="Coverage Status" />
+  <a href="https://coveralls.io/github/zab/jumpsuit?branch=master">
+    <img src="https://coveralls.io/repos/github/zab/jumpsuit/badge.svg?branch=master" alt="Coverage Status" />
+  </a>
   
-  <img src="https://badges.gitter.im/zab/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/zab/jumpsuit" />
+  <a href="https://gitter.im/zab/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+    <img src="https://badges.gitter.im/zab/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/zab/jumpsuit" />
+  </a>
 </div>
 
 ---
