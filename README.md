@@ -1,11 +1,13 @@
-<center>
-  ![Jumpsuit Banner](assets/banner.png)
+<div align="center">
+  <img src="assets/banner.png" alt="Jumpsuit Banner" width="100%" />
   <br /> <br />
 
-  [![Build Status](https://travis-ci.org/zab/jumpsuit.svg?branch=master)](https://travis-ci.org/zab/jumpsuit)
-  [![Coverage Status](https://coveralls.io/repos/github/zab/jumpsuit/badge.svg?branch=master)](https://coveralls.io/github/zab/jumpsuit?branch=master)
-  [![Join the chat at https://gitter.im/zab/jumpsuit](https://badges.gitter.im/zab/jumpsuit.js.svg)](https://gitter.im/zab/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-</center>
+  <img src="https://travis-ci.org/zab/jumpsuit.svg?branch=master)](https://travis-ci.org/zab/jumpsuit" alt="Build Status" />
+  
+  <img src="https://coveralls.io/repos/github/zab/jumpsuit/badge.svg?branch=master)](https://coveralls.io/github/zab/jumpsuit?branch=master" alt="Coverage Status" />
+  
+  <img src="https://badges.gitter.im/zab/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/zab/jumpsuit" />
+</div>
 
 ---
 
