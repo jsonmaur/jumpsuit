@@ -76,8 +76,15 @@ Render(CounterState, <Counter/>)
 ## Usage
 
 #### Component <em>(config, stateMappingFn)</em>
-- Creates a new simple component using a standard react-class config.
-- Optionally pass a redux state-mapping function to subscribe to any part of the state
+- Creates a new simple or stateful component.
+- Parameters
+  - <strong>config</strong> Object
+    - A react-class config
+  - <strong>stateMappingFn(state)</strong>
+    - An optional function that subscribes the component to the state
+    - Must return an object, which will be available via the component's `props`
+- Returns
+  - React Component
 - Simple Component
 ```javascript
   import { Component } from 'jumpsuit'
@@ -119,10 +126,10 @@ Render(CounterState, <Counter/>)
 - Creates a new state instance
 - Parameters
   - <strong>config</strong> Object
-    - <strong>initial</strong> Object
+    - <strong>initial</strong>
       - An object or value representing the initial properties for this state
-    - <strong>...actionName(state, payload)</strong> Functions
-      - Actions that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller
+    - <strong>...actionName(state, payload)</strong>
+      - Actions (functions) that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller as the second
 - Returns
   - <strong>State Reducer</strong> function - can be used directly in the Render method, or combined with other states using State.combine. It also has these these prototype methods:
     - <strong>.getState()</strong>
@@ -181,13 +188,13 @@ Render(CounterState, <Counter/>)
 #### Render <em>(state, component)</em>
 - Renders your app to `div#app`
 - Parameters
-  - <strong>state</strong> Object
+  - <strong>state</strong>
     - A single or combined state reducer
-  - <strong>component</strong> Jumpsuit/React Component
-    - The root component of your app
+  - <strong>component</strong>
+    - The root Jumpsuit/React Component of your app
   ```javascript
     import { Render } from './states/user'
-    
+
     import Counter from './containers/counter'
     import CounterState from './states/counter'
 
