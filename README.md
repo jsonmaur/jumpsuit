@@ -75,27 +75,124 @@ Render(CounterState, <Counter/>)
 
 ## Usage
 
-#### Component (config:obj [, stateMappingFn:fn ])
+#### Component <em>(config, stateMappingFn)</em>
 - Creates a new simple component using a standard react-class config.
 - Optionally pass a redux state-mapping function to subscribe to any part of the state
+- Simple Component
 ```javascript
-const SayHello = Component({
-  render() {
-    return (
-      <div>
-        <Button onClick={ this.myMethod }>Decrement</Button>
-      </div>
-    )
-  },
-  myMethod(){
-    console.log('Hello!')
-  },
-  decrement(){
-}, (state) => ({
-  counter: state.counter
-}))
+  import { Component } from 'jumpsuit'
+
+  const SayHello = Component({
+    render() {
+      return (
+        <div>
+          <Button onClick={ this.sayHello }>Say Hello</Button>
+        </div>
+      )
+    },
+    sayHello(){
+      console.log('Hello!')
+    },
+  })
+```
+- Stateful Component
+```javascript
+  import { Component } from 'jumpsuit'
+
+  const Counter = Component({
+    render() {
+      return (
+        <div>
+          Count: { this.props.count }
+        </div>
+      )
+    }
+  // Subscribe to the count property on the count state
+  }, (state) => {
+    return {
+      count: state.counter.count
+    }
+  })
 ```
 
+#### State <em>(config)</em>
+- Creates a new state instance
+- Parameters
+  - <strong>config</strong> Object
+    - <strong>initial</strong> Object
+      - An object or value representing the initial properties for this state
+    - <strong>...actionName(state, payload)</strong> Functions
+      - Actions that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller
+- Returns
+  - <strong>State Reducer</strong> function - can be used directly in the Render method, or combined with other states using State.combine. It also has these these prototype methods:
+    - <strong>.getState()</strong>
+      - Returns the current state of the instance
+    - <strong>.dispatch()</strong>
+      - The underlying redux dispatcher
+
+  ```javascript
+
+    import { State } from 'jumpsuit'
+
+    const CounterState = State({
+      initial: { count: 0 },
+      increment (state, payload) {
+        return { count: ++state.count }
+      },
+      set (state, payload) {
+        return { count: payload }
+      },
+      reset (state) {
+        return { count: 0 }
+      }
+    })
+
+    // Call the methods normally. No action creators or dispatch required.
+    CounterState.increment()
+    // CounterState.getState() === { count: 1 }
+
+    CounterState.set(5)
+    // CounterState.getState() === { count: 5 }
+
+    CounterState.reset()
+    // CounterState.getState() === { count: 0 }
+  ```
+
+#### State.combine <em>(stateMapping)</em>
+- Combines multiple state into a single state that you can use in Render
+- Parameters
+  - <strong>stateMapping</strong> Object
+    - An object that maps state names to a state
+- Returns
+  - <strong>State Reducer</strong>, a combined reducer function that can be used directly in the Render method
+  ```javascript
+
+    import user from './states/user'
+    import counter from './states/counter'
+
+    const state = {
+      user,
+      counter
+    }
+
+    Render(state, <App/>)
+  ```
+
+#### Render <em>(state, component)</em>
+- Renders your app to `div#app`
+- Parameters
+  - <strong>state</strong> Object
+    - A single or combined state reducer
+  - <strong>component</strong> Jumpsuit/React Component
+    - The root component of your app
+  ```javascript
+    import { Render } from './states/user'
+    
+    import Counter from './containers/counter'
+    import CounterState from './states/counter'
+
+    Render(CounterState, <Counter/>)
+  ```
 
 ## Team
 
