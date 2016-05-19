@@ -122,9 +122,11 @@ Render(CounterState, <Counter/>)
     })
   ```
 
-#### State <em>(config)</em>
+#### State <em>(name, config)</em>
 - Creates a new state instance
 - Parameters
+  - <strong>name</strong> String
+    - A unique name for this state
   - <strong>config</strong> Object
     - <strong>initial</strong>
       - An object or value representing the initial properties for this state
@@ -168,17 +170,90 @@ Render(CounterState, <Counter/>)
 #### Render <em>(state, component)</em>
 - Renders your app to `div#app`
 - Parameters
-  - <strong>state</strong>
-    - A single or combined state reducer
+  - <strong>state or {states}</strong>
+    - A single state or state combining object.  If passing a an object, the property names must use the state name they correspond to.
   - <strong>component</strong>
     - The root Jumpsuit/React Component of your app
+  - Single State
+    ```javascript
+      import { Render } from 'jumpsuit'
+
+      import Counter from './containers/counter'
+      import CounterState from './states/counter'
+
+      Render(CounterState, <Counter/>)
+    ```
+  - Combined State
+    ```javascript
+      import { Render } from 'jumpsuit'
+
+      import App from './containers/app'
+
+      import CounterState from './states/counter'
+      import TimerState from './states/timer'
+
+      const state = {
+        counter: CounterState, // CounterState's name is 'counter'
+        timer: TimerState // TimerState's name is 'timer'
+      }
+
+      Render(state, <App/>)
+    ```
+
+#### <Router/>
+- Jumpsuit's built in router component.
   ```javascript
-    import { Render } from './states/user'
+    import { Render, Router, IndexRoute, Route } from 'jumpsuit'
 
-    import Counter from './containers/counter'
-    import CounterState from './states/counter'
+    Render(state, (
+      <Router>
+        <IndexRoute component={ Home }/>
+        <Route path="/counter" component={ Counter }/>
+      </Router>
+    ))
+  ```
 
-    Render(CounterState, <Counter/>)
+#### <Route/>
+- A component that renders a specific component at the specified route
+  ```javascript
+    import { Render, Router, Route } from 'jumpsuit'
+
+    import Counter from './components/counter'
+
+    Render(state, (
+      <Router>
+        <Route path="/counter" component={ Counter }/>
+      </Router>
+    ))
+  ```
+
+#### <IndexRoute/>
+- A component that renders a specific component at the index route of your app
+  ```javascript
+    import { Render, Router, Route } from 'jumpsuit'
+
+    import Home from './components/home'
+
+    Render(state, (
+      <Router>
+        <IndexRoute component={ Home }/>
+      </Router>
+    ))
+  ```
+
+#### Middleware <em>(...middlewares)</em>
+- A method for registering middleware into the underlying redux instance
+  ```javascript
+    import { Render, Middleware } from 'jumpsuit'
+
+    const myMiddleware = store => next => action => {
+      let result = next(action)
+      return result
+    }
+
+    Middleware(myMiddleware, ...OtherMiddleWares)
+
+    Render(state, <App/>)
   ```
 
 ## Team
