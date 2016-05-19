@@ -86,41 +86,41 @@ Render(CounterState, <Counter/>)
 - Returns
   - React Component
 - Simple Component
-```javascript
-  import { Component } from 'jumpsuit'
+  ```javascript
+    import { Component } from 'jumpsuit'
 
-  const SayHello = Component({
-    render() {
-      return (
-        <div>
-          <Button onClick={ this.sayHello }>Say Hello</Button>
-        </div>
-      )
-    },
-    sayHello(){
-      console.log('Hello!')
-    },
-  })
-```
+    const SayHello = Component({
+      render() {
+        return (
+          <div>
+            <Button onClick={ this.sayHello }>Say Hello</Button>
+          </div>
+        )
+      },
+      sayHello(){
+        console.log('Hello!')
+      },
+    })
+  ```
 - Stateful Component
-```javascript
-  import { Component } from 'jumpsuit'
+  ```javascript
+    import { Component } from 'jumpsuit'
 
-  const Counter = Component({
-    render() {
-      return (
-        <div>
-          Count: { this.props.count }
-        </div>
-      )
-    }
-  // Subscribe to the count property on the count state
-  }, (state) => {
-    return {
-      count: state.counter.count
-    }
-  })
-```
+    const Counter = Component({
+      render() {
+        return (
+          <div>
+            Count: { this.props.count }
+          </div>
+        )
+      }
+    // Subscribe to the count property on the count state
+    }, (state) => {
+      return {
+        count: state.counter.count
+      }
+    })
+  ```
 
 #### State <em>(config)</em>
 - Creates a new state instance
