@@ -73,6 +73,29 @@ const Counter = Component({
 Render(CounterState, <Counter/>)
 ```
 
+## Usage
+
+#### Component (config:obj [, stateMappingFn:fn ])
+- Creates a new simple component using a standard react-class config.
+- Optionally pass a redux state-mapping function to subscribe to any part of the state
+```javascript
+const SayHello = Component({
+  render() {
+    return (
+      <div>
+        <Button onClick={ this.myMethod }>Decrement</Button>
+      </div>
+    )
+  },
+  myMethod(){
+    console.log('Hello!')
+  },
+  decrement(){
+}, (state) => ({
+  counter: state.counter
+}))
+```
+
 
 ## Team
 
