@@ -200,7 +200,7 @@ Render(CounterState, <Counter/>)
       Render(state, <App/>)
     ```
 
-#### <Router/>
+#### Router
 - Jumpsuit's built in router component.
   ```javascript
     import { Render, Router, IndexRoute, Route } from 'jumpsuit'
@@ -213,7 +213,7 @@ Render(CounterState, <Counter/>)
     ))
   ```
 
-#### <Route/>
+#### Route
 - A component that renders a specific component at the specified route
   ```javascript
     import { Render, Router, Route } from 'jumpsuit'
@@ -227,7 +227,7 @@ Render(CounterState, <Counter/>)
     ))
   ```
 
-#### <IndexRoute/>
+#### IndexRoute
 - A component that renders a specific component at the index route of your app
   ```javascript
     import { Render, Router, Route } from 'jumpsuit'
