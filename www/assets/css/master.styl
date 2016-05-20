@@ -1,0 +1,177 @@
+@import '_globals'
+global-reset()
+
+*
+  margin 0
+  padding 0
+  box-sizing border-box
+
+body
+  font-family $font-open
+  text-align center
+  color $clr-offBlack
+
+.main
+  background $clr-blue1
+  background radial-gradient(ellipse at center, $clr-blue2 0%, $clr-blue1 70%) no-repeat
+  height 100vh
+  min-height 550px
+  display flex
+  flex-direction column
+  align-items center
+  justify-content space-around
+  padding 0 30px
+
+header
+  margin-top 70px
+  margin-bottom 0px
+
+  .logo
+    width 100%
+    max-width 350px
+    display block
+    margin-bottom 15px
+
+.install
+  background rgba(255, 255, 255, .3)
+  border-radius 4px
+  display inline-block
+  color white
+  padding 20px 30px
+  font-size 24px
+  font-family $font-anon
+  text-align left
+  margin-bottom 20px
+  width 100%
+  +below(500px)
+    font-size 18px
+    white-space nowrap
+
+  span
+    opacity .5
+    margin-right 15px
+    user-select none
+
+.subheading
+  font-weight 700
+  color $clr-offWhite
+  margin-bottom 100px
+
+  a
+    color $clr-offWhite
+    text-decoration none
+    border-bottom 1px solid $clr-offWhite
+    &:hover
+      color white
+      border-color white
+
+.star-on-github
+  display block
+  margin-bottom 70px
+
+.content
+  padding 50px
+  margin 100px auto
+  display flex
+  flex-wrap wrap
+  max-width 1400px
+  +below(500px)
+    padding 40px
+    margin 70px 0
+
+  h1
+    font-size 30px
+    font-weight 700
+    margin-bottom 10px
+
+  p
+    line-height 28px
+    color $clr-gray
+    font-weight 300
+
+.block
+  width 50%
+  text-align left
+  &:nth-child(even):not(:last-child)
+    padding-bottom 150px
+  +below(500px)
+    width 100%
+    &:nth-child(even):not(:last-child)
+      padding-bottom 100px
+    &:nth-child(odd)
+      padding-bottom 50px
+
+.center
+  text-align center
+
+.react-redux
+  max-width 300px
+
+.middot-list
+  list-style-type none
+
+  li
+    display inline-block
+    &:not(:last-child):after
+      content '\00B7'
+      padding 0 5px 0 10px
+
+footer
+  background $clr-offBlack
+  color white
+  padding 50px
+  font-size 16px
+  display flex
+  flex-wrap wrap
+  justify-content space-between
+  align-items center
+  +below(500px)
+    padding 40px 20px
+    text-align center
+    flex-direction column-reverse
+
+  .copyright
+    list-style-type none
+    display flex
+    flex-wrap wrap
+    text-align center
+    +below(500px)
+      margin 0 auto
+    +below(400px)
+      flex-direction column-reverse
+
+    .heart
+      padding 0 3px
+      
+    li
+      display inline-block
+      &.date
+        opacity .3
+        margin-right 10px
+        +below(400px)
+          margin-top 15px
+
+    a
+      text-decoration none
+      &.zab
+        color $clr-zab
+      &.nozzle
+        color $clr-nozzle
+      &:hover
+        opacity .7
+
+  .social
+    list-style-type none
+    +below(500px)
+      margin 0 auto 30px
+
+    li
+      display inline-block
+      &:not(:first-child)
+        margin-left 10px
+
+    a
+      color $clr-offWhite
+      font-size 30px
+      &:hover
+        opacity .6

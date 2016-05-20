@@ -5,3 +5,4 @@ lib
 dist
 .nyc_output
 coverage
+public

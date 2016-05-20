@@ -1,0 +1,15 @@
+{
+  "name": "jumpsuit-www",
+  "description": "Jumpsuit marketing site",
+  "dependencies": {
+    "autoprefixer-stylus": "0.9.x",
+    "axis": "0.6.x",
+    "css-pipeline": "0.3.x",
+    "jade": "1.x",
+    "js-pipeline": "0.2.x",
+    "jstransformer-marked": "1.x",
+    "marked": "0.3.x",
+    "rupture": "0.6.x",
+    "stylus": "0.54.x"
+  }
+}

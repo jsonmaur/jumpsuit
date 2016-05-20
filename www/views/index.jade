@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  section(class="main")
+    header
+      img(class="logo", src="/img/logo.svg")
+      p(class="subheading") v0.0.9
+    
+    div
+      div(class="install")
+        span $
+        | npm install -g jumpsuit
+      
+      div(class="star-on-github")
+        a(class="github-button" href="https://github.com/ntkme/github-buttons" data-style="mega" data-count-href="/zab/jumpsuit/stargazers" data-count-api="/repos/zab/jumpsuit#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star zab/jumpsuit on GitHub") Star
+      
+  section(class="content")
+    div(class="block center")
+      img(src="/img/react-redux.svg", class="react-redux")
+    div(class="block")
+      h1 What is Jumpsuit?
+      p Jumpsuit is a powerful and efficient front-end framework, built on the industry's best technologies. It abstracts the usage of React, React Router, Redux, Redux DevTools, and more into one simple-to-use library.
+
+    div(class="block center")
+      img(src="/img/react-redux.svg", class="react-redux")
+    div(class="block")
+      h1 What is Jumpsuit?
+      p Jumpsuit is a powerful and efficient front-end framework, built on the industry's best technologies. It abstracts the usage of React, React Router, Redux, Redux DevTools, and more into one simple-to-use library.
+
+    div(class="block center")
+      img(src="/img/react-redux.svg", class="react-redux")
+    div(class="block")
+      h1 What is Jumpsuit?
+      p Jumpsuit is a powerful and efficient front-end framework, built on the industry's best technologies. It abstracts the usage of React, React Router, Redux, Redux DevTools, and more into one simple-to-use library.
+
+  footer
+    ul(class="copyright")
+      li(class="date") &#169; 2016
+      li Built with #[i(class="fa fa-heart heart")] by #[a(href="http://zab.io", class="zab", target="_blank") Zab] and #[a(href="http://nozzle.io", class="nozzle", target="_blank") Nozzle]
+    ul(class="social")
+      li: a(href="https://github.com/zab/jumpsuit", target="_blank"): i(class="fa fa-github-square")
+      li: a(href="https://twitter.com/jumpsuitjs", target="_blank"): i(class="fa fa-twitter-square")
+
+  script(async, defer, src="https://buttons.github.io/buttons.js")
