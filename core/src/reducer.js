@@ -15,7 +15,7 @@ export function combine (states) {
   const nativeMiddleware = applyMiddleware(thunk, routerMiddleware(browserHistory), ...userMiddleware)
   const enhancers = [nativeMiddleware]
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     const devTools = require('./devtools')
     const devToolsExtension = devTools.default.instrument()
     enhancers.push(devToolsExtension)

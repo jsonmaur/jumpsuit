@@ -17,7 +17,7 @@ export default function (stores, baseComponent) {
     : baseComponent
 
   let child = base
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     if (window.devToolsExtension) {
       console.warn('Jumpsuit doesn\'t support the Redux Dev Tools browser extension!')
     }
@@ -35,6 +35,7 @@ export default function (stores, baseComponent) {
 }
 
 export const Router = React.createClass({
+  propTypes: { children: React.PropTypes.object },
   getDefaultProps: () => ({ _isRouteWrapper: true }),
   render: () => <div>{ this.props.children }</div>,
 })

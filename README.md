@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.png" alt="Jumpsuit Banner" width="100%" />
+  <img src="banner.png" alt="Jumpsuit Banner" width="100%" />
   <br /> <br />
 
   <a href="https://travis-ci.org/zab/jumpsuit">

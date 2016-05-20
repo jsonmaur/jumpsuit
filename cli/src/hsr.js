@@ -1,6 +1,6 @@
 import http from 'http'
 import websocket from 'websocket'
-import { getFreePort } from '../utils/common'
+import { getFreePort } from './utils/common'
 import { error } from './emit'
 
 export const connections = new Set()

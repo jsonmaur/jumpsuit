@@ -1,13 +1,15 @@
 import './styles/base.css'
-import { Render, Route, IndexRoute } from 'jumpsuit'
-
-import state from 'state'
+import { Render, Router, Route, IndexRoute } from 'jumpsuit'
 
 import App from 'containers/index'
 import Counter from 'containers/counter'
 
-Render(state, (
-  <Route path="/" component={ App }>
-    <IndexRoute component={ Counter } />
-  </Route>
+import counterState from 'state/counter'
+
+Render({ counter: counterState }, (
+  <Router>
+    <Route path="/" component={ App }>
+      <IndexRoute component={ Counter } />
+    </Route>
+  </Router>
 ))

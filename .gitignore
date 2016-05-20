@@ -1,8 +1,10 @@
-.DS_Store
 node_modules
 npm-debug.log
+
 lib
 dist
-.nyc_output
-coverage
 public
+coverage
+
+.DS_Store
+.nyc_output

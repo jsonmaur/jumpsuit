@@ -1,0 +1,83 @@
+{
+  "name": "jumpsuit-core",
+  "version": "0.0.10",
+  "description": "Core library for Jumpsuit",
+  "homepage": "http://jumpsuit.io",
+  "license": "MIT",
+  "keywords": [
+    "framework",
+    "react",
+    "redux",
+    "react-router",
+    "spa",
+    "front-end"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zab/jumpsuit.git"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test:lint": "exlint src test",
+    "test:unit": "nyc ava test/unit -a",
+    "test:integration": "ava test/integration",
+    "pretest": "rm -rf .nyc_output coverage",
+    "test": "cross-env NODE_ENV=testing run-s test:*",
+    "posttest": "nyc report -r=lcov",
+    "prebuild": "rm -rf lib",
+    "build": "babel src -d lib",
+    "watch": "npm run build -- -w",
+    "prepublish": "npm run build -- --compact --no-comments"
+  },
+  "dependencies": {
+    "axios": "0.11.0",
+    "query-string": "4.1.0",
+    "react": "15.0.2",
+    "react-dom": "15.0.2",
+    "react-redux": "4.4.5",
+    "react-router": "2.4.0",
+    "react-router-redux": "4.0.4",
+    "redux": "3.5.2",
+    "redux-devtools": "3.3.1",
+    "redux-devtools-dock-monitor": "1.1.1",
+    "redux-devtools-log-monitor": "1.0.11",
+    "redux-thunk": "2.0.1"
+  },
+  "devDependencies": {
+    "ava": "0.14.0",
+    "babel-cli": "6.9.0",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-2": "6.5.0",
+    "babel-register": "6.9.0",
+    "cross-env": "1.0.7",
+    "exlint": "0.1.4",
+    "npm-run-all": "2.1.1",
+    "nyc": "6.4.4"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "react"
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "include": [
+      "src"
+    ]
+  }
+}
