@@ -88,6 +88,7 @@ header
     line-height 28px
     color $clr-gray
     font-weight 300
+    max-width 530px
 
 .block
   width 50%
@@ -117,7 +118,7 @@ header
       padding 0 5px 0 10px
 
 footer
-  background $clr-offBlack
+  background $clr-space
   color white
   padding 50px
   font-size 16px
@@ -128,12 +129,12 @@ footer
   +below(500px)
     padding 40px 20px
     text-align center
-    flex-direction column-reverse
 
   .copyright
     list-style-type none
     display flex
     flex-wrap wrap
+    align-items center
     text-align center
     +below(500px)
       margin 0 auto
@@ -142,7 +143,7 @@ footer
 
     .heart
       padding 0 3px
-      
+
     li
       display inline-block
       &.date
@@ -162,6 +163,9 @@ footer
 
   .social
     list-style-type none
+    display flex
+    align-items center
+    text-align center
     +below(500px)
       margin 0 auto 30px
 
@@ -171,7 +175,52 @@ footer
         margin-left 10px
 
     a
-      color $clr-offWhite
+      color $clr-gray
       font-size 30px
       &:hover
-        opacity .6
+        color white
+
+    .logo
+      margin-right 30px
+      position relative
+      cursor pointer
+      &:hover:after
+        content 'Type "space". I dare you.'
+        background white
+        color black
+        text-align center
+        border-radius 4px
+        padding 10px
+        width 200px
+        position absolute
+        left calc(100% + 10px)
+        top 50%
+        transform translateY(-50%)
+      img
+        width 40px
+
+#seinfeld-container
+  display none
+  &:before
+    content ''
+    position fixed
+    top 0
+    bottom 0
+    left 0
+    right 0
+    background rgba(0, 0, 0, .9)
+    z-index 10
+
+  #seinfeld
+    position fixed
+    width 100%
+    max-width 560px
+    height 315px
+    left 50%
+    top 50%
+    margin -157px 0 0 -280px
+    z-index 11
+
+    iframe
+      width 100%
+      height 100%

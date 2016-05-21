@@ -1,16 +1,16 @@
 axis         = require 'axis'
 rupture      = require 'rupture'
 autoprefixer = require 'autoprefixer-stylus'
-js_pipeline  = require 'js-pipeline'
 css_pipeline = require 'css-pipeline'
+browserify   = require 'roots-browserify'
 
 module.exports =
   ignores: ['README.md', '**/layout.*', '**/_*', '.gitignore', 'ship.*conf', 'zab.json']
 
   extensions: [
-    js_pipeline(files: 'assets/js/*.coffee', out: 'js/build.js', minify: true, hash: true),
-    css_pipeline(files: 'assets/css/*.styl', out: 'css/build.css', minify: true, hash: true)
+    browserify(files: 'assets/js/main.coffee', out: 'js/bundle.js', minify: true, hash: false),
+    css_pipeline(files: 'assets/css/*.styl', out: 'css/build.css', minify: true, hash: false)
   ]
 
   stylus:
-    use: [axis(), rupture(), autoprefixer()]
+    use: [rupture(), autoprefixer()]
