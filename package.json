@@ -29,6 +29,7 @@
     "README.md"
   ],
   "scripts": {
+    "www:deploy": "cd www && roots compile -e production && zab deploy -k $ZAB_KEY",
     "test:lint": "exlint cli/src cli/test cli/bin",
     "test:unit": "nyc ava cli/test/unit -a",
     "test:integration": "ava cli/test/integration",
