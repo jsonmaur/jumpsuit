@@ -6,7 +6,6 @@ import { getDevToolsState, setDevToolsState } from './devtools'
 const { WebSocket, location, history } = window
 
 export default Component({
-  _hsrWsPort: process.env.WS_PORT,
   _hsrUrl () {
     const port = process.env.PORT
     const host = process.env.HOST
@@ -15,7 +14,7 @@ export default Component({
   },
 
   componentWillMount () {
-    const client = new WebSocket(`ws://0.0.0.0:${this._hsrWsPort}/`, 'echo-protocol')
+    const client = new WebSocket(process.env.HSR_WS, 'echo-protocol')
 
     client.onclose = () => {
       console.warn('HSR connection closed')

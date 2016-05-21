@@ -11,7 +11,7 @@ import resolve from 'resolve'
 import postcss from '../transforms/postcss'
 import { debounce } from '../utils/common'
 import { depTree } from '../deptree'
-import { triggerRefresh } from '../hsr'
+import { triggerRefresh } from '../serve'
 import { CONFIG } from '../config'
 
 let bundler
