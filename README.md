@@ -264,4 +264,4 @@ Render(CounterState, <Counter/>)
 
 ## License
 
-© 2016 [MIT](LICENSE)
+[MIT](LICENSE) © [Zab Labs](http://zab.io)
