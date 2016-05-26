@@ -1,7 +1,7 @@
 cheet = require 'cheet.js'
 
 cheet 's p a c e', ->
-  seinfeldContainer = document.getElementById('seinfeld-container')
-  seinfeld = document.getElementById('seinfeld')
-  seinfeldContainer.style.display = 'block'
-  seinfeld.setAttribute('src', 'https://www.youtube.com/embed/V3Vm_ksWreM?autoplay=1')
+  eggContainer = document.getElementById('egg-container')
+  egg = document.getElementById('egg')
+  eggContainer.style.display = 'block'
+  egg.setAttribute('src', 'https://giphy.com/embed/qGy9SDPLTmSkM')

@@ -12,10 +12,10 @@ body
   color $clr-offBlack
 
 .main
-  background $clr-blue1
-  background radial-gradient(ellipse at center, $clr-blue2 0%, $clr-blue1 70%) no-repeat
+  background $clr-slate1
+  background radial-gradient(ellipse at center, $clr-slate2 0%, $clr-slate1 70%) no-repeat
   height 100vh
-  min-height 550px
+  min-height 650px
   display flex
   flex-direction column
   align-items center
@@ -33,28 +33,29 @@ header
     margin-bottom 15px
 
 .install
-  background rgba(255, 255, 255, .3)
+  background rgba(255, 255, 255, .2)
   border-radius 4px
   display inline-block
   color white
-  padding 20px 30px
-  font-size 24px
+  padding 18px 25px 20px
+  font-size 20px
   font-family $font-anon
   text-align left
   margin-bottom 20px
   width 100%
+  font-weight 300
   +below(500px)
     font-size 18px
     white-space nowrap
 
   span
-    opacity .5
+    opacity .3
     margin-right 15px
     user-select none
 
 .subheading
-  font-weight 700
-  color $clr-offWhite
+  font-weight 400
+  color rgba(255, 255, 255, .3)
   margin-bottom 100px
 
   a
@@ -185,7 +186,7 @@ footer
       position relative
       cursor pointer
       &:hover:after
-        content 'Type "space". I dare you.'
+        content 'Say space for a surprise.'
         background white
         color black
         text-align center
@@ -199,7 +200,7 @@ footer
       img
         width 40px
 
-#seinfeld-container
+#egg-container
   display none
   &:before
     content ''
@@ -211,14 +212,14 @@ footer
     background rgba(0, 0, 0, .9)
     z-index 10
 
-  #seinfeld
+  #egg
     position fixed
     width 100%
-    max-width 560px
-    height 315px
+    max-width 480px
+    height 335px
     left 50%
     top 50%
-    margin -157px 0 0 -280px
+    margin -167px 0 0 -240px
     z-index 11
 
     iframe

@@ -1,4 +1,3 @@
-axis         = require 'axis'
 rupture      = require 'rupture'
 autoprefixer = require 'autoprefixer-stylus'
 css_pipeline = require 'css-pipeline'
