@@ -11,9 +11,12 @@ body
   text-align center
   color $clr-offBlack
 
+bgGrad(size)
+  background radial-gradient(ellipse at center, $clr-slate2 0%, $clr-slate1 size) no-repeat
+
 .main
   background $clr-slate1
-  background radial-gradient(ellipse at center, $clr-slate2 0%, $clr-slate1 70%) no-repeat
+  bgGrad(70%)
   height 100vh
   min-height 650px
   display flex
@@ -21,6 +24,8 @@ body
   align-items center
   justify-content space-around
   padding 0 30px
+  +below(500px)
+    bgGrad(90%)
 
 header
   margin-top 70px
