@@ -29,7 +29,6 @@
     "README.md"
   ],
   "scripts": {
-    "www:deploy": "cd www && npm install && roots compile -e production && zab deploy -k $ZAB_KEY",
     "test:lint": "exlint cli/src cli/test cli/bin",
     "test:unit": "nyc ava cli/test/unit -a",
     "test:integration": "ava cli/test/integration",
@@ -86,9 +85,7 @@
     "npm-run-all": "2.1.1",
     "nyc": "6.4.4",
     "proxyquire": "1.7.8",
-    "roots": "5.0.0",
-    "sinon": "1.17.4",
-    "zab": "0.3.6"
+    "sinon": "1.17.4"
   },
   "babel": {
     "presets": [
