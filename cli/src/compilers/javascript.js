@@ -67,6 +67,7 @@ const createBundle = debounce((cb) => {
         const code = fs.readFileSync(file, 'utf8')
         const newCode = uglify.minify(code, { fromString: true })
         fs.writeFileSync(file, newCode.code)
+        return
       }
 
       triggerRefresh()
