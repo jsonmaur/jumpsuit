@@ -36,5 +36,6 @@ export default async function () {
     }
   } catch (err) {
     error(err)
+    process.exit(1)
   }
 }
