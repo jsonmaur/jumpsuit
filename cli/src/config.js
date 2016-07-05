@@ -10,6 +10,10 @@ const defaults = {
 
   entry: 'app.js', // relative to sourceDir
 
+  hsr: {
+    maxHistory: -1
+  },
+
   server: {
     port: 8000,
     host: 'localhost',

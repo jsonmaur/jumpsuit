@@ -1,4 +1,8 @@
 module.exports = {
+  prodSourceMaps: true,
+  hsr: {
+    maxHistory: -1
+  },
   postcss: {
     parsers: [{
       name: 'sugarss',

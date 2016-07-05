@@ -8,6 +8,8 @@ import envify from 'loose-envify'
 import uglifyify from 'uglifyify'
 import uglify from 'uglify-js'
 import resolve from 'resolve'
+import exorcist from 'exorcist'
+import transform from 'vinyl-transform'
 import postcss from '../transforms/postcss'
 import { debounce } from '../utils/common'
 import { depTree } from '../deptree'
@@ -19,7 +21,7 @@ export function initBundle () {
   const b = browserify({
     plugin: [forgetify],
     paths: [CONFIG.sourceDir],
-    debug: process.env.NODE_ENV === 'development',
+    debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
     insertGlobalVars: {
       React: (file, basedir) => 'require("react")',
@@ -38,9 +40,10 @@ export function initBundle () {
     global: true,
   }, envify)
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' || CONFIG.prodSourceMaps) {
     b.transform({
       global: true,
+      sourcemap: CONFIG.prodSourceMaps
     }, uglifyify)
   }
 
@@ -73,10 +76,21 @@ const createBundle = debounce((cb) => {
       triggerRefresh()
     })
 
-  bundler.bundle((err) => {
-    if (err) cb(err)
-    else cb()
-  }).pipe(stream)
+  if(CONFIG.prodSourceMaps){
+    bundler.bundle((err) => {
+      if (err) cb(err)
+      else cb()
+    })
+    .pipe(exorcist(path.resolve(CONFIG.outputDir, path.basename('source.map.js'))))
+    .pipe(stream)
+  }
+  else{
+    bundler.bundle((err) => {
+      if (err) cb(err)
+      else cb()
+    })
+    .pipe(stream)
+  }
 }, { wait: 300 })
 
 let firstRun = true
