@@ -29,8 +29,8 @@ export function initBundle () {
 
   b.transform(babelify, {
     presets: [
-      resolve.sync('babel-preset-es2015', { basedir: __dirname }),
-      resolve.sync('babel-preset-react', { basedir: __dirname }),
+      resolve.sync('babel-preset-es2015', { basedir: path.resolve(__dirname) }),
+      resolve.sync('babel-preset-react', { basedir: path.resolve(__dirname) }),
     ],
   })
 
