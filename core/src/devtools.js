@@ -15,7 +15,6 @@ class JumpsuitDockMonitor extends DockMonitor {
     setDevToolsState = (state) => this.props.dispatch({
       type: 'IMPORT_STATE',
       nextLiftedState: state,
-      noRecompute: true
     })
   }
 }

@@ -11,7 +11,8 @@ export default async function () {
   process.env.PORT = config.port
   process.env.HOST = config.host
   process.env.HSR_WS = hsr.uri
-  process.env.HSR_MAX_HISTORY = CONFIG.hsr.maxHistory
+  process.env.HSR = CONFIG.hsr
+
   triggerRefresh = hsr.trigger
 
   log('running at', chalk.underline(uri))

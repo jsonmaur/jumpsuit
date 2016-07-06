@@ -17,7 +17,7 @@ export function combine (states) {
 
   if (process.env.NODE_ENV !== 'production') {
     const devTools = require('./devtools')
-    const devToolsExtension = devTools.default.instrument()
+    const devToolsExtension = devTools.default.instrument(process.env.HSR)
     enhancers.push(devToolsExtension)
   }
 
