@@ -62,12 +62,19 @@ export function initBundle () {
 const createBundle = debounce((cb) => {
   const file = path.resolve(CONFIG.outputDir, path.basename(CONFIG.entry))
 
+  let sourceMapFile = path.basename(CONFIG.entry).split('.')
+  sourceMapFile.splice(sourceMapFile.length - 1, 0, 'map')
+  sourceMapFile = sourceMapFile.join('.')
+
   const stream = fs.createWriteStream(file)
     .on('error', cb)
     .on('finish', () => {
       if (process.env.NODE_ENV === 'production') {
         const code = fs.readFileSync(file, 'utf8')
-        const newCode = uglify.minify(code, { fromString: true })
+        const newCode = uglify.minify(code, {
+          outSourceMap: CONFIG.prodSourceMaps ? sourceMapFile : undefined,
+          fromString: true
+        })
         fs.writeFileSync(file, newCode.code)
         return
       }
@@ -76,14 +83,11 @@ const createBundle = debounce((cb) => {
     })
 
   if(process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps){
-    let sourceMapName = path.basename(CONFIG.entry).split('.')
-    sourceMapName.splice(sourceMapName.length - 1, 0, 'map')
-    sourceMapName = sourceMapName.join('.')
     bundler.bundle((err) => {
       if (err) cb(err)
       else cb()
     })
-    .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapName)))
+    .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapFile)))
     .pipe(stream)
   }
   else{
