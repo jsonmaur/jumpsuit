@@ -10,8 +10,11 @@ const defaults = {
 
   entry: 'app.js', // relative to sourceDir
 
+  prodSourceMaps: true,
+
   hsr: {
-    maxHistory: -1
+    maxAge: 1000,
+    shouldCatchErrors: true
   },
 
   server: {

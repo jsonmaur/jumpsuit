@@ -1,8 +1,7 @@
 module.exports = {
   prodSourceMaps: true,
   hsr: {
-    maxAge: 4,
-    shouldCatchErrors: true,
+    maxAge: 2,
   },
   postcss: {
     parsers: [{

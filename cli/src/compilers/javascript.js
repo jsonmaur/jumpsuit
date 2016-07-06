@@ -75,12 +75,15 @@ const createBundle = debounce((cb) => {
       triggerRefresh()
     })
 
-  if(CONFIG.prodSourceMaps){
+  if(process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps){
+    let sourceMapName = path.basename(CONFIG.entry).split('.')
+    sourceMapName.splice(sourceMapName.length - 1, 0, 'map')
+    sourceMapName = sourceMapName.join('.')
     bundler.bundle((err) => {
       if (err) cb(err)
       else cb()
     })
-    .pipe(exorcist(path.resolve(CONFIG.outputDir, path.basename('source.map.js'))))
+    .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapName)))
     .pipe(stream)
   }
   else{
