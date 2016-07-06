@@ -8,6 +8,7 @@ import envify from 'loose-envify'
 import uglifyify from 'uglifyify'
 import uglify from 'uglify-js'
 import resolve from 'resolve'
+import exorcist from 'exorcist'
 import postcss from '../transforms/postcss'
 import { debounce } from '../utils/common'
 import { depTree } from '../deptree'
@@ -19,12 +20,12 @@ export function initBundle () {
   const b = browserify({
     plugin: [forgetify],
     paths: [CONFIG.sourceDir],
-    debug: process.env.NODE_ENV === 'development',
+    debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
-    insertGlobalVars: {
+    insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
       React: (file, basedir) => 'require("react")',
-      _INSERT_CSS_: (file, basedir) => 'require("insert-css")',
-    },
+      _INSERT_CSS_: (file, basedir) => `require("${ resolve.sync('insert-css', { basedir: __dirname })}")`
+    })
   })
 
   b.transform(babelify, {
@@ -41,6 +42,7 @@ export function initBundle () {
   if (process.env.NODE_ENV === 'production') {
     b.transform({
       global: true,
+      sourcemap: CONFIG.prodSourceMaps
     }, uglifyify)
   }
 
@@ -73,10 +75,24 @@ const createBundle = debounce((cb) => {
       triggerRefresh()
     })
 
-  bundler.bundle((err) => {
-    if (err) cb(err)
-    else cb()
-  }).pipe(stream)
+  if(process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps){
+    let sourceMapName = path.basename(CONFIG.entry).split('.')
+    sourceMapName.splice(sourceMapName.length - 1, 0, 'map')
+    sourceMapName = sourceMapName.join('.')
+    bundler.bundle((err) => {
+      if (err) cb(err)
+      else cb()
+    })
+    .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapName)))
+    .pipe(stream)
+  }
+  else{
+    bundler.bundle((err) => {
+      if (err) cb(err)
+      else cb()
+    })
+    .pipe(stream)
+  }
 }, { wait: 300 })
 
 let firstRun = true

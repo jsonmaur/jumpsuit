@@ -53,6 +53,7 @@
     "chokidar": "1.4.3",
     "clean-css": "3.4.12",
     "crypto-extra": "0.2.2",
+    "exorcist": "^0.4.0",
     "forgetify": "0.1.2",
     "fs-extra": "0.30.0",
     "fs-promise": "0.5.0",
@@ -70,7 +71,8 @@
     "resolve": "1.1.7",
     "strip-ansi": "3.0.1",
     "uglify-js": "2.6.2",
-    "uglifyify": "3.0.1"
+    "uglifyify": "3.0.1",
+    "vinyl-transform": "^1.0.0"
   },
   "devDependencies": {
     "ava": "0.14.0",

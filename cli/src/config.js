@@ -10,6 +10,13 @@ const defaults = {
 
   entry: 'app.js', // relative to sourceDir
 
+  prodSourceMaps: true,
+
+  hsr: {
+    maxAge: 1000,
+    shouldCatchErrors: true
+  },
+
   server: {
     port: 8000,
     host: 'localhost',
@@ -19,6 +26,7 @@ const defaults = {
     extensions: ['.js'],
     rebundles: [],
     transforms: [],
+    globals: {}
   },
 
   postcss: {
