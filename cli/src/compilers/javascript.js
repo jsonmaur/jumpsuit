@@ -24,6 +24,7 @@ export function initBundle () {
     cache: {}, packageCache: {},
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
       React: (file, basedir) => 'require("react")',
+      _INSERT_CSS_: (file, basedir) => `require("${ resolve.sync('insert-css', { basedir: __dirname })}")`
     })
   })
 
