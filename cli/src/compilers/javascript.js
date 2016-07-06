@@ -9,7 +9,6 @@ import uglifyify from 'uglifyify'
 import uglify from 'uglify-js'
 import resolve from 'resolve'
 import exorcist from 'exorcist'
-import transform from 'vinyl-transform'
 import postcss from '../transforms/postcss'
 import { debounce } from '../utils/common'
 import { depTree } from '../deptree'
@@ -23,10 +22,9 @@ export function initBundle () {
     paths: [CONFIG.sourceDir],
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
-    insertGlobalVars: {
+    insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
       React: (file, basedir) => 'require("react")',
-      _INSERT_CSS_: (file, basedir) => 'require("insert-css")',
-    },
+    })
   })
 
   b.transform(babelify, {
@@ -40,7 +38,7 @@ export function initBundle () {
     global: true,
   }, envify)
 
-  if (process.env.NODE_ENV === 'production' || CONFIG.prodSourceMaps) {
+  if (process.env.NODE_ENV === 'production') {
     b.transform({
       global: true,
       sourcemap: CONFIG.prodSourceMaps

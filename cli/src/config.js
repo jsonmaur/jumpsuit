@@ -23,6 +23,7 @@ const defaults = {
     extensions: ['.js'],
     rebundles: [],
     transforms: [],
+    globals: {}
   },
 
   postcss: {
