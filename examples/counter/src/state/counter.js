@@ -1,6 +1,6 @@
 import { State } from 'jumpsuit'
 
-const duck = State('counter', {
+const state = State('counter', {
   initial: { count: 0 },
 
   increment (state, payload) {
@@ -12,4 +12,10 @@ const duck = State('counter', {
   },
 })
 
-export default duck
+export default state
+
+export function incrementAsync(amount){
+  setTimeout(() => {
+    state.increment(amount)
+  }, 1000)
+}
