@@ -63,7 +63,7 @@ export function initBundle () {
       // resolve to the react package location, not the file
       "react": path.resolve(resolve.sync('react', { basedir: __dirname }), '../')
     },
-    verbose: true
+    verbose: false
   })
 
   return b
