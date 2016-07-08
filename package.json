@@ -21,9 +21,10 @@
     "jumpsuit": "bin/jumpsuit"
   },
   "files": [
+    "jumpsuit.js",
     "bin/",
-    "src/",
     "lib/",
+    "examples/",
     "logo.txt",
     "banner.png",
     "LICENSE",
@@ -37,10 +38,11 @@
     "test": "cross-env NODE_ENV=testing run-s test:*",
     "posttest": "nyc report -r=lcov",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "prebuild": "rm -rf lib",
+    "prebuild": "rm -rf lib && rm -rf jumpsuit.js",
     "build": "babel src -d lib --no-comments",
     "watch": "npm run build -- -w -s",
-    "prepublish": "npm run build"
+    "standalone": "browserify lib/core/index.js -s jumpsuit -tg uglifyify -o jumpsuit.js",
+    "prepublish": "npm run build && npm run standalone"
   },
   "dependencies": {
     "aliasify": "^2.0.0",
