@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zab/jumpsuit.git"
+    "url": "git+https://github.com/jumpsuit/jumpsuit.git"
   },
   "main": "cli/lib/core.js",
   "bin": {
