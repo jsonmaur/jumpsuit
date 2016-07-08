@@ -6,6 +6,7 @@ import forgetify from 'forgetify'
 import babelify from 'babelify'
 import envify from 'loose-envify'
 import uglifyify from 'uglifyify'
+import aliasify from 'aliasify'
 import uglify from 'uglify-js'
 import resolve from 'resolve'
 import exorcist from 'exorcist'
@@ -23,7 +24,7 @@ export function initBundle () {
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
-      React: (file, basedir) => 'require("react")',
+      React: (file, basedir) => `require("${ resolve.sync('react', { basedir: __dirname })}")`,
       _INSERT_CSS_: (file, basedir) => `require("${ resolve.sync('insert-css', { basedir: __dirname })}")`
     })
   })
@@ -33,6 +34,15 @@ export function initBundle () {
       resolve.sync('babel-preset-es2015', { basedir: __dirname }),
       resolve.sync('babel-preset-react', { basedir: __dirname }),
     ],
+  })
+
+  b.transform({
+    global: true,
+  }, aliasify, {
+    aliases: {
+      "react": resolve.sync('react', { basedir: __dirname })
+    },
+    verbose: false
   })
 
   b.transform({

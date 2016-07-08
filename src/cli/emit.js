@@ -40,7 +40,7 @@ export function getLogo (options = {}) {
   options.indent = options.indent || 0
 
   const prepend = Array(parseInt(options.indent, 10) + 1).join('  ')
-  const filepath = path.resolve(__dirname, '../logo.txt')
+  const filepath = path.resolve(__dirname, '../../logo.txt')
   const logo = fs.readFileSync(filepath, 'utf8').replace(/^/gm, prepend)
 
   return logo
