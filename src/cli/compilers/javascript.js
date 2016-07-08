@@ -38,15 +38,6 @@ export function initBundle () {
 
   b.transform({
     global: true,
-  }, aliasify, {
-    aliases: {
-      "react": resolve.sync('react', { basedir: __dirname })
-    },
-    verbose: false
-  })
-
-  b.transform({
-    global: true,
   }, envify)
 
   if (process.env.NODE_ENV === 'production') {
@@ -64,6 +55,15 @@ export function initBundle () {
     } else if (typeof t === 'object' && t.transform) {
       b.transform(t.transform, t.options)
     }
+  })
+
+  b.transform(aliasify, {
+    global: true,
+    aliases: {
+      // resolve to the react package location, not the file
+      "react": path.resolve(resolve.sync('react', { basedir: __dirname }), '../')
+    },
+    verbose: true
   })
 
   return b
