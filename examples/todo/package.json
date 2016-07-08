@@ -1,0 +1,17 @@
+{
+  "name": "jumpsuit-counter-example",
+  "version": "1.0.0",
+  "scripts": {
+    "watch": "jumpsuit watch",
+    "build": "jumpsuit build"
+  },
+  "devDependencies": {
+    "postcss-nested": "1.0.0",
+    "postcss-simple-vars": "1.2.0",
+    "reset.css": "2.0.2",
+    "sugarss": "0.1.3"
+  },
+  "dependencies": {
+    "jumpsuit": "^0.1.1"
+  }
+}
