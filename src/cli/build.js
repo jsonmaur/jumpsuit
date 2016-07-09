@@ -8,6 +8,7 @@ import { CONFIG } from './config'
 import { outputLogo, pending, pendingDone, error } from './emit'
 import { buildJs } from './compilers/javascript'
 import { buildAsset } from './compilers/assets'
+import { buildStyles } from './compilers/styles'
 
 export default function (argv) {
   outputLogo({ indent: 1 })
@@ -26,7 +27,7 @@ export async function watch (argv) {
   fs.emptyDirSync(outputDir)
   const watcher = chokidar.watch(sourceDir, {
     persistent: true,
-    ignored: /[\/\\](\.)|node_modules|bower_components/,
+    ignored: /[\/\\](\.)|node_modules|bower_components/
   })
 
   watcher.on('all', handleEvent)
@@ -53,7 +54,9 @@ export async function handleEvent (evt, file) {
     const ext = path.extname(file)
     if (CONFIG.browserify.extensions.indexOf(ext) > -1) {
       await buildJs(evt, file)
-    } else {
+    } else if (CONFIG.styles && CONFIG.styles.extensions.indexOf(ext) > -1) {
+      await buildStyles(evt, file)
+    } else if (CONFIG.assetsIgnoreExtensions.indexOf(ext) === -1) {
       await buildAsset(evt, file)
     }
   } catch (err) {

@@ -10,10 +10,9 @@ import aliasify from 'aliasify'
 import uglify from 'uglify-js'
 import resolve from 'resolve'
 import exorcist from 'exorcist'
-import postcss from '../transforms/postcss'
 import { debounce } from '../utils/common'
 import { depTree } from '../deptree'
-import { triggerRefresh } from '../serve'
+import { socketMessage } from '../serve'
 import { CONFIG } from '../config'
 
 let bundler
@@ -24,20 +23,19 @@ export function initBundle () {
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
-      React: (file, basedir) => `require("${ resolve.sync('react', { basedir: __dirname })}")`,
-      _INSERT_CSS_: (file, basedir) => `require("${ resolve.sync('insert-css', { basedir: __dirname })}")`
+      React: (file, basedir) => `require("${resolve.sync('react', { basedir: __dirname })}")`
     })
   })
 
   b.transform(babelify, {
     presets: [
       resolve.sync('babel-preset-es2015', { basedir: __dirname }),
-      resolve.sync('babel-preset-react', { basedir: __dirname }),
-    ],
+      resolve.sync('babel-preset-react', { basedir: __dirname })
+    ]
   })
 
   b.transform({
-    global: true,
+    global: true
   }, envify)
 
   if (process.env.NODE_ENV === 'production') {
@@ -46,8 +44,6 @@ export function initBundle () {
       sourcemap: CONFIG.prodSourceMaps
     }, uglifyify)
   }
-
-  b.transform(postcss)
 
   CONFIG.browserify.transforms.forEach((t) => {
     if (typeof t === 'string') {
@@ -61,9 +57,8 @@ export function initBundle () {
     global: true,
     aliases: {
       // resolve to the react package location, not the file
-      "react": path.resolve(resolve.sync('react', { basedir: __dirname }), '../')
-    },
-    verbose: false
+      'react': path.resolve(resolve.sync('react', { basedir: __dirname }), '../')
+    }
   })
 
   return b
@@ -89,28 +84,30 @@ const createBundle = debounce((cb) => {
         return
       }
 
-      triggerRefresh()
+      socketMessage({
+        type: 'refresh'
+      })
     })
 
-  if(process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps){
+  if (process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps) {
     bundler.bundle((err) => {
       if (err) cb(err)
       else cb()
     })
-    .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapFile)))
-    .pipe(stream)
-  }
-  else{
+      .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapFile)))
+      .pipe(stream)
+  } else {
     bundler.bundle((err) => {
       if (err) cb(err)
       else cb()
     })
-    .pipe(stream)
+      .pipe(stream)
   }
 }, { wait: 300 })
 
 let firstRun = true
 const entries = new Set()
+
 export function buildJs (evt, file) {
   return new Promise((resolve, reject) => {
     if (!bundler) bundler = initBundle()

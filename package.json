@@ -31,7 +31,7 @@
     "README.md"
   ],
   "scripts": {
-    "test:lint": "exlint src",
+    "test:lint": "standard --verbose | snazzy",
     "test:unit": "nyc ava test/cli/unit test/core/unit -a",
     "test:integration": "ava test/cli/integration test/core/integration",
     "pretest": "rm -rf .nyc_output coverage",
@@ -93,16 +93,21 @@
     "ava": "0.14.0",
     "babel-cli": "6.8.0",
     "babel-core": "6.8.0",
+    "babel-eslint": "^6.1.1",
     "babel-plugin-transform-runtime": "6.8.0",
+    "babel-preset-stage-2": "6.5.0",
     "babel-register": "6.8.0",
     "coveralls": "2.11.9",
     "cross-env": "1.0.7",
-    "exlint": "0.1.4",
     "npm-run-all": "2.1.1",
     "nyc": "6.4.4",
     "proxyquire": "1.7.8",
     "sinon": "1.17.4",
-    "babel-preset-stage-2": "6.5.0"
+    "snazzy": "^4.0.0",
+    "standard": "^7.1.2"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   },
   "babel": {
     "presets": [

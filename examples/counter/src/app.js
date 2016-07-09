@@ -1,4 +1,3 @@
-import './styles/base.css'
 import { Render, Router, Route, IndexRoute } from 'jumpsuit'
 
 import App from 'containers/index'

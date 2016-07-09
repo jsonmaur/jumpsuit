@@ -2,10 +2,16 @@ import fs from 'fs-promise'
 import { CONFIG } from '../config'
 
 export async function buildAsset (evt, file) {
-  const { outputDir, assetsDir } = CONFIG
+  const { outputDir, assetsDir, sourceDir } = CONFIG
 
   /* flatten out assets dir */
-  const outputFile = file.replace(assetsDir, outputDir)
+  let outputFile
+
+  if (file.indexOf(assetsDir) > -1) {
+    outputFile = file.replace(assetsDir, outputDir)
+  } else {
+    outputFile = file.replace(sourceDir, outputDir)
+  }
 
   switch (evt) {
     case 'add':

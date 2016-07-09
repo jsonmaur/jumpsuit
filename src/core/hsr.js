@@ -64,11 +64,12 @@ export default Component({
         }).catch((err) => console.error(err))
       }
 
-      if (payload.type === 'css_refresh') {
+      if (payload.type === 'styles') {
         const allLinks = Array.from(document.getElementsByTagName('link'))
-        const link = allLinks.find((e) => e.href.match(/app\.css(?:\?[0-9]+)?$/))
+        const urlReg = new RegExp(`${escapeRegExp(payload.url)}(?:\\?[0-9]+)?$`, 'g')
+        const link = allLinks.find((e) => e.href.match(urlReg))
 
-        const newLink = document.createElement('LINK')
+        const newLink = document.createElement('link')
         newLink.type = 'text/css'
         newLink.rel = 'stylesheet'
         newLink.href = link.href
@@ -76,6 +77,8 @@ export default Component({
           .replace(/\?[0-9]+/, '') + `?${Date.now()}`
 
         document.head.appendChild(newLink)
+
+        console.info('Styles Updated')
 
         /* prevents flash of unstyled content */
         const vars = 'sheet' in newLink ? ['sheet', 'cssRules'] : ['styleSheet', 'rules']
@@ -91,5 +94,9 @@ export default Component({
 
   render () {
     return null
-  },
+  }
 })
+
+function escapeRegExp (str) {
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+}

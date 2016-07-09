@@ -16,11 +16,11 @@ const cssModulesPlugin = postcssModules({
   getJSON (cssFilename, json) {
     fs.mkdirpSync(path.dirname(cssFilename))
     fs.writeFileSync(cssFilename, json)
-  },
+  }
 })
 
 export default tools.makeStringTransform('postcss', {
-  includeExtensions: CONFIG.postcss.extensions,
+  includeExtensions: CONFIG.postcss.extensions
 }, async (content, opts, done) => {
   try {
     const options = { from: opts.file }
@@ -30,14 +30,14 @@ export default tools.makeStringTransform('postcss', {
         path: [
           CONFIG.sourceDir,
           path.dirname(opts.file),
-          path.resolve(process.cwd(), 'node_modules'),
+          path.resolve(process.cwd(), 'node_modules')
         ],
         onImport: (files) => {
           files.forEach((f) => {
             if (f !== opts.file) addToDepTree(f, opts.file)
           })
-        },
-      }),
+        }
+      })
     ]
 
     if (CONFIG.postcss.modules) {

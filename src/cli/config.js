@@ -1,12 +1,15 @@
 import path from 'path'
 import _ from 'lodash'
 import fs from 'fs-promise'
+import { warn } from './emit'
 
 export let CONFIG
 const defaults = {
   sourceDir: 'src',
   outputDir: 'dist',
   assetsDir: 'assets', // relative to sourceDir
+
+  assetsIgnoreExtensions: [],
 
   entry: 'app.js', // relative to sourceDir
 
@@ -19,7 +22,7 @@ const defaults = {
 
   server: {
     port: 8000,
-    host: 'localhost',
+    host: 'localhost'
   },
 
   browserify: {
@@ -29,38 +32,14 @@ const defaults = {
     globals: {}
   },
 
-  postcss: {
-    extensions: ['.css'],
-    plugins: [],
-    parsers: [],
-    modules: true,
-  },
-
-  // indexFile: {
-    // template: 'assets/index.html', // auto-generates if undefined
-    // title: null,
-    // meta: {}, // key: value
-    // entry: 'div#app',
-  // },
-
-  // build: {
-  //   development: {
-  //     sourceMaps: true, // only internal
-  //   },
-  //   production: {
-  //     sourceMaps: false, // only external
-  //     minify: true,
-  //     fingerprint: true,
-  //     prefix: '/',
-  //   },
-  // },
+  styles: null // eg {extensions: ['.css', '.styl'], action: (file, evt) => {return Promise.resolve(css)}}
 }
 
 export default async function (argv) {
   const configFile = path.resolve(argv.c || argv.config || 'jumpsuit.config.js')
 
   if (!await fs.exists(configFile)) {
-    throw new Error(`"${path.basename(configFile)}" doesn't exist here!`)
+    warn(`"${path.basename(configFile)}" doesn't exist. We recommend creating one!`)
   }
 
   const config = _.defaultsDeep(require(configFile), defaults)
@@ -69,14 +48,6 @@ export default async function (argv) {
   config.outputDir = path.resolve(config.outputDir)
   config.assetsDir = path.resolve(config.sourceDir, config.assetsDir)
   config.entry = path.resolve(config.sourceDir, config.entry)
-
-  config.browserify.extensions = _.uniq(config.browserify.extensions
-    .concat(defaults.browserify.extensions)
-    /* so we rebundle for postcss files */
-    .concat(config.postcss.extensions))
-
-  config.postcss.extensions = _.uniq(config.postcss.extensions
-    .concat(defaults.postcss.extensions))
 
   CONFIG = config
 }
