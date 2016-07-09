@@ -1,5 +1,5 @@
 {
-  "name": "jumpsuit-counter-example",
+  "name": "jumpsuit-todo-example",
   "version": "1.0.0",
   "scripts": {
     "watch": "jumpsuit watch",
