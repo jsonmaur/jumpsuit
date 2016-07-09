@@ -21,10 +21,12 @@ export async function buildStyles (evt, file) {
       if (err) return reject(err)
       fs.writeFile(outputFile, css, function (err) {
         if (err) return reject(err)
-        socketMessage({
-          type: 'styles',
-          url: fileName
-        })
+        if (process.env.NODE_ENV === 'development'){
+          socketMessage({
+            type: 'styles',
+            url: fileName
+          })
+        }
         resolve()
         currentResolve = null
       })
