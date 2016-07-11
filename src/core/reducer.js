@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
-import { browserHistory } from 'react-router'
+import { browserHistory, hashHistory } from 'react-router'
 import thunk from 'redux-thunk'
 
 let userMiddleware = []
@@ -11,8 +11,8 @@ export function Middleware (...newMiddleware) {
 
 export let STORE
 
-export function combine (states) {
-  const nativeMiddleware = applyMiddleware(thunk, routerMiddleware(browserHistory), ...userMiddleware)
+export function combine (states, options) {
+  const nativeMiddleware = applyMiddleware(thunk, routerMiddleware(options.useHash ? hashHistory : browserHistory), ...userMiddleware)
   const enhancers = [nativeMiddleware]
 
   if (process.env.NODE_ENV !== 'production') {
