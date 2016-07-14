@@ -11,7 +11,7 @@ export function Middleware (...newMiddleware) {
 
 export let STORE
 
-export function combine (states, options) {
+export function combine (states, options = {}) {
   const nativeMiddleware = applyMiddleware(thunk, routerMiddleware(options.useHash ? hashHistory : browserHistory), ...userMiddleware)
   const enhancers = [nativeMiddleware]
 
