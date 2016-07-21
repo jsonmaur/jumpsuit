@@ -61,6 +61,9 @@ export async function handleEvent (evt, file) {
     }
   } catch (err) {
     evtCount--
+    if (process.env.NODE_ENV === 'production') {
+      throw err
+    }
     return error(err, true)
   }
 
