@@ -22,7 +22,8 @@ const defaults = {
 
   server: {
     port: 8000,
-    host: 'localhost'
+    host: 'localhost',
+    pushState: true
   },
 
   browserify: {
