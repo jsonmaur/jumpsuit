@@ -14,13 +14,19 @@ export default async function () {
 
   Commands:
 
-      watch           build initial app and wait for file changes
-      build           create a production-ready version of app
-      serve           run the static server
+      new [dir] [example]   start a new project at the specified
+                            directory using an optional example template
+
+      init [example]        start a new project in the current directory
+                            using an optional example template
+
+      watch                 build initial app and wait for file changes
+      build                 create a production-ready version of app
+      serve                 run the static server
 
   Options:
 
-      -p, --port      specify the port you want to run on
-      -h, --host      specify the host you want to run on
-      -v, --version   show jumpsuit version number\n`)
+      -p, --port            specify the port you want to run on
+      -h, --host            specify the host you want to run on
+      -v, --version         show jumpsuit version number\n`)
 }

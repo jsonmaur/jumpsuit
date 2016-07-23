@@ -40,6 +40,7 @@ export default async function (argv) {
 
   if (!await fs.exists(configFile)) {
     warn(`"${path.basename(configFile)}" doesn't exist. We recommend creating one!`)
+    return
   }
 
   const config = _.defaultsDeep(require(configFile), defaults)

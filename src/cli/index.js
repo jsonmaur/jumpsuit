@@ -11,19 +11,24 @@ export default async function () {
       return console.log(`v${pkg.version}`)
     }
 
-    await initConfig(argv)
-
     const cmd = argv._[0]
     switch (cmd) {
+      case 'new':
+      case 'init':
+        await require('./new').default(argv)
+        break
       case 'watch':
         process.env.NODE_ENV = 'development'
+        await initConfig(argv)
         await require('./build').watch(argv)
         break
       case 'build':
         process.env.NODE_ENV = 'production'
+        await initConfig(argv)
         await require('./build').default(argv)
         break
       case 'serve':
+        await initConfig(argv)
         await require('./serve').default(argv)
         break
       case 'help':

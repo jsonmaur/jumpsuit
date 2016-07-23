@@ -19,7 +19,7 @@ export function combine (states, options = {}) {
     const devTools = require('./devtools')
     const devToolsExtension = devTools.default.instrument({
       maxAge: Number(process.env.HSR_MAX_AGE),
-      shouldCatchErrors: Boolean(process.env.HSR_SHOULD_CATCH_ERRORS),
+      shouldCatchErrors: Boolean(process.env.HSR_SHOULD_CATCH_ERRORS)
     })
     enhancers.push(devToolsExtension)
   }
