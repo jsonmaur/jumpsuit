@@ -10,13 +10,11 @@ import { buildJs } from './compilers/javascript'
 import { buildAsset } from './compilers/assets'
 import { buildStyles } from './compilers/styles'
 
-export default function (argv) {
+export default async function (argv) {
   outputLogo({ indent: 1 })
 
-  glob(`${CONFIG.sourceDir}/**/*`, { nodir: true }, (err, files) => {
-    if (err) return error(err)
-    files.forEach(async (file) => await handleEvent('add', file))
-  })
+  const files = glob.sync(`${CONFIG.sourceDir}/**/*`, { nodir: true })
+  await Promise.all(files.map((file) => handleEvent('add', file)))
 }
 
 export async function watch (argv) {
@@ -61,10 +59,10 @@ export async function handleEvent (evt, file) {
     }
   } catch (err) {
     evtCount--
+    error(err, true)
     if (process.env.NODE_ENV === 'production') {
       throw err
     }
-    return error(err, true)
   }
 
   /* output build complete and build time */

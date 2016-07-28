@@ -40,7 +40,7 @@ export default async function () {
         break
     }
   } catch (err) {
-    error(err)
+    error(err, true)
     process.exit(1)
   }
 }
