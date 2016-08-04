@@ -2,14 +2,6 @@
   <img src="banner.png" alt="Jumpsuit Banner" width="100%" />
   <br /> <br />
 
-  <a href="https://travis-ci.org/jumpsuit/jumpsuit">
-    <img src="https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master" alt="Build Status" />
-  </a>
-
-  <a href="https://coveralls.io/github/jumpsuit/jumpsuit?branch=master">
-    <img src="https://coveralls.io/repos/github/jumpsuit/jumpsuit/badge.svg?branch=master" alt="Coverage Status" />
-  </a>
-
   <a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
     <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
   </a>
