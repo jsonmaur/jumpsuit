@@ -2,8 +2,6 @@
   <img src="banner.png" alt="Jumpsuit Banner" width="100%" />
 </div>
 
----
-
 # Jumpsuit
 A powerful and extremely efficient Front-end framework & CLI. It is the fastest way to write scalable react/redux apps with the least overhead.
 
@@ -16,6 +14,8 @@ A powerful and extremely efficient Front-end framework & CLI. It is the fastest 
 <a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
   <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
 </a>
+
+> Jumpsuit is still under active development, so any feedback is welcome and appreciated!
 
 ## Installation
 Install from NPM
