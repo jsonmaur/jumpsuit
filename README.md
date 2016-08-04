@@ -79,8 +79,8 @@ const Counter = Component({
     return (
       <div>
         <h1>{ this.props.counter.count }</h1>
-        <Button onClick={ this.increment }>Increment</Button>
-        <Button onClick={ this.decrement }>Decrement</Button>
+        <button onClick={ this.increment }>Increment</button>
+        <button onClick={ this.decrement }>Decrement</button>
       </div>
     )
   },
@@ -122,7 +122,7 @@ Render(CounterState, <Counter/>)
       render() {
         return (
           <div>
-            <Button onClick={ this.sayHello }>Say Hello</Button>
+            <button onClick={ this.sayHello }>Say Hello</button>
           </div>
         )
       },
