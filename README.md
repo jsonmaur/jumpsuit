@@ -13,9 +13,9 @@ A powerful and extremely efficient Front-end framework & CLI. It is the fastest 
 - Minimal API
 - Simple and scalable state management based on redux
 
- <a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
-    <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
-  </a>
+<a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+  <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
+</a>
 
 ## Installation
 Install from NPM
