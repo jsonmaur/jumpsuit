@@ -427,4 +427,4 @@ function buildStyles(){
 
 ## License
 
-[MIT](LICENSE) © [Jumpsuit](http://jumpsuit.io)
+[MIT](LICENSE) © Jumpsuit
