@@ -6,10 +6,9 @@ export default async function () {
   const desc = chalk.dim(`${pkg.description} (v${pkg.version})`)
 
   outputLogo({ indent: 1 })
-  console.log(`  ${desc}
+  console.log(`  Usage:
 
-  Usage:
-
+      js <command> [options]
       jumpsuit <command> [options]
 
   Commands:

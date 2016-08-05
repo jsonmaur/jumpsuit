@@ -1,32 +1,32 @@
 <div align="center">
+  <a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+    <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
+  </a>
+
   <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
 </div>
+<br />
 
-# Jumpsuit
-A powerful and extremely efficient Front-end framework & CLI. It is the fastest way to write scalable react/redux apps with the least overhead.
+A powerful and efficient Javascript framework that helps you build great apps. It is the fastest way to write scalable React/Redux with the least overhead.
 
 - No boilerplate
-- Dedicated build system
-- Scaffolding tools
-- Minimal API
-- Simple and scalable state management based on redux
-
-<a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
-  <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
-</a>
-
-### Badge
-
-Using Jumpsuit in a project? Show it off!
-
-[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
-```
-[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
-```
+- Minimalist API
+- Components powered by React
+- State based on Redux
+- CLI powered by Browserify
+- [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
 
 > Jumpsuit is still under active development, so any feedback is welcome and appreciated!
 
-## Installation
+## Why another Javascript framework?
+
+[Just read this.](https://medium.com/@tannerlinsley/jumpsuit-react-redux-made-simple-e3186ba1b077)
+
+Javascript fatigue is a real thing, especially in the React/Webpack/Redux world where there are so many options to choose from. Jumpsuit brings together the best standards in the industry with the least amount of headache. It should be easy for a developer of any skill level to get started writing great apps without spending hours setting them up.
+
+## Getting Started
+
+#### Install
 
 ```bash
 $ npm install -g jumpsuit-cli
@@ -38,14 +38,24 @@ You can also use Jumpsuit with your own build system if you don't like ours. We'
 $ npm install --save jumpsuit
 ```
 
-## Quick start
+#### Quick Start
 ```bash
 # Create a new project
-$ jumpsuit new myProjectName && cd myProjectName
+$ jumpsuit new myProjectName
+$ cd myProjectName
 # Watch for changes
 $ jumpsuit watch
 # View your project
 $ open localhost:8000
+```
+
+#### Badge
+
+Using Jumpsuit in a project? Show it off!
+
+[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
+```
+[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```
 
 ## Examples
