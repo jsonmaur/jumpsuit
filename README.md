@@ -44,18 +44,20 @@ $ npm install --save jumpsuit
 # Create a new project
 $ jumpsuit new myProjectName
 $ cd myProjectName
+
 # Watch for changes
 $ jumpsuit watch
+
 # View your project
 $ open localhost:8000
 ```
 
 #### Badge
 
-Using Jumpsuit in a project? Show it off!
+Using Jumpsuit in your project? Show it off!
 
 [![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
-```
+```markdown
 [![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```
 
