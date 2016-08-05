@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="banner.png" alt="Jumpsuit Banner" width="100%" />
+  <img src="https://raw.githubusercontent.com/jumpsuit/jumpsuit/master/banner.png" alt="Jumpsuit Banner" width="100%" />
 </div>
 
 # Jumpsuit
