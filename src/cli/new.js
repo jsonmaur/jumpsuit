@@ -11,14 +11,15 @@ export default function (argv) {
   const exampleDir = (isInit ? argv._[1] : argv._[2]) || 'counter'
   const destDir = isInit ? '.' : (argv._[1] || 'new-jumpsuit')
 
-  return glob(path.resolve(__dirname, `../../examples/${exampleDir}/*`), {
-    ignore: '**/node_modules/**'
-  }, async (err, files) => {
+  return glob(path.resolve(__dirname, `../../examples/${exampleDir}/*`), async (err, files) => {
     if (err) return error(err)
+
     log('Creating new jumpsuit project...')
+    await fs.mkdirs(path.resolve(process.cwd(), destDir))
     await Promise.all(files.map((file) => {
       return fs.copy(file, path.resolve(process.cwd(), destDir, path.basename(file)))
     }))
+    await fs.remove(path.resolve(process.cwd(), destDir, 'node_modules'))
 
     log('Installing project dependencies...\n')
 
