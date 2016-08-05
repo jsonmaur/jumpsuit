@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+DIR="$(dirname "$(cd $(dirname $0); pwd)")"
+PACKAGES=( "core" "cli" )
+
+for i in ${PACKAGES[@]}; do
+  P=$DIR/packages/$i
+  cp -r $DIR/assets $P
+  cp $DIR/LICENSE $P
+  cp $DIR/README.md $P
+done
