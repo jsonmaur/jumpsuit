@@ -145,7 +145,7 @@ Render({
     })
   ```
 
-#### State <em>(name, config)</em>
+#### State <em>(name, config, detachedState)</em>
 - Creates a new state instance
 - Parameters
   - <strong>name</strong> String
@@ -155,6 +155,8 @@ Render({
       - An object or value representing the initial properties for this state
     - <strong>...actionName(state, payload)</strong>
       - Actions (functions) that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller as the second
+  - <strong>detachedState</strong> Boolean
+    - If set to true, the state will not be attached to the underlying redux instance, and cannot be combined with other states.  This basically creates a state machine that you can use how you please.
 - Returns
   - <strong>State Reducer</strong> function - can be used directly in the Render method, or combined with other states using State.combine. It also has these these prototype methods:
     - <strong>.getState()</strong>
