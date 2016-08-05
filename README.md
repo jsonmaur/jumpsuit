@@ -154,7 +154,8 @@ Render({
     - <strong>initial</strong>
       - An object or value representing the initial properties for this state
     - <strong>...actionName(state, payload)</strong>
-      - Actions (functions) that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller as the second
+      - Actions (functions) that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller as the second. Returns a new partial state object to be merged with the existing state.
+      - Notes on immutability: Any object returned will be automatically assigned to a new copy of the state object. This means you don't need to use `Object.assign` on the root object of your returns, but you will however need to maintain immutability for nested properties. If you're not sure what this means, see the `state/todos.js` file in the Todo List example for reference.
   - <strong>detachedState</strong> Boolean
     - If set to true, the state will not be attached to the underlying redux instance, and cannot be combined with other states.  This basically creates a state machine that you can use how you please.
 - Returns
