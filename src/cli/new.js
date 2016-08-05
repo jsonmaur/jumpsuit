@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs-promise'
 import glob from 'glob'
-import { spawn } from 'child_process'
+import spawn from 'cross-spawn'
 import { outputLogo, error, log } from './emit'
 
 export default function (argv) {
@@ -20,16 +20,20 @@ export default function (argv) {
       return fs.copy(file, path.resolve(process.cwd(), destDir, path.basename(file)))
     }))
 
-    log('Installing project dependencies...')
+    log('Installing project dependencies...\n')
+
+    // It would be nice to just copy jumpsuit or jumpsuit-core into here instead of installing it again
+    // await fs.copy(path.resolve(__dirname, '../../'), path.resolve(process.cwd(), destDir, 'node_modules/jumpsuit'))
+
     const ls = spawn('npm', ['install'], {
       cwd: path.resolve(process.cwd(), destDir),
-      stdio: 'ignore'
+      stdio: 'inherit'
     })
 
     ls.on('close', (code) => {
+      console.log('\n')
       log('Your new jumpsuit is ready to go!')
-      log('')
-      log(`cd ${destDir} && jumpsuit watch`)
+      log(`cd ${destDir} && jumpsuit watch\n`)
       process.exit(0)
     })
   })

@@ -99,6 +99,7 @@
     "babel-register": "6.8.0",
     "coveralls": "2.11.9",
     "cross-env": "1.0.7",
+    "cross-spawn": "^4.0.0",
     "npm-run-all": "2.1.1",
     "nyc": "6.4.4",
     "proxyquire": "1.7.8",
