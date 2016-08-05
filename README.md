@@ -2,10 +2,13 @@
   <a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
     <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
   </a>
+  <br>
 
   <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
 </div>
 <br />
+
+> Jumpsuit is still under active development, so any feedback is welcome and appreciated!
 
 A powerful and efficient Javascript framework that helps you build great apps. It is the fastest way to write scalable React/Redux with the least overhead.
 
@@ -15,8 +18,6 @@ A powerful and efficient Javascript framework that helps you build great apps. I
 - State based on Redux
 - CLI powered by Browserify
 - [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
-
-> Jumpsuit is still under active development, so any feedback is welcome and appreciated!
 
 ## Why another Javascript framework?
 
