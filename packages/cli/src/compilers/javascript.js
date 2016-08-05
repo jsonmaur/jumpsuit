@@ -19,7 +19,7 @@ let bundler
 export function initBundle () {
   const b = browserify({
     plugin: [forgetify],
-    paths: [CONFIG.sourceDir],
+    paths: [path.resolve('node_modules'), CONFIG.sourceDir],
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
