@@ -30,7 +30,8 @@ export function initBundle () {
   b.transform(babelify, {
     presets: [
       resolve.sync('babel-preset-es2015', { basedir: __dirname }),
-      resolve.sync('babel-preset-react', { basedir: __dirname })
+      resolve.sync('babel-preset-react', { basedir: __dirname }),
+      resolve.sync('babel-preset-stage-2', { basedir: __dirname })
     ]
   })
 
