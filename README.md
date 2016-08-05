@@ -15,6 +15,15 @@ A powerful and extremely efficient Front-end framework & CLI. It is the fastest 
   <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
 </a>
 
+#### Badge
+
+Using Jumpsuit in a project? Show it off!
+
+[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
+```
+[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
+```
+
 > Jumpsuit is still under active development, so any feedback is welcome and appreciated!
 
 ## Installation
