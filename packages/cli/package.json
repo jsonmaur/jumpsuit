@@ -28,6 +28,7 @@
   "files": [
     "assets/",
     "bin/",
+    "examples/",
     "lib/",
     "LICENSE",
     "README.md"
