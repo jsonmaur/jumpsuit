@@ -11,7 +11,7 @@ export default function (argv) {
   const exampleDir = (isInit ? argv._[1] : argv._[2]) || 'counter'
   const destDir = isInit ? '.' : (argv._[1] || 'new-jumpsuit')
 
-  return glob(path.resolve(__dirname, `../../examples/${exampleDir}/*`), async (err, files) => {
+  return glob(path.resolve(__dirname, `../../../examples/${exampleDir}/*`), async (err, files) => {
     if (err) return error(err)
 
     log('Creating new jumpsuit project...')

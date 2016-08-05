@@ -1,0 +1,72 @@
+{
+  "name": "jumpsuit",
+  "version": "0.6.5",
+  "description": "One javascript framework to rule them all",
+  "license": "MIT",
+  "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumpsuit/jumpsuit.git"
+  },
+  "keywords": [
+    "framework",
+    "react",
+    "redux",
+    "react-router",
+    "spa",
+    "front-end"
+  ],
+  "preferGlobal": false,
+  "main": "lib/index.js",
+  "files": [
+    "assets/",
+    "bin/",
+    "lib/",
+    "jumpsuit.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test:lint": "standard --verbose | snazzy",
+    "test": "npm-run-all test:*",
+    "build:node": "rm -rf lib && babel src -d lib --no-comments",
+    "build:umd": "rm -rf jumpsuit.js && browserify lib/index.js -s jumpsuit -tg uglifyify -o jumpsuit.js",
+    "watch": "npm run build:node -- -w -s",
+    "prepublish": "npm-run-all build:*"
+  },
+  "dependencies": {
+    "axios": "0.13.1",
+    "react": "15.3.0",
+    "react-dom": "15.3.0",
+    "react-redux": "4.4.5",
+    "react-router": "2.6.1",
+    "react-router-redux": "4.0.5",
+    "redux": "3.5.2",
+    "redux-devtools": "3.3.1",
+    "redux-devtools-dock-monitor": "1.1.1",
+    "redux-devtools-log-monitor": "1.0.11",
+    "redux-thunk": "2.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.11.4",
+    "babel-eslint": "6.1.2",
+    "babel-preset-es2015": "6.13.2",
+    "babel-preset-react": "6.11.1",
+    "babel-preset-stage-2": "6.13.0",
+    "browserify": "13.1.0",
+    "npm-run-all": "2.3.0",
+    "snazzy": "4.0.0",
+    "standard": "7.1.2",
+    "uglifyify": "3.0.2"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "react"
+    ]
+  }
+}

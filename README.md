@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/jumpsuit/jumpsuit/master/banner.png" alt="Jumpsuit Banner" width="100%" />
+  <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
 </div>
 
 # Jumpsuit
@@ -21,10 +21,10 @@ A powerful and extremely efficient Front-end framework & CLI. It is the fastest 
 Install from NPM
 ```bash
 # CLI
-$ npm install jumpsuit -g
+$ npm install -g jumpsuit-cli
 
 # Framework Only
-$ npm install jumpsuit --save
+$ npm install --save jumpsuit
 ```
 
 ## Quick start

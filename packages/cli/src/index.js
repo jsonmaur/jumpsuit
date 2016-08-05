@@ -1,5 +1,5 @@
 import minimist from 'minimist'
-import pkg from '../../package.json'
+import pkg from '../package.json'
 import initConfig from './config'
 import { error } from './emit'
 
