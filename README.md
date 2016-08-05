@@ -23,7 +23,7 @@ Install from NPM
 # CLI
 $ npm install jumpsuit -g
 
-# Framework
+# Framework Only
 $ npm install jumpsuit --save
 ```
 
