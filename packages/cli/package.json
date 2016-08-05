@@ -1,6 +1,6 @@
 {
   "name": "jumpsuit-cli",
-  "version": "0.6.5",
+  "version": "0.7.0",
   "description": "One javascript framework to rule them all",
   "license": "MIT",
   "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
@@ -59,7 +59,7 @@
     "fs-promise": "0.5.0",
     "glob": "7.0.3",
     "insert-css": "0.2.0",
-    "jumpsuit": "0.6.5",
+    "jumpsuit": "^0.7.0",
     "lodash": "4.12.0",
     "loose-envify": "1.1.0",
     "memory-fs": "0.3.0",
