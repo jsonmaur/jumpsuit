@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs-promise'
 import glob from 'glob'
+import { spawn } from 'child_process'
 import { outputLogo, error, log } from './emit'
 
 export default function (argv) {
@@ -12,13 +13,21 @@ export default function (argv) {
 
   return glob(path.resolve(__dirname, `../../examples/${exampleDir}/*`), {
     ignore: '**/node_modules/**'
-  }, (err, files) => {
+  }, async (err, files) => {
     if (err) return error(err)
-    files.forEach(async (file) => {
-      await fs.copy(file, path.resolve(process.cwd(), destDir, path.basename(file)))
+    log('Creating new jumpsuit project...')
+    await Promise.all(files.map((file) => {
+      return fs.copy(file, path.resolve(process.cwd(), destDir, path.basename(file)))
+    }))
+
+    const ls = spawn('npm', ['install'], {
+      cwd: path.resolve(process.cwd(), destDir)
     })
-    log('Your new jumpsuit is ready to go!')
-    log('')
-    log(`cd ${destDir} && jumpsuit watch`)
+
+    ls.on('close', (code) => {
+      log('Your new jumpsuit is ready to go!')
+      log('')
+      log(`cd ${destDir} && jumpsuit watch`)
+    })
   })
 }
