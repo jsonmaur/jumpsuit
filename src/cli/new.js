@@ -20,14 +20,17 @@ export default function (argv) {
       return fs.copy(file, path.resolve(process.cwd(), destDir, path.basename(file)))
     }))
 
+    log('Installing project dependencies...')
     const ls = spawn('npm', ['install'], {
-      cwd: path.resolve(process.cwd(), destDir)
+      cwd: path.resolve(process.cwd(), destDir),
+      stdio: 'ignore'
     })
 
     ls.on('close', (code) => {
       log('Your new jumpsuit is ready to go!')
       log('')
       log(`cd ${destDir} && jumpsuit watch`)
+      process.exit(0)
     })
   })
 }
