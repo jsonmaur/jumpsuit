@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import pkg from '../../package.json'
+import pkg from '../package.json'
 import { outputLogo } from './emit'
 
 export default async function () {

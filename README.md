@@ -21,10 +21,10 @@ A powerful and extremely efficient Front-end framework & CLI. It is the fastest 
 Install from NPM
 ```bash
 # CLI
-$ npm install jumpsuit -g
+$ npm install -g jumpsuit-cli
 
 # Framework Only
-$ npm install jumpsuit --save
+$ npm install --save jumpsuit
 ```
 
 ## Quick start
