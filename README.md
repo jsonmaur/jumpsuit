@@ -15,7 +15,7 @@ A powerful and extremely efficient Front-end framework & CLI. It is the fastest 
   <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
 </a>
 
-#### Badge
+### Badge
 
 Using Jumpsuit in a project? Show it off!
 
@@ -27,12 +27,14 @@ Using Jumpsuit in a project? Show it off!
 > Jumpsuit is still under active development, so any feedback is welcome and appreciated!
 
 ## Installation
-Install from NPM
-```bash
-# CLI
-$ npm install -g jumpsuit-cli
 
-# Framework Only
+```bash
+$ npm install -g jumpsuit-cli
+```
+
+You can also use Jumpsuit with your own build system if you don't like ours. We'll only cry a little bit.
+
+```bash
 $ npm install --save jumpsuit
 ```
 
