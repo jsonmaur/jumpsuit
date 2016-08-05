@@ -8,7 +8,7 @@
 </div>
 <br />
 
-> Jumpsuit is still under active development, so any feedback is welcome and appreciated!
+> *Jumpsuit is still under active development, so any feedback is welcome and appreciated!*
 
 A powerful and efficient Javascript framework that helps you build great apps. It is the fastest way to write scalable React/Redux with the least overhead.
 
