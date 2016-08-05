@@ -79,19 +79,11 @@ const Counter = Component({
     return (
       <div>
         <h1>{ this.props.counter.count }</h1>
-        <button onClick={ this.increment }>Increment</button>
-        <button onClick={ this.decrement }>Decrement</button>
+        <button onClick={ () => CounterState.increment() }>Increment</button>
+        <button onClick={ () => CounterState.decrement() }>Decrement</button>
       </div>
     )
-  },
-  increment(){
-    // Dispatch state actions
-    CounterState.increment()
-  },
-  decrement(){
-    // Dispatch state actions
-    CounterState.decrement()
-  },
+  }
 
 }, (state) => ({
   // Subscribe to the counter state (will be available via this.props.counter)
@@ -99,7 +91,9 @@ const Counter = Component({
 }))
 
 // Render your app!
-Render(CounterState, <Counter/>)
+Render({
+  counter: CounterState
+}, <Counter/>)
 ```
 
 ## API
