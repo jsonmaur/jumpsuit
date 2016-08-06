@@ -14,6 +14,7 @@ A powerful and efficient Javascript framework that helps you build great apps. I
 
 - No boilerplate
 - Minimalist API
+- Built-in support for ES6
 - Components powered by React
 - State based on Redux
 - CLI powered by Browserify
