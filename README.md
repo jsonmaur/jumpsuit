@@ -82,7 +82,7 @@ Using Jumpsuit in your project? Show it off!
 // Yep, that's all you have to import
 import { Render, State, Component } from 'jumpsuit'
 
-// Create a state and with some actions
+// Create a state with some actions
 const CounterState = State('counter', {
 
   // Initial State
