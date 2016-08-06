@@ -5,8 +5,8 @@ import { CONFIG } from '../utils/config'
 
 export let socketMessage
 
-export default async function () {
-  outputLogo()
+export default async function (argv, fromWatch = false) {
+  if (!fromWatch) outputLogo()
 
   const { uri, config, hsr } = await butler(CONFIG.server, { hsr: true })
 

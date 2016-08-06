@@ -27,7 +27,7 @@ export async function watch (argv) {
   })
 
   watcher.on('all', handleEvent)
-  await serve(argv)
+  await serve(argv, true)
 }
 
 let evtCount = 0
