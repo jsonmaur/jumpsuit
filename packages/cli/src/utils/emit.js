@@ -40,12 +40,16 @@ export function getLogo (options = {}) {
   options.indent = options.indent || 0
 
   const prepend = Array(parseInt(options.indent, 10) + 1).join('  ')
-  const filepath = path.resolve(__dirname, '../assets/logo.txt')
-  const logo = fs.readFileSync(filepath, 'utf8').replace(/^/gm, prepend)
+  const filepath = path.resolve(__dirname, '../../assets/logo.txt')
+  let logo = fs.readFileSync(filepath, 'utf8').replace(/^/gm, prepend)
+
+  if (options.trim) {
+    logo = logo.substring(0, logo.lastIndexOf('\n'))
+  }
 
   return logo
 }
 
-export function outputLogo (opts) {
-  console.log(chalk.dim(getLogo(opts)))
+export function outputLogo () {
+  console.log(chalk.dim(getLogo({ indent: 1 })))
 }

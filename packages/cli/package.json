@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "test:lint": "standard --verbose | snazzy",
-    "test": "run-run-all test:*",
+    "test": "npm-run-all test:*",
     "build": "rm -rf lib && babel src -d lib --no-comments",
     "watch": "npm run build -- -w -s",
     "prepublish": "npm run build"
@@ -90,7 +90,11 @@
     "standard": "^7.1.2"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [
+      "lib",
+      "examples"
+    ]
   },
   "babel": {
     "presets": [

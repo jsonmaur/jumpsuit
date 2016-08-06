@@ -2,24 +2,22 @@ import path from 'path'
 import fs from 'fs-promise'
 import glob from 'glob'
 import chokidar from 'chokidar'
-import { debounce } from './utils/common'
 import serve from './serve'
-import { CONFIG } from './config'
-import { outputLogo, pending, pendingDone, error } from './emit'
-import { buildJs } from './compilers/javascript'
-import { buildAsset } from './compilers/assets'
-import { buildStyles } from './compilers/styles'
+import { debounce } from '../utils/common'
+import { CONFIG } from '../utils/config'
+import { outputLogo, pending, pendingDone, error } from '../utils/emit'
+import { buildJs } from '../compilers/javascript'
+import { buildAsset } from '../compilers/assets'
+import { buildStyles } from '../compilers/styles'
 
 export default async function (argv) {
-  outputLogo({ indent: 1 })
-
+  outputLogo()
   const files = glob.sync(`${CONFIG.sourceDir}/**/*`, { nodir: true })
   await Promise.all(files.map((file) => handleEvent('add', file)))
 }
 
 export async function watch (argv) {
-  outputLogo({ indent: 1 })
-
+  outputLogo()
   const { sourceDir, outputDir } = CONFIG
 
   fs.emptyDirSync(outputDir)

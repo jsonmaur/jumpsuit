@@ -7,8 +7,8 @@ import resolve from 'resolve'
 import minimatch from 'minimatch'
 import MemoryFS from 'memory-fs'
 import Clean from 'clean-css'
-import { CONFIG } from '../config'
-import { addToDepTree } from '../deptree'
+import { CONFIG } from '../utils/config'
+import { addToDepTree } from '../utils/deptree'
 
 const fs = new MemoryFS()
 

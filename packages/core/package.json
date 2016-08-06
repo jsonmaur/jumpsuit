@@ -61,7 +61,12 @@
     "uglifyify": "3.0.2"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [
+      "lib",
+      "examples",
+      "jumpsuit.js"
+    ]
   },
   "babel": {
     "presets": [

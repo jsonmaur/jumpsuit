@@ -2,16 +2,16 @@ import path from 'path'
 import fs from 'fs-promise'
 import glob from 'glob'
 import spawn from 'cross-spawn'
-import { outputLogo, error, log } from './emit'
+import { outputLogo, error, log } from '../utils/emit'
 
 export default function (argv) {
-  outputLogo({ indent: 1 })
+  outputLogo()
 
   const isInit = argv._[0] === 'init'
   const exampleDir = (isInit ? argv._[1] : argv._[2]) || 'counter'
   const destDir = isInit ? '.' : (argv._[1] || 'new-jumpsuit')
 
-  return glob(path.resolve(__dirname, `../examples/${exampleDir}/*`), async (err, files) => {
+  return glob(path.resolve(__dirname, `../../examples/${exampleDir}/*`), async (err, files) => {
     if (err) return error(err)
 
     log('Creating new jumpsuit project...')

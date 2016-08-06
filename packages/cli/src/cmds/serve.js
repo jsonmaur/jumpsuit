@@ -1,7 +1,7 @@
 import butler from 'butler'
 import chalk from 'chalk'
-import { log } from './emit'
-import { CONFIG } from './config'
+import { log } from '../utils/emit'
+import { CONFIG } from '../utils/config'
 
 export let socketMessage
 

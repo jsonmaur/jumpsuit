@@ -1,5 +1,5 @@
 import fs from 'fs-promise'
-import { CONFIG } from '../config'
+import { CONFIG } from '../utils/config'
 
 export async function buildAsset (evt, file) {
   const { outputDir, assetsDir, sourceDir } = CONFIG

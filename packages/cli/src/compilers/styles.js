@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import { CONFIG } from '../config'
-import { socketMessage } from '../serve'
+import { CONFIG } from '../utils/config'
+import { socketMessage } from '../cmds/serve'
 import { debounce } from '../utils/common'
 
 const { outputDir, styles } = CONFIG

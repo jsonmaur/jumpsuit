@@ -11,9 +11,9 @@ import uglify from 'uglify-js'
 import resolve from 'resolve'
 import exorcist from 'exorcist'
 import { debounce } from '../utils/common'
-import { depTree } from '../deptree'
-import { socketMessage } from '../serve'
-import { CONFIG } from '../config'
+import { depTree } from '../utils/deptree'
+import { socketMessage } from '../cmds/serve'
+import { CONFIG } from '../utils/config'
 
 let bundler
 export function initBundle () {
