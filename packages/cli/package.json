@@ -28,7 +28,7 @@
   "files": [
     "assets/",
     "bin/",
-    "examples/",
+    "getting-started/",
     "lib/",
     "LICENSE",
     "README.md"
