@@ -1,8 +1,10 @@
 import minimist from 'minimist'
+import updateNotifier from 'update-notifier'
 import pkg from '../package.json'
 import initConfig from './config'
 import { error } from './emit'
 
+updateNotifier({ pkg }).notify()
 const argv = minimist(process.argv.slice(2))
 
 export default async function () {
