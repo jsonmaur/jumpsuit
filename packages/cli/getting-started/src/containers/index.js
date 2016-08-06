@@ -3,10 +3,10 @@ import { Component } from 'jumpsuit'
 export default Component({
   render () {
     return (
-      <button
-        { ...this.props }>
-        { this.props.children }
-      </button>
+      <div>
+        <h1>Hello Counter!</h1>
+        {this.props.children}
+      </div>
     )
   }
 })

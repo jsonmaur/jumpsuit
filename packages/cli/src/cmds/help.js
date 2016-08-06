@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import pkg from '../../package.json'
 import { getLogo } from '../utils/emit'
 
 export default async function (argv) {
@@ -15,10 +16,9 @@ export function spaced (name, desc) {
   return `${name} ${chalk.dim(fill)} ${desc}`
 }
 
-// ${spaced('init', 'start a project in the current directory')}
 export const menus = {
   _default: `${chalk.dim(getLogo({ indent: 1, trim: true }))}
-                      ${chalk.dim('Jump in. Zip up. Build great apps.')}
+                      ${chalk.dim(pkg.description)}
 
   ${chalk.underline('Usage:')}
 
@@ -49,5 +49,29 @@ export const menus = {
   ${chalk.underline('Usage:')}
 
     jumpsuit new <app-name> [options]
+  `,
+
+  // -----------------------------------------------------------------------------
+
+  'watch': `
+  ${chalk.underline('Usage:')}
+
+    jumpsuit watch [options]
+  `,
+
+  // -----------------------------------------------------------------------------
+
+  'build': `
+  ${chalk.underline('Usage:')}
+
+    jumpsuit build [options]
+  `,
+
+  // -----------------------------------------------------------------------------
+
+  'serve': `
+  ${chalk.underline('Usage:')}
+
+    jumpsuit serve [options]
   `
 }

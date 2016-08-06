@@ -31,7 +31,6 @@ export default async function () {
     const cmd = argv._[0]
     switch (cmd) {
       case 'new':
-      case 'init':
         await require('./cmds/new').default(argv)
         break
       case 'watch':

@@ -7,8 +7,8 @@ import counterState from 'state/counter'
 
 Render({ counter: counterState }, (
   <Router>
-    <Route path="/" component={ App }>
-      <IndexRoute component={ Counter } />
+    <Route path='/' component={App}>
+      <IndexRoute component={Counter} />
     </Route>
   </Router>
 ))

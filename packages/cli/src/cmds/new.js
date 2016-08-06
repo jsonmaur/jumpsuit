@@ -1,41 +1,52 @@
 import path from 'path'
-import fs from 'fs-promise'
-import glob from 'glob'
+import fs from 'fs-extra'
+import chalk from 'chalk'
 import spawn from 'cross-spawn'
-import { outputLogo, error, log } from '../utils/emit'
+import inquirer from 'inquirer'
+import { outputLogo, log, question, questionErr } from '../utils/emit'
 
-export default function (argv) {
+export default async function (argv) {
   outputLogo()
 
-  const isInit = argv._[0] === 'init'
-  const exampleDir = (isInit ? argv._[1] : argv._[2]) || 'counter'
-  const destDir = isInit ? '.' : (argv._[1] || 'new-jumpsuit')
+  const name = argv._[1] || (await inquirer.prompt([
+    {
+      type: 'input',
+      message: question('Enter a name for your app:'),
+      name: 'name',
+      validate (val) {
+        if (!val) {
+          return questionErr('Please enter a name!')
+        }
+        if (fs.existsSync(path.resolve(val))) {
+          return questionErr('A folder with that name already exists here!')
+        }
+        return true
+      }
+    }
+  ])).name
 
-  return glob(path.resolve(__dirname, `../../examples/${exampleDir}/*`), async (err, files) => {
-    if (err) return error(err)
+  const template = path.resolve(__dirname, '../../getting-started')
+  const destination = path.resolve(name)
 
-    log('Creating new jumpsuit project...')
-    await fs.mkdirs(path.resolve(process.cwd(), destDir))
-    await Promise.all(files.map((file) => {
-      return fs.copy(file, path.resolve(process.cwd(), destDir, path.basename(file)))
-    }))
-    await fs.remove(path.resolve(process.cwd(), destDir, 'node_modules'))
+  log('Creating new project')
+  fs.copySync(template, destination)
 
-    log('Installing project dependencies...\n')
+  const pkgFile = `${destination}/package.json`
+  const pkg = fs.readJsonSync(pkgFile)
+  pkg.name = name
 
-    // It would be nice to just copy jumpsuit or jumpsuit-core into here instead of installing it again
-    // await fs.copy(path.resolve(__dirname, '../../'), path.resolve(process.cwd(), destDir, 'node_modules/jumpsuit'))
+  fs.outputJsonSync(pkgFile, pkg)
 
-    const ls = spawn('npm', ['install'], {
-      cwd: path.resolve(process.cwd(), destDir),
-      stdio: 'inherit'
-    })
+  log('Installing dependencies\n')
+  const child = spawn('npm', ['install'], {
+    cwd: destination,
+    stdio: 'inherit'
+  })
 
-    ls.on('close', (code) => {
-      console.log('\n')
-      log('Your new jumpsuit is ready to go!')
-      log(`cd ${destDir} && jumpsuit watch\n`)
-      process.exit(0)
-    })
+  child.on('close', (code) => {
+    log('Your new project is ready to go!')
+    log(`Run ${chalk.green('cd', name, '&& jumpsuit watch')} to get started.\n`)
+
+    process.exit(code)
   })
 }

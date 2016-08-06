@@ -1,11 +1,13 @@
 import butler from 'butler'
 import chalk from 'chalk'
-import { log } from '../utils/emit'
+import { outputLogo, log } from '../utils/emit'
 import { CONFIG } from '../utils/config'
 
 export let socketMessage
 
 export default async function () {
+  outputLogo()
+
   const { uri, config, hsr } = await butler(CONFIG.server, { hsr: true })
 
   process.env.PORT = config.port

@@ -8,7 +8,7 @@ dist
 public
 jumpsuit.js
 
-*/**/assets
-*/**/examples
-*/**/README.md
-*/**/LICENSE
+*/*/assets
+*/*/examples
+*/*/README.md
+*/*/LICENSE

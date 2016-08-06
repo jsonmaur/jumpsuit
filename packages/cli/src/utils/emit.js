@@ -13,22 +13,30 @@ export function error (err, lineBreak = false) {
   if (lineBreak) console.log()
 
   const msg = err.message || err.msg || err
-  console.log(chalk.red(`  ${ARROW}`, strip(msg)))
+  console.log(chalk.red(chalk.dim(ARROW), ' ', strip(msg)))
 }
 
 export function warn (...msg) {
   if (!msg.length) return
-  console.log(chalk.yellow(`  ${ARROW}`, ...msg))
+  console.log(chalk.yellow(chalk.dim(ARROW), ' ', ...msg))
 }
 
 export function log (...msg) {
   if (!msg.length) return
-  console.log(`  ${ARROW}`, ...msg)
+  console.log(chalk.dim(ARROW), ' ', ...msg)
+}
+
+export function question (msg) {
+  return chalk.yellow(' ', msg)
+}
+
+export function questionErr (msg) {
+  return chalk.red(` ${msg}`)
 }
 
 export function pending (msg) {
   if (!msg.length) return
-  process.stdout.write(`  ${ARROW} ${msg}... `)
+  process.stdout.write(`${chalk.dim(ARROW)}   ${msg}... `)
 }
 
 export function pendingDone (time) {

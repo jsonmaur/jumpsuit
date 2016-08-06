@@ -1,7 +1,7 @@
 {
-  "name": "jumpsuit-counter-example",
+  "name": "getting-started",
   "version": "1.0.0",
-  "description": "Jumpsuit counter example",
+  "description": "Jumpsuit getting started example",
   "license": "MIT",
   "repository": {
     "type": "git",

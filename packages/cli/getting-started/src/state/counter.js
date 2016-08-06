@@ -9,12 +9,12 @@ const state = State('counter', {
 
   decrement (state, payload) {
     return { count: --state.count }
-  },
+  }
 })
 
 export default state
 
-export function incrementAsync(amount){
+export function incrementAsync (amount) {
   setTimeout(() => {
     state.increment(amount)
   }, 1000)
