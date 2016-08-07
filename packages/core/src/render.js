@@ -8,12 +8,12 @@ import { combine } from './reducer'
 export default function (stores, baseComponent, options) {
   const store = combine({
     ...stores,
-    routing: routerReducer,
+    routing: routerReducer
   }, options)
 
   const syncedHistory = syncHistoryWithStore(browserHistory, store)
   const base = baseComponent.props._isRouteWrapper
-    ? <ReactRouter history={ syncedHistory }>{ baseComponent }</ReactRouter>
+    ? <ReactRouter history={syncedHistory}>{baseComponent}</ReactRouter>
     : baseComponent
 
   let child = base
@@ -25,11 +25,11 @@ export default function (stores, baseComponent, options) {
     const Hsr = require('./hsr').default
     const DevTools = require('./devtools').default
 
-    child = <div>{ base }<DevTools /><Hsr /></div>
+    child = <div>{base}<DevTools /><Hsr /></div>
   }
 
   render(
-    <Provider store={ store }>{ child }</Provider>,
+    <Provider store={store}>{child}</Provider>,
     document.getElementById('app')
   )
 }
@@ -37,5 +37,5 @@ export default function (stores, baseComponent, options) {
 export const Router = React.createClass({
   propTypes: { children: React.PropTypes.object },
   getDefaultProps: () => ({ _isRouteWrapper: true }),
-  render: () => <div>{ this.props.children }</div>,
+  render: () => <div>{this.props.children}</div>
 })

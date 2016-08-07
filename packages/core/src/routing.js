@@ -24,7 +24,7 @@ export default function (params = {}) {
   const location = state.routing.locationBeforeTransitions
   const newParams = Object.assign({}, {
     hash: location.hash,
-    pathname: location.pathname,
+    pathname: location.pathname
   }, params)
 
   newParams.query = Object.assign({}, location.query, newParams.query)

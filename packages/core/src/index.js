@@ -4,7 +4,7 @@ import {
   Redirect,
   IndexRedirect,
   Link,
-  IndexLink,
+  IndexLink
 } from 'react-router'
 
 import Component from './component'
@@ -30,5 +30,5 @@ module.exports = {
   IndexLink,
 
   /* Redux */
-  Middleware,
+  Middleware
 }
