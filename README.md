@@ -57,9 +57,9 @@ $ open localhost:8000
 
 Using Jumpsuit in your project? Show it off!
 
-[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
+[![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```markdown
-[![built with jumpsuit v0.7](https://img.shields.io/badge/built%20with%20jumpsuit-v0.7-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
+[![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```
 
 ## Examples

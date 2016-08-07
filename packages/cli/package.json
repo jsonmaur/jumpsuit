@@ -94,7 +94,9 @@
     "parser": "babel-eslint",
     "ignore": [
       "lib",
-      "examples"
+      "dist",
+      "examples",
+      "node_modules"
     ]
   },
   "babel": {

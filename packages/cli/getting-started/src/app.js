@@ -1,14 +1,14 @@
 import { Render, Router, Route, IndexRoute } from 'jumpsuit'
+/* state */
+import state from 'state/index'
+/* screens */
+import App from 'screens/index'
+import Github from 'screens/github'
 
-import App from 'containers/index'
-import Counter from 'containers/counter'
-
-import counterState from 'state/counter'
-
-Render({ counter: counterState }, (
+Render(state, (
   <Router>
     <Route path='/' component={App}>
-      <IndexRoute component={Counter} />
+      <IndexRoute component={Github} />
     </Route>
   </Router>
 ))
