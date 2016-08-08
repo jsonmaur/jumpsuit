@@ -15,6 +15,8 @@ import { depTree } from '../utils/deptree'
 import { socketMessage } from '../cmds/serve'
 import { CONFIG } from '../utils/config'
 
+const projectNodeModsDir = path.resolve('node_modules')
+
 let bundler
 export function initBundle () {
   const b = browserify({
@@ -23,7 +25,7 @@ export function initBundle () {
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
     cache: {}, packageCache: {},
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
-      React: (file, basedir) => `require("${resolve.sync('react', { basedir: __dirname })}")`
+      React: (file, basedir) => `require("${resolve.sync('react', { basedir: projectNodeModsDir })}")`
     })
   })
 
@@ -58,7 +60,7 @@ export function initBundle () {
     global: true,
     aliases: {
       // resolve to the react package location, not the file
-      'react': path.resolve(resolve.sync('react', { basedir: __dirname }), '../')
+      'react': path.resolve(resolve.sync('react', { basedir: projectNodeModsDir }), '../')
     }
   })
 
