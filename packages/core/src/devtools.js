@@ -11,6 +11,8 @@ class JumpsuitDockMonitor extends DockMonitor {
   componentDidMount () {
     super.componentDidMount()
 
+    console.info('Dev Tools: Press ctrl+h to toggle and ctrl+p to change position')
+
     getDevToolsState = () => this.props.store.getState()
     setDevToolsState = (state) => this.props.dispatch({
       type: 'IMPORT_STATE',
