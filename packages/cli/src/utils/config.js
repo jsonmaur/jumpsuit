@@ -1,6 +1,6 @@
 import path from 'path'
-import _ from 'lodash'
 import fs from 'fs-promise'
+import deepAssign from 'deep-assign'
 import { warn } from './emit'
 
 export let CONFIG
@@ -44,7 +44,7 @@ export default async function (argv) {
     return
   }
 
-  const config = _.defaultsDeep(require(configFile), defaults)
+  const config = deepAssign({}, defaults, require(configFile))
 
   config.sourceDir = path.resolve(config.sourceDir)
   config.outputDir = path.resolve(config.outputDir)

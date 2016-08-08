@@ -64,7 +64,6 @@
     "parser": "babel-eslint",
     "ignore": [
       "lib",
-      "examples",
       "jumpsuit.js"
     ]
   },
