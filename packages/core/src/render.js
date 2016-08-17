@@ -11,6 +11,10 @@ export default function (stores, baseComponent, options) {
     routing: routerReducer
   }, options)
 
+  if (typeof baseComponent === 'function') {
+    baseComponent = baseComponent(store)
+  }
+
   const syncedHistory = syncHistoryWithStore(browserHistory, store)
   const base = baseComponent.props._isRouteWrapper
     ? <ReactRouter history={syncedHistory}>{baseComponent}</ReactRouter>
