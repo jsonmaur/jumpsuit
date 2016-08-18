@@ -1,6 +1,6 @@
 {
   "name": "jumpsuit-cli",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "Jump in. Zip up. Build great apps.",
   "license": "MIT",
   "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
@@ -64,7 +64,7 @@
     "fs-promise": "0.5.0",
     "glob": "7.0.5",
     "inquirer": "1.1.2",
-    "jumpsuit": "^0.7.6",
+    "jumpsuit": "^0.7.7",
     "loose-envify": "1.2.0",
     "minimatch": "3.0.2",
     "minimist": "1.2.0",
