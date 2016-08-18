@@ -5,16 +5,16 @@ import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { combine } from './reducer'
 
+let syncedHistory
+
 export default function (stores, baseComponent, options) {
   const store = combine({
     ...stores,
     routing: routerReducer
   }, options)
 
-  const syncedHistory = syncHistoryWithStore(browserHistory, store)
-  const base = baseComponent.props._isRouteWrapper
-    ? <ReactRouter history={syncedHistory}>{baseComponent}</ReactRouter>
-    : baseComponent
+  syncedHistory = syncHistoryWithStore(browserHistory, store)
+  const base = baseComponent
 
   let child = base
   if (process.env.NODE_ENV !== 'production') {
@@ -37,5 +37,9 @@ export default function (stores, baseComponent, options) {
 export const Router = React.createClass({
   propTypes: { children: React.PropTypes.object },
   getDefaultProps: () => ({ _isRouteWrapper: true }),
-  render: () => <div>{this.props.children}</div>
+  render: () => (
+    <ReactRouter history={syncedHistory}>
+      {this.props.children}
+    </ReactRouter>
+  )
 })
