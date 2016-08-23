@@ -14,6 +14,9 @@ export default async function (argv) {
   outputLogo()
   const files = glob.sync(`${CONFIG.sourceDir}/**/*`, { nodir: true })
   await Promise.all(files.map((file) => handleEvent('add', file)))
+  if (process.env.NODE_ENV === 'production') {
+    require('./prerender').default(argv)
+  }
 }
 
 export async function watch (argv) {

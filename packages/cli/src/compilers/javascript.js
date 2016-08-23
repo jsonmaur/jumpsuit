@@ -23,7 +23,9 @@ export function initBundle () {
     plugin: [forgetify],
     paths: [path.resolve('node_modules'), CONFIG.sourceDir],
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
-    cache: {}, packageCache: {},
+    cache: {},
+    packageCache: {},
+    standalone: 'jumpsuit-app',
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
       React: (file, basedir) => `require("${resolve.sync('react', { basedir: projectNodeModsDir })}")`
     })
@@ -95,16 +97,16 @@ const createBundle = debounce((cb) => {
   if (process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps) {
     bundler.bundle((err) => {
       if (err) cb(err)
-      else cb()
     })
       .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapFile)))
       .pipe(stream)
+      .on('finish', () => cb())
   } else {
     bundler.bundle((err) => {
       if (err) cb(err)
-      else cb()
     })
       .pipe(stream)
+      .on('finish', () => cb())
   }
 }, { wait: 300 })
 
