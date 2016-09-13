@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs-promise'
 import deepAssign from 'deep-assign'
 import { warn } from './emit'
+import {convertIfWin32Path} from '../utils/common'
 
 export let CONFIG
 const defaults = {
@@ -46,10 +47,10 @@ export default async function (argv) {
 
   const config = deepAssign({}, defaults, require(configFile))
 
-  config.sourceDir = path.resolve(config.sourceDir)
-  config.outputDir = path.resolve(config.outputDir)
-  config.assetsDir = path.resolve(config.sourceDir, config.assetsDir)
-  config.entry = path.resolve(config.sourceDir, config.entry)
+  config.sourceDir = convertIfWin32Path(path.resolve(config.sourceDir))
+  config.outputDir = convertIfWin32Path(path.resolve(config.outputDir))
+  config.assetsDir = convertIfWin32Path(path.resolve(config.sourceDir, config.assetsDir))
+  config.entry = convertIfWin32Path(path.resolve(config.sourceDir, config.entry))
 
   CONFIG = config
 }

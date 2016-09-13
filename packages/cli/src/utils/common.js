@@ -1,4 +1,5 @@
 import net from 'net'
+import os from "os";
 
 /**
  * Gets a variable type without using typeof.
@@ -75,4 +76,20 @@ export function getFreePort () {
       server.close(() => resolve(port))
     })
   })
+}
+
+/**
+ * Converts a win32 path double backslash path to forward slash path
+ * for Windows compatibility
+ */
+
+function win32PathToPosix(path) {
+  return path.replace(/\\/g, '/')
+}
+
+export function convertIfWin32Path(path) {
+  if (os.platform() === 'win32') {
+    return win32PathToPosix(path)
+  }
+  return path
 }
