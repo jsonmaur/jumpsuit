@@ -46,6 +46,15 @@ export default async function (argv) {
   }
 
   const config = deepAssign({}, defaults, require(configFile))
+  if (argv.hasOwnProperty('port')) {
+    config.server.port = argv.port
+    console.log("has port")
+  }
+  if (argv.hasOwnProperty('host')) {
+    config.server.host = argv.host
+    console.log("has host")
+  }
+  console.log("config =>", config )
 
   config.sourceDir = convertIfWin32Path(path.resolve(config.sourceDir))
   config.outputDir = convertIfWin32Path(path.resolve(config.outputDir))
