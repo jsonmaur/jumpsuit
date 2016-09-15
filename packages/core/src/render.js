@@ -1,13 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router as ReactRouter, browserHistory, createMemoryHistory } from 'react-router'
+import { Router as ReactRouter, browserHistory, hashHistory, createMemoryHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { combine } from './reducer'
 
 let syncedHistory
 
-export default function (stores, baseComponent, options) {
+export default function (stores, baseComponent, options = {}) {
   const store = combine({
     ...stores,
     routing: routerReducer
@@ -17,7 +17,7 @@ export default function (stores, baseComponent, options) {
   if (global.IS_SERVERSIDE) {
     history = createMemoryHistory()
   } else {
-    history = browserHistory
+    history = options.useHash ? hashHistory : browserHistory
   }
   syncedHistory = syncHistoryWithStore(history, store)
   const base = baseComponent
