@@ -21,7 +21,7 @@ export default async function (argv) {
 
 export async function watch (argv) {
   outputLogo()
-  const { sourceDir, outputDir } = CONFIG
+  const { sourceDir, outputDir, extraDirs } = CONFIG
 
   fs.emptyDirSync(outputDir)
   const watcher = chokidar.watch(sourceDir, {
@@ -30,6 +30,21 @@ export async function watch (argv) {
   })
 
   watcher.on('all', handleEvent)
+
+  // extra watchers:
+  const extraWatchers = extraDirs.map((f)=>{
+    return chokidar.watch(f, {
+      persistent: true,
+      ignored: /[\/\\](\.)|node_modules|bower_components/
+    })
+  })
+
+  extraWatchers.forEach((w)=>{
+    w.on('all', handleEvent)
+  })
+
+  // extra watchers end
+
   await serve(argv, true)
 }
 
