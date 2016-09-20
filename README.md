@@ -424,7 +424,7 @@ module.exports = {
     action: buildStyles
   }
 }
-var sassEntry = path.resolve('src/app.styl')
+var sassEntry = path.resolve('src/app.scss')
 
 function buildStyles(){
   return new Promise((resolve, reject) => {

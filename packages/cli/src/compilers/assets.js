@@ -1,7 +1,9 @@
 import fs from 'fs-promise'
 import { CONFIG } from '../utils/config'
+import { convertIfWin32Path } from '../utils/common'
 
 export async function buildAsset (evt, file) {
+  file = convertIfWin32Path(file)
   const { outputDir, assetsDir, sourceDir } = CONFIG
 
   /* flatten out assets dir */

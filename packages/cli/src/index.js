@@ -47,6 +47,10 @@ export default async function () {
         await initConfig(argv)
         await require('./cmds/serve').default(argv)
         break
+      case 'prerender':
+        await initConfig(argv)
+        await require('./cmds/prerender').default(argv)
+        break
       case 'help':
       case undefined:
         await require('./cmds/help').default(argv)

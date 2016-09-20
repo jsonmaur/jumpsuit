@@ -3,7 +3,7 @@ import axios from 'axios'
 import Component from './component'
 import { getDevToolsState, setDevToolsState } from './devtools'
 
-const { WebSocket, location, history } = window
+const { WebSocket, location, history } = global
 
 export default Component({
   _hsrUrl () {

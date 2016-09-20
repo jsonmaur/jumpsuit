@@ -2,9 +2,10 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "clean": "lerna exec -- rm -rf assets examples lib LICENSE README.md && lerna clean",
     "publish": "scripts/prepublish && lerna publish"
   },
   "devDependencies": {
-    "lerna": "2.0.0-beta.24"
+    "lerna": "2.0.0-beta.28"
   }
 }

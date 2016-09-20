@@ -10,7 +10,7 @@ import aliasify from 'aliasify'
 import uglify from 'uglify-js'
 import resolve from 'resolve'
 import exorcist from 'exorcist'
-import { debounce } from '../utils/common'
+import { debounce, convertIfWin32Path } from '../utils/common'
 import { depTree } from '../utils/deptree'
 import { socketMessage } from '../cmds/serve'
 import { CONFIG } from '../utils/config'
@@ -19,13 +19,16 @@ const projectNodeModsDir = path.resolve('node_modules')
 
 let bundler
 export function initBundle () {
+  var reactDir = convertIfWin32Path(resolve.sync('react', { basedir: projectNodeModsDir }));
   const b = browserify({
     plugin: [forgetify],
     paths: [path.resolve('node_modules'), CONFIG.sourceDir],
     debug: process.env.NODE_ENV === 'development' || CONFIG.prodSourceMaps,
-    cache: {}, packageCache: {},
+    cache: {},
+    packageCache: {},
+    standalone: 'jumpsuit-app',
     insertGlobalVars: Object.assign(CONFIG.browserify.globals, {
-      React: (file, basedir) => `require("${resolve.sync('react', { basedir: projectNodeModsDir })}")`
+      React: (file, basedir) => `require("${reactDir}")`
     })
   })
 
@@ -55,7 +58,6 @@ export function initBundle () {
       b.transform(t.transform, t.options)
     }
   })
-
   b.transform(aliasify, {
     global: true,
     aliases: {
@@ -68,8 +70,7 @@ export function initBundle () {
 }
 
 const createBundle = debounce((cb) => {
-  const file = path.resolve(CONFIG.outputDir, path.basename(CONFIG.entry))
-
+  const file = convertIfWin32Path( path.resolve(CONFIG.outputDir, path.basename(CONFIG.entry)) )
   let sourceMapFile = path.basename(CONFIG.entry).split('.')
   sourceMapFile.splice(sourceMapFile.length - 1, 0, 'map')
   sourceMapFile = sourceMapFile.join('.')
@@ -95,16 +96,16 @@ const createBundle = debounce((cb) => {
   if (process.env.NODE_ENV === 'production' && CONFIG.prodSourceMaps) {
     bundler.bundle((err) => {
       if (err) cb(err)
-      else cb()
     })
       .pipe(exorcist(path.resolve(CONFIG.outputDir, sourceMapFile)))
       .pipe(stream)
+      .on('finish', () => cb())
   } else {
     bundler.bundle((err) => {
       if (err) cb(err)
-      else cb()
     })
       .pipe(stream)
+      .on('finish', () => cb())
   }
 }, { wait: 300 })
 
@@ -112,11 +113,12 @@ let firstRun = true
 const entries = new Set()
 
 export function buildJs (evt, file) {
+  var posixFileName = convertIfWin32Path(file)
   return new Promise((resolve, reject) => {
     if (!bundler) bundler = initBundle()
 
     /* only worry about bundling the main file on first run */
-    if (firstRun && !file.match(new RegExp(`${CONFIG.entry}$`))) {
+    if (firstRun && !posixFileName.match(new RegExp(`${CONFIG.entry}$`))) {
       return resolve()
     }
 
@@ -131,7 +133,6 @@ export function buildJs (evt, file) {
         invalidate.add(path.resolve(f.file))
       }
     })
-
     invalidate.forEach((f) => forgetify.forget(bundler, f))
 
     if (!entries.has(file)) {
