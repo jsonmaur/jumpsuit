@@ -13,6 +13,10 @@ export default function (stores, baseComponent, options = {}) {
     routing: routerReducer
   }, options)
 
+  if (typeof baseComponent === 'function') {
+    baseComponent = baseComponent(store)
+  }
+
   let history
   if (global.IS_SERVERSIDE) {
     history = createMemoryHistory()
