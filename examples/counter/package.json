@@ -1,7 +1,7 @@
 {
-  "name": "jumpsuit-todo-example",
+  "name": "jumpsuit-counter-example",
   "version": "1.0.0",
-  "description": "Jumpsuit todo example",
+  "description": "Jumpsuit counter example",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "nib": "^1.1.0",
-    "standard": "^8.2.0",
     "stylus": "^0.54.5"
   },
   "dependencies": {

@@ -9,7 +9,7 @@ import {
 
 import Component from './component'
 import Render, { Router } from './render'
-import State from './state'
+import State from 'jumpstate'
 import Goto from './routing'
 import { Middleware } from './reducer'
 

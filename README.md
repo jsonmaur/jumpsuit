@@ -135,88 +135,83 @@ Render({
   - React Component
 - Simple Component
   ```javascript
-    import { Component } from 'jumpsuit'
+  import { Component } from 'jumpsuit'
 
-    const SayHello = Component({
-      render() {
-        return (
-          <div>
-            <button onClick={ this.sayHello }>Say Hello</button>
-          </div>
-        )
-      },
-      sayHello(){
-        console.log('Hello!')
-      },
-    })
+  const SayHello = Component({
+    render() {
+      return (
+        <div>
+          <button onClick={ this.sayHello }>Say Hello</button>
+        </div>
+      )
+    },
+    sayHello(){
+      console.log('Hello!')
+    },
+  })
   ```
 - Stateful Component
   ```javascript
-    import { Component } from 'jumpsuit'
+  import { Component } from 'jumpsuit'
 
-    const Counter = Component({
-      render() {
-        return (
-          <div>
-            Count: { this.props.count }
-          </div>
-        )
-      }
-    // Subscribe to the count property on the count state
-    }, (state) => {
-      return {
-        count: state.counter.count
-      }
-    })
+  const Counter = Component({
+    render() {
+      return (
+        <div>
+          Count: { this.props.count }
+        </div>
+      )
+    }
+  // Subscribe to the count property on the count state
+  }, (state) => {
+    return {
+      count: state.counter.count
+    }
+  })
   ```
 
-#### State <em>(name, config, detachedState)</em>
-- Creates a new state instance
-- Parameters
-  - <strong>name</strong> String
-    - A unique name for this state
-  - <strong>config</strong> Object
-    - <strong>initial</strong>
-      - An object or value representing the initial properties for this state
-    - <strong>...actionName(state, payload)</strong>
-      - Actions (functions) that transform your your current state.  They receive the current state as the first parameter and any payload used by the caller as the second. Returns a new partial state object to be merged with the existing state.
-      - Notes on immutability: Any object returned will be automatically assigned to a new copy of the state object. This means you don't need to use `Object.assign` on the root object of your returns, but you will however need to maintain immutability for nested properties. If you're not sure what this means, see the `state/todos.js` file in the Todo List example for reference.
-  - <strong>detachedState</strong> Boolean
-    - If set to true, the state will not be attached to the underlying redux instance, and cannot be combined with other states.  This basically creates a state machine that you can use how you please.
-- Returns
-  - <strong>State Reducer</strong> function - can be used directly in the Render method, or combined with other states using State.combine. It also has these these prototype methods:
-    - <strong>.getState()</strong>
-      - Returns the current state of the instance
-    - <strong>.dispatch()</strong>
-      - The underlying redux dispatcher
+#### State <em>([ config/name,] actions)</em>
+**Powered by [Jumpstate](https://github.com/jumpsuit/jumpstate)**
+Below is a simple example on how to use Jumpsuit's `State` component
+```javascript
 
-  ```javascript
+import { State } from 'jumpsuit'
 
-    import { State } from 'jumpsuit'
+const CounterState = State({
+  initial: { count: 0 },
+  increment (state, payload) {
+    return { count: ++state.count }
+  },
+  set (state, payload) {
+    return { count: payload }
+  },
+  reset (state) {
+    return { count: 0 }
+  }
+})
 
-    const CounterState = State({
-      initial: { count: 0 },
-      increment (state, payload) {
-        return { count: ++state.count }
-      },
-      set (state, payload) {
-        return { count: payload }
-      },
-      reset (state) {
-        return { count: 0 }
-      }
-    })
+// Get the current Counter state outside of a Linked Component
+CounterState()
+// { count: 1 }
 
-    // Call the methods normally. No action creators or dispatch required.
-    CounterState.increment()
-    // CounterState.getState() === { count: 1 }
+// Call the methods normally. No action creators or dispatch required.
+CounterState.increment()
+// { count: 1 }
 
-    CounterState.set(5)
-    // CounterState.getState() === { count: 5 }
+CounterState.set(5)
+// { count: 5 }
 
-    CounterState.reset()
-    // CounterState.getState() === { count: 0 }
-  ```
+CounterState.reset()
+// { count: 0 }
+```
+
+The `State` component packs way more power than we show here. For the full documentation, visit [Jumpstate](https://github.com/jumpsuit/jumpstate). There you will find examples on how to:
+
+- Name your state for easier debugging
+- Set global defaults and configure individual states
+- Use `State` as an action creator factory and use the traditional redux dispatcher
+- Create vanilla JS states that do not rely on Redux
+- Manage your own immutability within the state
 
 #### Render <em>(state, component)</em>
 - Renders your app to `div#app`
@@ -227,84 +222,84 @@ Render({
     - The root Jumpsuit/React Component of your app
   - Single State
     ```javascript
-      import { Render } from 'jumpsuit'
+    import { Render } from 'jumpsuit'
 
-      import Counter from './containers/counter'
-      import CounterState from './states/counter'
+    import Counter from './containers/counter'
+    import CounterState from './states/counter'
 
-      Render(CounterState, <Counter/>)
+    Render(CounterState, <Counter/>)
     ```
   - Combined State
     ```javascript
-      import { Render } from 'jumpsuit'
+    import { Render } from 'jumpsuit'
 
-      import App from './containers/app'
+    import App from './containers/app'
 
-      import CounterState from './states/counter'
-      import TimerState from './states/timer'
+    import CounterState from './states/counter'
+    import TimerState from './states/timer'
 
-      const state = {
-        counter: CounterState, // CounterState's name is 'counter'
-        timer: TimerState // TimerState's name is 'timer'
-      }
+    const state = {
+      counter: CounterState, // CounterState's name is 'counter'
+      timer: TimerState // TimerState's name is 'timer'
+    }
 
-      Render(state, <App/>)
+    Render(state, <App/>)
     ```
 
 #### Router
 - Jumpsuit's built-in router
   ```javascript
-    import { Render, Router, IndexRoute, Route } from 'jumpsuit'
+  import { Render, Router, IndexRoute, Route } from 'jumpsuit'
 
-    Render(state, (
-      <Router>
-        <IndexRoute component={ Home }/>
-        <Route path="/counter" component={ Counter }/>
-      </Router>
-    ))
+  Render(state, (
+    <Router>
+      <IndexRoute component={ Home }/>
+      <Route path="/counter" component={ Counter }/>
+    </Router>
+  ))
   ```
 
 #### Route
 - Renders a component at the specified route
   ```javascript
-    import { Render, Router, Route } from 'jumpsuit'
+  import { Render, Router, Route } from 'jumpsuit'
 
-    import Counter from './components/counter'
+  import Counter from './components/counter'
 
-    Render(state, (
-      <Router>
-        <Route path="/counter" component={ Counter }/>
-      </Router>
-    ))
+  Render(state, (
+    <Router>
+      <Route path="/counter" component={ Counter }/>
+    </Router>
+  ))
   ```
 
 #### IndexRoute
 - Renders a component at the index route of your app
   ```javascript
-    import { Render, Router, Route } from 'jumpsuit'
+  import { Render, Router, Route } from 'jumpsuit'
 
-    import Home from './components/home'
+  import Home from './components/home'
 
-    Render(state, (
-      <Router>
-        <IndexRoute component={ Home }/>
-      </Router>
-    ))
+  Render(state, (
+    <Router>
+      <IndexRoute component={ Home }/>
+    </Router>
+  ))
   ```
 
 #### Middleware <em>(...middlewares)</em>
 - A method for registering middleware into the underlying redux instance
   ```javascript
-    import { Render, Middleware } from 'jumpsuit'
+  import { Render, Middleware } from 'jumpsuit'
 
-    const myMiddleware = store => next => action => {
-      let result = next(action)
-      return result
-    }
+  const myMiddleware = store => next => action => {
+    let result = next(action)
+    return result
+  }
 
-    Middleware(myMiddleware, ...OtherMiddleWares)
+  Middleware(myMiddleware, ...OtherMiddleWares)
 
-    Render(state, <App/>)
+  Render(state, <App/>)
   ```
 
 ## Build System & CLI

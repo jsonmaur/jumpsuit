@@ -2,6 +2,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import { browserHistory, hashHistory } from 'react-router'
 import thunk from 'redux-thunk'
+//
+import { attachDispatcher } from 'jumpstate'
 
 let userMiddleware = []
 
@@ -30,13 +32,7 @@ export function combine (states, options = {}) {
   const store = createStore(rootReducer, enhancer)
   STORE = store
 
-  for (const i in states) {
-    states[i].dispatch = store.dispatch
-    states[i].getState = (stateName) => {
-      if (stateName === true) return store.getState()
-      return store.getState()[states[i]._name]
-    }
-  }
+  attachDispatcher(store, states)
 
   return store
 }

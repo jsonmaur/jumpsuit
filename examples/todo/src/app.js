@@ -4,7 +4,7 @@ import Index from 'containers/index'
 
 import todos from 'state/todos'
 
-Render({ todos}, (
+Render({ todos }, (
   <Router>
     <Route path='/' component={Index}>
       <IndexRoute component={Index} />
