@@ -1,6 +1,6 @@
 {
   "name": "jumpsuit",
-  "version": "0.7.10",
+  "version": "0.8.0",
   "description": "Jump in. Zip up. Build great apps.",
   "license": "MIT",
   "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "axios": "0.14.0",
-    "jumpstate": "0.0.1",
+    "jumpstate": "0.0.2",
     "query-string": "4.2.3",
     "react": "15.3.1",
     "react-dom": "15.3.1",
