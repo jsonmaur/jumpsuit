@@ -9,7 +9,7 @@ import {
 
 import Component from './component'
 import Render, { Router } from './render'
-import State from 'jumpstate'
+import State, { attachDispatcher, jumpstateDefaults } from 'jumpstate'
 import Goto from './routing'
 import { Middleware } from './reducer'
 
@@ -30,5 +30,9 @@ module.exports = {
   IndexLink,
 
   /* Redux */
-  Middleware
+  Middleware,
+
+  /* Other */
+  attachDispatcher,
+  jumpstateDefaults
 }
