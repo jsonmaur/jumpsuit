@@ -214,6 +214,8 @@ The `State` component packs way more power than we show here. For the full docum
 - Create vanilla JS states that do not rely on Redux
 - Manage your own immutability within the state
 
+Note: Advanced Jumpstate components are exposed on the `jumpsuit` module under `{ jumpstateDefaults, attachDispatcher }`
+
 #### Render <em>(state, component)</em>
 - Renders your app to `div#app`
 - Parameters
