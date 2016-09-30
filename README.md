@@ -1,6 +1,6 @@
 <div align="center">
-  <a href="https://gitter.im/jumpsuit/jumpsuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
-    <img src="https://badges.gitter.im/jumpsuit/jumpsuit.js.svg" alt="Join the chat at https://gitter.im/jumpsuit/jumpsuit" />
+  <a href="https://chart-js-automation.herokuapp.com/">
+    <img src="https://img.shields.io/badge/slack-Chart.js-blue.svg" alt="Chart.js on Slack" />
   </a>
   <br /> <br />
 
