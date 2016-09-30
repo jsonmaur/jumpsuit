@@ -172,6 +172,7 @@ Render({
 
 #### State <em>([ config/name,] actions)</em>
 **Powered by [Jumpstate](https://github.com/jumpsuit/jumpstate)**
+
 Below is a simple example on how to use Jumpsuit's `State` component
 ```javascript
 
