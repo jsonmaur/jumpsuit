@@ -1,9 +1,8 @@
 <div align="center">
-  <a href="https://chart-js-automation.herokuapp.com/">
-    <img src="https://img.shields.io/badge/slack-Chart.js-blue.svg" alt="Chart.js on Slack" />
+  <a href="https://jumpsuit-slack.herokuapp.com/">
+    <img src="https://img.shields.io/badge/slack-jumpsuit-blue.svg" alt="jumpsuit on Slack" />
   </a>
   <br /> <br />
-
   <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
 </div>
 <br />
