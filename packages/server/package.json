@@ -1,12 +1,12 @@
 {
   "name": "jumpserver",
   "version": "0.1.0",
-  "description": "",
+  "description": "The static server used for Jumpsuit CLI",
   "license": "MIT",
-  "homepage": "https://github.com/jumpsuit/jumpserver#readme",
+  "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jumpsuit/jumpserver.git"
+    "url": "git+https://github.com/jumpsuit/jumpsuit.git"
   },
   "engines": {
     "node": ">=4"
@@ -32,7 +32,6 @@
     "babel-runtime": "6.18.0",
     "body-parser": "1.15.2",
     "express": "4.14.0",
-    "serve-static": "1.11.1",
     "websocket": "1.0.23"
   },
   "devDependencies": {
