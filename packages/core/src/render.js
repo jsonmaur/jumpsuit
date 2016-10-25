@@ -33,9 +33,11 @@ export default function (stores, baseComponent, options = {}) {
     }
 
     const Hsr = require('./hsr').default
+    const hsrComponent = process.env.HSR_WS ? <Hsr /> : <div />
+
     const DevTools = require('./devtools').default
 
-    child = <div>{base}<DevTools /><Hsr /></div>
+    child = <div>{base}<DevTools />{hsrComponent}</div>
   }
 
   const root = <Provider store={store}>{child}</Provider>
