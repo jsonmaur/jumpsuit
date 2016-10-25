@@ -19,8 +19,8 @@
   ],
   "files": [
     "lib/",
-    "license",
-    "readme.md"
+    "LICENSE",
+    "README.md"
   ],
   "main": "lib/index.js",
   "scripts": {
