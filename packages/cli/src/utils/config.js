@@ -23,8 +23,7 @@ const defaults = {
 
   server: {
     port: 8000,
-    host: 'localhost',
-    pushState: true
+    host: 'localhost'
   },
 
   browserify: {
@@ -47,12 +46,8 @@ export default async function (argv) {
 
   const config = deepAssign({}, defaults, require(configFile))
 
-  if (argv.hasOwnProperty('port')) {
-    config.server.port = argv.port
-  }
-  if (argv.hasOwnProperty('host')) {
-    config.server.host = argv.host
-  }
+  if (argv.p || argv.port) config.server.port = argv.p || argv.port
+  if (argv.h || argv.host) config.server.host = argv.h || argv.host
 
   config.sourceDir = convertIfWin32Path(path.resolve(config.sourceDir))
   config.outputDir = convertIfWin32Path(path.resolve(config.outputDir))
