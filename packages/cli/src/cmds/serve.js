@@ -1,4 +1,4 @@
-import butler from 'butler'
+import jumpserver from 'jumpserver'
 import chalk from 'chalk'
 import { outputLogo, log } from '../utils/emit'
 import { CONFIG } from '../utils/config'
@@ -8,7 +8,7 @@ export let socketMessage
 export default async function (argv, fromWatch = false) {
   if (!fromWatch) outputLogo()
 
-  const { uri, config, hsr } = await butler(CONFIG.server, { hsr: true })
+  const { uri, config, hsr } = await jumpserver(CONFIG.server)
 
   process.env.PORT = config.port
   process.env.HOST = config.host

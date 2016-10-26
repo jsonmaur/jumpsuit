@@ -1,0 +1,58 @@
+{
+  "name": "jumpserver",
+  "version": "0.1.0",
+  "description": "The static server used for Jumpsuit CLI",
+  "license": "MIT",
+  "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumpsuit/jumpsuit.git"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "jumpsuit",
+    "server",
+    "hsr",
+    "push state"
+  ],
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "standard --verbose | snazzy",
+    "build": "rm -rf lib && babel src -d lib --no-comments --compact",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "babel-runtime": "6.18.0",
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "websocket": "1.0.23"
+  },
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-plugin-transform-runtime": "6.15.0",
+    "babel-preset-latest": "6.16.0",
+    "snazzy": "5.0.0",
+    "standard": "8.5.0"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ],
+    "plugins": [
+      [
+        "transform-runtime",
+        {
+          "polyfill": false,
+          "regenerator": true
+        }
+      ]
+    ]
+  }
+}
