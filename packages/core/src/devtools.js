@@ -3,9 +3,11 @@ import * as DevTools from 'redux-devtools'
 import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
 
+const reduxNotReady = 'Devtools is not yet ready to export/import state'
+
 export const devTools = DevTools
-export let getDevToolsState = () => {}
-export let setDevToolsState = () => {}
+export let getDevToolsState = () => { console.warn(reduxNotReady) }
+export let setDevToolsState = () => { console.warn(reduxNotReady) }
 
 class JumpsuitDockMonitor extends DockMonitor {
   componentDidMount () {
