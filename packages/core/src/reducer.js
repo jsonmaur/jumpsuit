@@ -1,9 +1,8 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import { browserHistory, hashHistory } from 'react-router'
-import thunk from 'redux-thunk'
 //
-import { attachDispatcher } from 'jumpstate'
+import { CreateJumpstateMiddleware } from 'jumpstate'
 
 let userMiddleware = []
 
@@ -14,7 +13,11 @@ export function Middleware (...newMiddleware) {
 export let STORE
 
 export function combine (states, options = {}) {
-  const nativeMiddleware = applyMiddleware(thunk, routerMiddleware(options.useHash ? hashHistory : browserHistory), ...userMiddleware)
+  const nativeMiddleware = applyMiddleware(
+    routerMiddleware(options.useHash ? hashHistory : browserHistory),
+    ...userMiddleware,
+    CreateJumpstateMiddleware()
+  )
   const enhancers = [nativeMiddleware]
 
   if (process.env.NODE_ENV !== 'production') {
@@ -32,10 +35,5 @@ export function combine (states, options = {}) {
   const store = createStore(rootReducer, enhancer)
   STORE = store
 
-  attachDispatcher(store, states)
-
   return store
 }
-
-export function getDevToolsState () {}
-export function setDevToolsState () {}

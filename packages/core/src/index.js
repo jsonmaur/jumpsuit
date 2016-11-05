@@ -9,30 +9,31 @@ import {
 
 import Component from './component'
 import Render, { Router } from './render'
-import State, { attachDispatcher, jumpstateDefaults } from 'jumpstate'
+import { State, Effect, Actions, StateDefaults } from 'jumpstate'
 import Goto from './routing'
 import { Middleware } from './reducer'
 
 module.exports = {
   /* Core */
-  Component,
-  Router,
   Render,
+  Component,
   State,
-  Goto,
+  Effect,
+  Actions,
 
   /* React Router */
+  Router,
   Route,
   IndexRoute,
   Redirect,
   IndexRedirect,
   Link,
   IndexLink,
+  Goto,
 
   /* Redux */
   Middleware,
 
   /* Other */
-  attachDispatcher,
-  jumpstateDefaults
+  StateDefaults
 }
