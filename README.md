@@ -80,10 +80,10 @@ Using Jumpsuit in your project? Show it off!
 ```
 ```javascript
 // Yep, that's all you have to import
-import { Render, State, Component } from 'jumpsuit'
+import { Render, State, Actions, Component } from 'jumpsuit'
 
 // Create a state with some actions
-const CounterState = State('counter', {
+const CounterState = State({
 
   // Initial State
   initial: { count: 0 },
@@ -102,16 +102,16 @@ const Counter = Component({
   render() {
     return (
       <div>
-        <h1>{ this.props.counter.count }</h1>
-        <button onClick={ () => CounterState.increment() }>Increment</button>
-        <button onClick={ () => CounterState.decrement() }>Decrement</button>
+        <h1>{ this.props.count }</h1>
+        <button onClick={ () => Actions.increment() }>Increment</button>
+        <button onClick={ () => Actions.decrement() }>Decrement</button>
       </div>
     )
   }
 
 }, (state) => ({
   // Subscribe to the counter state (will be available via this.props.counter)
-  counter: state.counter
+  count: state.counter.count
 }))
 
 // Render your app!
@@ -169,54 +169,17 @@ Render({
   })
   ```
 
-#### State <em>([ config/name,] actions)</em>
-**Powered by [Jumpstate](https://github.com/jumpsuit/jumpstate)**
+#### State <em>([ sandboxName,] {initial,actions})</em>
+**See [Jumpstate State](https://github.com/jumpsuit/jumpstate#global-states)**
 
-Below is a simple example on how to use Jumpsuit's `State` component
-```javascript
+#### Effects <em>(effectName, callback)</em>
+**See [Jumpstate Effects](https://github.com/jumpsuit/jumpstate#effects)**
 
-import { State } from 'jumpsuit'
-
-const CounterState = State({
-  initial: { count: 0 },
-  increment (state, payload) {
-    return { count: ++state.count }
-  },
-  set (state, payload) {
-    return { count: payload }
-  },
-  reset (state) {
-    return { count: 0 }
-  }
-})
-
-// Get the current Counter state outside of a Linked Component
-CounterState()
-// { count: 1 }
-
-// Call the methods normally. No action creators or dispatch required.
-CounterState.increment()
-// { count: 1 }
-
-CounterState.set(5)
-// { count: 5 }
-
-CounterState.reset()
-// { count: 0 }
-```
-
-The `State` component packs way more power than we show here. For the full documentation, visit [Jumpstate](https://github.com/jumpsuit/jumpstate). There you will find examples on how to:
-
-- Name your state for easier debugging
-- Set global defaults and configure individual states
-- Use `State` as an action creator factory and use the traditional redux dispatcher
-- Create vanilla JS states that do not rely on Redux
-- Manage your own immutability within the state
-
-Note: Advanced Jumpstate components are exposed on the `jumpsuit` module under `{ jumpstateDefaults, attachDispatcher }`
+#### Hooks <em>(callback)</em>
+**See [Jumpstate Effects](https://github.com/jumpsuit/jumpstate#hooks)**
 
 #### Render <em>(state, component)</em>
-- Renders your app to `div#app`
+- Renders your app to `div#root`
 - Parameters
   - <strong>state or {states}</strong>
     - A single state or state combining object.  If passing a an object, the property names must use the state name they correspond to.
@@ -290,7 +253,7 @@ Note: Advanced Jumpstate components are exposed on the `jumpsuit` module under `
   ```
 
 #### Middleware <em>(...middlewares)</em>
-- A method for registering middleware into the underlying redux instance
+- A method for registering middleware into Jumpstate's underlying redux instance
   ```javascript
   import { Render, Middleware } from 'jumpsuit'
 
