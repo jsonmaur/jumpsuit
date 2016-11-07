@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIR="$(dirname "$(cd $(dirname $0); pwd)")"
-PACKAGES=( "core" "cli" )
+PACKAGES=( "core" "cli" "server")
 
 for i in ${PACKAGES[@]}; do
   P=$DIR/packages/$i

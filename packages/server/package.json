@@ -1,6 +1,6 @@
 {
   "name": "jumpserver",
-  "version": "0.8.3",
+  "version": "1.0.0",
   "description": "The static server used for Jumpsuit CLI",
   "license": "MIT",
   "homepage": "https://github.com/jumpsuit/jumpsuit#readme",
