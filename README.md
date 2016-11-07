@@ -127,7 +127,7 @@ Render({
 
 ## API
 
-#### Component <em>(config, stateMappingFn)</em>
+### Component <em>(config, stateMappingFn)</em>
 - Creates a new simple or stateful component.
 - Parameters
   - <strong>config</strong> Object
@@ -174,16 +174,16 @@ Render({
   })
   ```
 
-#### State <em>([ sandboxName,] {initial,actions})</em>
-**See [Jumpstate State](https://github.com/jumpsuit/jumpstate#global-states)**
+### State <em>([ sandboxName,] {initial,actions})</em>
+See **[Jumpstate State](https://github.com/jumpsuit/jumpstate#global-states)**
 
-#### Effects <em>(effectName, callback)</em>
-**See [Jumpstate Effects](https://github.com/jumpsuit/jumpstate#effects)**
+### Effects <em>(effectName, callback)</em>
+See **[Jumpstate Effects](https://github.com/jumpsuit/jumpstate#effects)**
 
-#### Hooks <em>(callback)</em>
-**See [Jumpstate Effects](https://github.com/jumpsuit/jumpstate#hooks)**
+### Hooks <em>(callback)</em>
+See **[Jumpstate Effects](https://github.com/jumpsuit/jumpstate#hooks)**
 
-#### Render <em>(state, component)</em>
+### Render <em>(state, component)</em>
 - Renders your app to `div#root`
 - Parameters
   - <strong>state or {states}</strong>
@@ -216,7 +216,7 @@ Render({
     Render(state, <App/>)
     ```
 
-#### Router
+### Router
 - Jumpsuit's built-in router
   ```javascript
   import { Render, Router, IndexRoute, Route } from 'jumpsuit'
@@ -229,7 +229,7 @@ Render({
   ))
   ```
 
-#### Route
+### Route
 - Renders a component at the specified route
   ```javascript
   import { Render, Router, Route } from 'jumpsuit'
@@ -243,7 +243,7 @@ Render({
   ))
   ```
 
-#### IndexRoute
+### IndexRoute
 - Renders a component at the index route of your app
   ```javascript
   import { Render, Router, Route } from 'jumpsuit'
@@ -257,7 +257,7 @@ Render({
   ))
   ```
 
-#### Middleware <em>(...middlewares)</em>
+### Middleware <em>(...middlewares)</em>
 - A method for registering middleware into Jumpstate's underlying redux instance
   ```javascript
   import { Render, Middleware } from 'jumpsuit'
