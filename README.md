@@ -65,24 +65,26 @@ Using Jumpsuit in your project? Show it off!
 
 ## Examples
 
-#### [Todo List](https://github.com/jumpsuit/jumpsuit/tree/master/examples/todo/src)
+- **[Todo List](https://github.com/jumpsuit/jumpsuit/tree/master/examples/todo/src)**
+- **[Advanced Counter](https://github.com/jumpsuit/jumpsuit/tree/master/examples/counter/src/app.js)**
 
-#### Counter
+Simple Counter Example
 ```html
 <html>
 <head>
-  <title>Jumpsuit Example</title>
+  <title>Simple Counter Example</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="root"></div>
   <script src="app.js"></script>
 </body>
 </html>
 
 ```
 ```javascript
-// Yep, that's all you have to import
+// Import Jumpsuit
 import { Render, State, Actions, Component } from 'jumpsuit'
+
 
 // Create a state with some actions
 const CounterState = State({
@@ -99,7 +101,8 @@ const CounterState = State({
   },
 })
 
-// Create a component
+
+// Create a subscribed component
 const Counter = Component({
   render() {
     return (
@@ -110,11 +113,11 @@ const Counter = Component({
       </div>
     )
   }
-
 }, (state) => ({
   // Subscribe to the counter state (will be available via this.props.counter)
   count: state.counter.count
 }))
+
 
 // Render your app!
 Render({
