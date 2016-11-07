@@ -1,6 +1,7 @@
 <div align="center">
   <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
   <br />
+  <br />
 </div>
 
 [![Jumpsuit on Slack](https://img.shields.io/badge/slack-jumpsuit-blue.svg)](https://jumpsuit-slack.herokuapp.com/)
