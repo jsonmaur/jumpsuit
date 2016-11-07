@@ -1,29 +1,31 @@
 <div align="center">
+  <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
+  <br />
   <a href="https://jumpsuit-slack.herokuapp.com/">
     <img src="https://img.shields.io/badge/slack-jumpsuit-blue.svg" alt="jumpsuit on Slack" />
   </a>
-  <br /> <br />
-  <img src="/assets/banner.png?raw=true" alt="Jumpsuit Banner" width="100%" />
 </div>
-<br />
-
-> *Jumpsuit is still under active development, so any feedback is welcome and appreciated!*
 
 A powerful and efficient Javascript framework that helps you build great apps. It is the fastest way to write scalable React/Redux with the least overhead.
 
 - No boilerplate
 - Minimalist API
-- Built-in support for ES6
 - Components powered by React
-- State based on Redux
-- CLI powered by Browserify
+- Full-featured state management (powered by [Jumpstate](https://github.com/jumpsuit/jumpstate))
+- CLI powered by [Browserify](http://browserify.org/)
 - [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
 
-## Why another Javascript framework?
+## FAQ
 
-[Just read this.](https://medium.com/@tannerlinsley/jumpsuit-react-redux-made-simple-e3186ba1b077)
+- Why another javascript framework?
+  - Javascript fatigue is a real thing, especially in the React ecosystem where there are so many options to choose from. Jumpsuit builds on the golden standards from the industry to give you the best developer and user experience. We make it easy for a developer of any skill level to write great apps. For a more in-depth discussion, [read our launch article.](https://medium.com/@tannerlinsley/jumpsuit-react-redux-made-simple-e3186ba1b077)
+- Can I use it with Create React App?
+  - You bet! Jumpsuits CLI is optional.  See below for instructions on using just the Jumpsuit framework :)
+- But I've already built an app! Can I still use Jumpsuit?
+  - Of course! Jumpsuit is not an all or nothing framework. You can easily start migrating small parts of your app to use Jumpsuit.
+- I love the state management in Jumpsuit, so can I just use that?
+  - You're probably looking for [Jumpstate](https://github.com/jumpsuit/jumpstate).  We packaged it separately for people just like you :)
 
-Javascript fatigue is a real thing, especially in the React/Webpack/Redux world where there are so many options to choose from. Jumpsuit brings together the best standards in the industry with the least amount of headache. It should be easy for a developer of any skill level to get started writing great apps without spending hours setting them up.
 
 ## Getting Started
 
