@@ -9,7 +9,7 @@ import {
 
 import Component from './component'
 import Render, { Router } from './render'
-import { State, Effect, Actions, StateDefaults } from 'jumpstate'
+import { State, Effect, Hook, Actions, StateDefaults } from 'jumpstate'
 import Goto from './routing'
 import { Middleware } from './reducer'
 
@@ -19,6 +19,7 @@ module.exports = {
   Component,
   State,
   Effect,
+  Hook,
   Actions,
 
   /* React Router */

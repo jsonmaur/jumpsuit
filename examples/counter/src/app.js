@@ -1,12 +1,12 @@
 // Yep, that's all you have to import
-import { Render, State, Effect, Actions, Component } from 'jumpsuit'
+import { Render, State, Effect, Hook, Actions, Component } from 'jumpsuit'
 
 // Some reusable actions for all of our counters
 const increment = (state, payload) => {
-  return { count: ++state.count }
+  return { count: state.count + 1 }
 }
 const decrement = (state, payload) => {
-  return { count: --state.count }
+  return { count: state.count - 1 }
 }
 
 // Create a state with some actions
@@ -46,16 +46,16 @@ Effect('asyncIncrement', (isSandbox) => {
 })
 
 // Create a global effect, that will get run after every dispatch
-Effect((action, getState) => {
+Hook((action, getState) => {
   // Like never letting the second counter equal 10!
-  if (getState().counter2.count === 10){
+  if (getState().counter2.count === 10) {
     Actions.increment()
   }
 })
 
 // Create a component
 const App = Component({
-  render() {
+  render () {
     return (
       <div>
         <h1>Counter 1: { this.props.count }</h1>
@@ -65,19 +65,19 @@ const App = Component({
         <br />
         {/* Call actions via the global Actions list */}
         <h3>Global Actions</h3>
-        <button onClick={ () => Actions.decrement() }>Decrement</button>
-        <button onClick={ () => Actions.increment() }>Increment</button>
+        <button onClick={() => Actions.decrement()}>Decrement</button>
+        <button onClick={() => Actions.increment()}>Increment</button>
         <br />
-        <button onClick={ () => Actions.asyncIncrement() }>Increment after 1 sec.</button>
+        <button onClick={() => Actions.asyncIncrement()}>Increment after 1 sec.</button>
         <br />
         <br />
         <br />
-        {/* Running a global action will allow every state to respond to that action*/}
+        {/* Running a global action will allow every state to respond to that action */}
         <h3>Sandboxed Actions</h3>
-        <button onClick={ () => SandboxCounter.decrement() }>Decrement</button>
-        <button onClick={ () => SandboxCounter.increment() }>Increment</button>
+        <button onClick={() => SandboxCounter.decrement()}>Decrement</button>
+        <button onClick={() => SandboxCounter.increment()}>Increment</button>
         <br />
-        <button onClick={ () => Actions.asyncIncrement(true) }>Increment after 1 sec.</button>
+        <button onClick={() => Actions.asyncIncrement(true)}>Increment after 1 sec.</button>
       </div>
     )
   }
@@ -95,4 +95,4 @@ Render({
   counter: Counter,
   counter2: Counter2,
   sandboxCounter: SandboxCounter
-}, <App/>)
+}, <App />)

@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "nib": "^1.1.0",
+    "standard": "^8.5.0",
     "stylus": "^0.54.5"
   },
   "dependencies": {
