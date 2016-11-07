@@ -6,7 +6,7 @@
 
 [![Jumpsuit on Slack](https://img.shields.io/badge/slack-jumpsuit-blue.svg)](https://jumpsuit-slack.herokuapp.com/)
 
-A powerful and efficient Javascript framework that helps you build great apps. It is the fastest way to write scalable React/Redux with the least overhead.
+Jumpsuit is a powerful and efficient Javascript framework that helps you build great apps. It is the fastest way to write scalable React/Redux with the least overhead.
 
 - No boilerplate
 - Minimalist API
