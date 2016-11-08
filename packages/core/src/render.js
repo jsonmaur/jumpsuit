@@ -44,7 +44,7 @@ export default function (stores, baseComponent, options = {}) {
 
   global.document && render(
     root,
-    global.document.getElementById('app')
+    global.document.getElementById(options.root || 'app')
   )
 
   return root

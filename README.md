@@ -75,7 +75,7 @@ Simple Counter Example
   <title>Simple Counter Example</title>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="app"></div>
   <script src="app.js"></script>
 </body>
 </html>
@@ -297,13 +297,20 @@ const states = {
 SandboxedCounter.increment()
 ```
 
-### Render <em>(state, component)</em>
-- Renders your app to `div#root`
+### Render <em>(state, component [, options])</em>
+- Renders your app to `div#app`
 - Parameters
   - <strong>state or {states}</strong>
     - A single state or state combining object.  If passing a an object, the property names must use the state name they correspond to.
   - <strong>component</strong>
     - The root Jumpsuit/React Component of your app
+  - <strong>options</strong>
+    ```javascript
+    {
+      root: 'app', // The id of the root element jumpsuit renders to. (For react-native, use `root`)
+      useHash: false, // Set to true for react-router to use a hash-based browser history (usually required for hybrid apps eg. Ionic)
+    }
+    ```
   - Single State
     ```javascript
     import { Render } from 'jumpsuit'
