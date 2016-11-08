@@ -174,7 +174,7 @@ Render({
   })
   ```
 
-## Global States
+### Global States
 
 Creating a global state is easy, and in return you get a reducer that is usable with redux right out of the box.
 
@@ -203,7 +203,7 @@ const states = {
 Actions.increment()
 ```
 
-## State Actions
+### State Actions
 When you create a state, you assign action functions that can change that state in some way. When called, each action received the current `state`, and the `payload` that was passed with the call.
 
 It's important to not mutate the current state in these actions, and that you return how the state has changed.
@@ -218,7 +218,7 @@ increment (state, payload) {
 
 In the example above, we created a new state with our updated count. Win!
 
-## Effects
+### Effects
 Effects, at their core, are asynchronous actions. They build on the concepts of [thunks](https://github.com/gaearon/redux-thunk) and [sagas](https://github.com/yelouafi/redux-saga) **but are much easier to understand and use**. Unlike thunks, Effects have their own redux actions, and their callback are executed **because** of those actions. You also gain all of the benefits of a side-effects model, without having to deal with the convoluted api of redux-saga.
 
 To create an effect:
@@ -240,7 +240,7 @@ Actions.postsFetch()
 postFetchEffect()
 ```
 
-## Hooks
+### Hooks
 A simple hook system that lets you monitor your state for actions or conditions and do just about anything you want.
 
 To create a global effect:
@@ -260,14 +260,14 @@ const myEffect = Hook((action, getState) => {
 })
 ```
 
-## Actions
+### Actions
 All global actions (including effects) are available via the `Actions` object.
 ```javascript
 Actions.increment()
 Actions.myEffect()
 ```
 
-## Sandboxed States
+### Sandboxed States
 Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via their reducer methods. They also return a reducer that is redux-compatible out of the box.
 
 ```javascript
