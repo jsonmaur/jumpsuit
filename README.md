@@ -174,9 +174,11 @@ Render({
   })
   ```
 
-### Global States
+### State
 
-Creating a global state is easy, and in return you get a reducer that is usable with redux right out of the box.
+Creating a state is easy. Pass `State()` an object with your `initial` state object and some actions.
+This returns a reducer that should then be passed into your render function's state object.
+
 
 ```javascript
 import { State, Actions } from 'jumpsuit'
@@ -268,7 +270,7 @@ Actions.myEffect()
 ```
 
 ### Sandboxed States
-Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via their reducer methods. They also return a reducer that is redux-compatible out of the box.
+Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via their reducer methods. This method returns a reducer that should be passed into your render function's state object.
 
 ```javascript
 import { State } from 'jumpsuit'
