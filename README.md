@@ -305,37 +305,38 @@ SandboxedCounter.increment()
   - <strong>component</strong>
     - The root Jumpsuit/React Component of your app
   - <strong>options</strong>
+
     ```javascript
     {
       root: 'app', // The id of the root element jumpsuit renders to. (For react-native, use `root`)
       useHash: false, // Set to true for react-router to use a hash-based browser history (usually required for hybrid apps eg. Ionic)
     }
     ```
-  - Single State
-    ```javascript
-    import { Render } from 'jumpsuit'
+- Single State Example
+  ```javascript
+  import { Render } from 'jumpsuit'
 
-    import Counter from './containers/counter'
-    import CounterState from './states/counter'
+  import Counter from './containers/counter'
+  import CounterState from './states/counter'
 
-    Render(CounterState, <Counter/>)
-    ```
-  - Combined State
-    ```javascript
-    import { Render } from 'jumpsuit'
+  Render(CounterState, <Counter/>)
+  ```
+- Combined State Example
+  ```javascript
+  import { Render } from 'jumpsuit'
 
-    import App from './containers/app'
+  import App from './containers/app'
 
-    import CounterState from './states/counter'
-    import TimerState from './states/timer'
+  import CounterState from './states/counter'
+  import TimerState from './states/timer'
 
-    const state = {
-      counter: CounterState, // CounterState's name is 'counter'
-      timer: TimerState // TimerState's name is 'timer'
-    }
+  const state = {
+    counter: CounterState, // CounterState's name is 'counter'
+    timer: TimerState // TimerState's name is 'timer'
+  }
 
-    Render(state, <App/>)
-    ```
+  Render(state, <App/>)
+  ```
 
 ### Router
 - Jumpsuit's built-in router
