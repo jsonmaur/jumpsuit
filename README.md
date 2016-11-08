@@ -230,7 +230,7 @@ import { Effect, Actions } from 'jumpsuit'
 const postFetchEffect = Effect('postsFetch', (payload) => {
   // You can do anything here, but async actions are a great use case:
   Actions.showLoading(true)
-  Axio.get('http://mysite.com/posts')
+  Axios.get('http://mysite.com/posts')
     .then(Actions.postsFetchSuccess)
     .catch(Actions.postsFetchError)
     .finally(() => Actions.showLoading(false))
@@ -250,7 +250,7 @@ To create a global effect:
 import { Hook } from 'jumpsuit'
 
 // You can hook into any actions, even ones from external libraries!
-const myEffect = Effect((action, getState) => {
+const myEffect = Hook((action, getState) => {
   if (action.type === 'redux-form/INITIALIZE') {
     console.log('A Redux-Form was just initialized with this payload', payload)
   }
