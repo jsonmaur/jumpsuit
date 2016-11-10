@@ -83,11 +83,11 @@ export function getFreePort () {
  * for Windows compatibility
  */
 
-function win32PathToPosix(path) {
+function win32PathToPosix (path) {
   return path.replace(/\\/g, '/')
 }
 
-export function convertIfWin32Path(path) {
+export function convertIfWin32Path (path) {
   if (os.platform() === 'win32') {
     return win32PathToPosix(path)
   }

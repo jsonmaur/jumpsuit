@@ -19,7 +19,7 @@ const projectNodeModsDir = path.resolve('node_modules')
 
 let bundler
 export function initBundle () {
-  var reactDir = convertIfWin32Path(resolve.sync('react', { basedir: projectNodeModsDir }));
+  var reactDir = convertIfWin32Path(resolve.sync('react', { basedir: projectNodeModsDir }))
   const b = browserify({
     plugin: [forgetify],
     paths: [path.resolve('node_modules'), CONFIG.sourceDir],
@@ -70,7 +70,7 @@ export function initBundle () {
 }
 
 const createBundle = debounce((cb) => {
-  const file = convertIfWin32Path( path.resolve(CONFIG.outputDir, path.basename(CONFIG.entry)) )
+  const file = convertIfWin32Path(path.resolve(CONFIG.outputDir, path.basename(CONFIG.entry)))
   let sourceMapFile = path.basename(CONFIG.entry).split('.')
   sourceMapFile.splice(sourceMapFile.length - 1, 0, 'map')
   sourceMapFile = sourceMapFile.join('.')

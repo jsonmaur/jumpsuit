@@ -36,7 +36,7 @@ export async function watch (argv) {
 let evtCount = 0
 let buildTime
 const isBuilding = debounce(() => pending('building'))
-const isDone = debounce((time) => pendingDone(time))
+const isDone = debounce(pendingDone)
 
 export async function handleEvent (evt, file) {
   /* skip dir events */
@@ -47,6 +47,8 @@ export async function handleEvent (evt, file) {
     buildTime = Date.now()
     isBuilding()
   }
+
+  let didFail
 
   try {
     /* determine action based on file extension */
@@ -59,15 +61,16 @@ export async function handleEvent (evt, file) {
       await buildAsset(evt, file)
     }
   } catch (err) {
-    evtCount--
+    didFail = true
     error(err, true)
     if (process.env.NODE_ENV === 'production') {
+      console.log('hello')
       throw err
     }
   }
 
   /* output build complete and build time */
   if (--evtCount === 0) {
-    isDone(Date.now() - buildTime)
+    isDone(Date.now() - buildTime, didFail)
   }
 }

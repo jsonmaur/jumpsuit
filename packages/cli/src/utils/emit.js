@@ -39,8 +39,11 @@ export function pending (msg) {
   process.stdout.write(`${chalk.dim(ARROW)}   ${msg}... `)
 }
 
-export function pendingDone (time) {
+export function pendingDone (time, failed) {
   if (time) time = chalk.dim(`(${time}ms)`)
+  if (failed) {
+    return process.stdout.write(`failed! ${time}\n`)
+  }
   process.stdout.write(`${CHECKMARK} ${time}\n`)
 }
 
