@@ -19,18 +19,23 @@ Jumpsuit is a powerful and efficient Javascript framework that helps you build g
 
 ## Documentation
 - [Introduction](https://jumpsuit.io/docs/introduction.html)
-- [Get Started](https://jumpsuit.io/docs/getting-started/)
-  - [Installation](https://jumpsuit.io/docs/getting-started/installation.html)
-  - [Your First App](https://jumpsuit.io/docs/getting-started/your-first-app.html)
+- [Installation](https://jumpsuit.io/docs/installation.html)
+- [Tutorial](https://jumpsuit.io/docs/tutorial.html)
 - [Examples](https://jumpsuit.io/docs/examples.html)
 - [API](https://jumpsuit.io/docs/api.html)
 - [FAQ](https://jumpsuit.io/docs/faq.html)
 
+## Join us on Slack!
+- [Join Here](https://jumpsuit-slack.herokuapp.com/)
+- [Chat Here](https://jumpsuit-js.slack.com/)
+
 ## Quick FAQ
 
 - **What does the Jumpsuit core include?**
+  - Components
   - State Management
   - Routing
+  - Rendering
   - Associated Boilerplate for "hooking everything up"
 - **What does the CLI do for me?**
   - Hot State Reloading
@@ -81,6 +86,8 @@ Using Jumpsuit in your project? Show it off!
 ```markdown
 [![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```
+
+## [Tutorial](https://jumpsuit.io/docs/tutorial.html)
 
 ## Examples
 
