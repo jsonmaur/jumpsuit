@@ -1,6 +1,6 @@
-# Your First Jumpsuit App: A Counter.
+# Tutorial: A Counter App!
 
-After you have installed Jumpsuit, you can immediately start building your app! Don't worry, we're going to show you how to build a simple counter app in just a few lines of code.
+After you have installed Jumpsuit, you can immediately start building your app! Don't worry, we're going to walk you through building a simple counter app right now!
 
 ## Import Jumpsuit
 To use Jumpsuit, you need to import a few of it's modules first.
@@ -39,7 +39,7 @@ increment (state) {
   state.count++ // NO! Mutation
 }
 ```
-*This would be mutating the current state and in the long run could cause some high-power nuclear reactor to go into hyper-meltdown. Ha! No, the real reason for this is explained in detail here. In a nutshell, if we mutate our state, there is no way to trace our state changes back in time for debugging. We'll get into this more later, so for now, let's focus on our counter app!*
+*This would be mutating the current state and in the long run could cause some high-power nuclear reactor to go into hyper-meltdown. Ha! No, the real reason for this is [explained in detail here](https://github.com/reactjs/redux/issues/758). In a nutshell, if we mutate our state, change detection is compromised and there is also no way to trace our state changes back in time for debugging. We'll get into this more later, so for now, let's focus on our counter app!*
 
 Let's add another action to `decrement` our count:
 ```javascript
@@ -72,7 +72,7 @@ const App = Component({
 })
 ```
 
-That was easy! If you have never used React before, the `render` function can return HTML right inside your javascript while curly braces can be used anywhere in the HTML that javascript is needed.  For more information on how React works, start here.
+That was easy! If you have never used React before, the `render` function can return HTML right inside your javascript while curly braces can be used anywhere in the HTML that javascript is needed.  For more information on how React works, [start here](https://facebook.github.io/react/docs/introducing-jsx.html).
 
 Now let's add some buttons to change the count!
 ```javascript
@@ -224,4 +224,4 @@ Render(globalState, <App />)
 
 Victory! As you can see, it's quick and painless to be productive with Jumpsuit. This is only the beginning, too!
 
-If you're ready to harness the full power of Jumpsuit, you should move on to one of our more sophisticated [examples](a). Great work!
+If you're ready to harness the full power of Jumpsuit, you should move on to one of our more sophisticated [examples](/docs/examples.md). Great work!
