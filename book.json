@@ -1,9 +1,6 @@
 {
   "gitbook": ">=3.2.1",
   "title": "Jumpsuit",
-  "structure": {
-    "summary": "docs/SUMMARY.md"
-  },
   "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
   "pluginsConfig": {
     "edit-link": {
