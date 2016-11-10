@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/assets/banner-skinny.png?raw=true" alt="Jumpsuit Banner" width="100%" />
+  <a href="https://jumpsuit.io"><img src="/assets/banner-skinny.png?raw=true" alt="Jumpsuit Banner" width="100%" /></a>
   <br />
   <br />
 </div>
