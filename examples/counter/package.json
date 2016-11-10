@@ -17,6 +17,6 @@
     "stylus": "^0.54.5"
   },
   "dependencies": {
-    "jumpsuit": "^0.8.0"
+    "jumpsuit": "^1.0.0"
   }
 }

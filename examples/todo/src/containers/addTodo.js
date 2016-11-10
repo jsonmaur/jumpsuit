@@ -2,7 +2,6 @@ import Todos from 'state/todos'
 
 export default () => {
   let input
-
   return (
     <div>
       <form onSubmit={e => {
@@ -13,8 +12,10 @@ export default () => {
         Todos.add(input.value)
         input.value = ''
       }}>
-        <input ref={node => input = node} />
-        <button type="submit">
+        <input ref={node => { input = node }} />
+        <br />
+        <br />
+        <button type='submit'>
           Add Todo
         </button>
       </form>

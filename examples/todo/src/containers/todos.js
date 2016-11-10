@@ -1,11 +1,10 @@
 import { Component } from 'jumpsuit'
 //
-import Todos from 'state/todos'
 import TodoList from 'components/todoList'
 
 export default Component({
-  render(){
-    return <TodoList todos={this.props.todos}/>
+  render () {
+    return <TodoList todos={this.props.todos} />
   }
 }, state => {
   return {
@@ -13,7 +12,7 @@ export default Component({
   }
 })
 
-function getVisibleTodos(todos, filter){
+function getVisibleTodos (todos, filter) {
   switch (filter) {
     case 'all':
       return todos

@@ -4,7 +4,7 @@ export default (props) => {
   }
   return (
     <a
-      href="#"
+      href='#'
       onClick={e => {
         e.preventDefault()
         props.onClick()

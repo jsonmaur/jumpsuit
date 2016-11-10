@@ -4,7 +4,7 @@ import Todos from 'state/todos'
 import Link from 'components/link'
 
 export default Component({
-  render(){
+  render () {
     return (
       <Link
         active={this.props.active}

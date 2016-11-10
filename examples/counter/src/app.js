@@ -38,7 +38,6 @@ const SandboxCounter = State('sandboxCounter', {
 
 // Create a global asynchronous event
 Effect('asyncIncrement', (isSandbox) => {
-  console.log(isSandbox)
   if (isSandbox) {
     return setTimeout(() => SandboxCounter.increment(), 1000)
   }
@@ -57,7 +56,7 @@ Hook((action, getState) => {
 const App = Component({
   render () {
     return (
-      <div>
+      <div className='Counter'>
         <h1>Counter 1: { this.props.count }</h1>
         <h1>Counter 2: { this.props.count2 } <em>*Try to make me 10</em></h1>
         <h1>Sandboxed Counter: { this.props.sandboxCount }</h1>
