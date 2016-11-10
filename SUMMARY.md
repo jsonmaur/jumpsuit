@@ -2,9 +2,8 @@
 
 - [Read Me](/README.md)
 - [Introduction](/docs/introduction.md)
-- [Get Started](/docs/getting-started/index.md)
-  - [Installation](/docs/getting-started/installation.md)
-  - [Your First App](/docs/getting-started/your-first-app.md)
+- [Installation](/docs/getting-started/installation.md)
+- [Tutorial](/docs/getting-started/tutorial.md)
 - [Examples](/docs/examples.md)
 - [API](/docs/api.md)
 - [Chat with us on Slack!](https://jumpsuit-slack.herokuapp.com/)
