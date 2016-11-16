@@ -1,10 +1,12 @@
 import path from 'path'
 import express from 'express'
+import cors from 'cors'
 import { enableHsr } from './hsr'
 
 module.exports = async function (config = {}) {
   const app = express()
 
+  app.use(cors())
   const root = path.resolve(config.root || 'dist')
   const hsr = await enableHsr(app)
 

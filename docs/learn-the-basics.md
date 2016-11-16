@@ -1,4 +1,4 @@
-# Tutorial: A Counter App!
+# Learn the Basics
 
 After you have installed Jumpsuit, you can immediately start building your app! Don't worry, we're going to walk you through building a simple counter app right now!
 

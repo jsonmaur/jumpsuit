@@ -10,16 +10,22 @@ export function Middleware (...newMiddleware) {
   userMiddleware = [...userMiddleware, ...newMiddleware]
 }
 
-export let STORE
+// Default history to browser history
+export let history = browserHistory
 
 export function combine (states, options = {}) {
-  const nativeMiddleware = applyMiddleware(
-    routerMiddleware(options.useHash ? hashHistory : browserHistory),
+  // Update the history object to the correct history instance
+  history = options.useHash ? hashHistory : browserHistory
+
+  // Compose the middleware
+  const middleware = applyMiddleware(
+    routerMiddleware(history),
     ...userMiddleware,
     CreateJumpstateMiddleware()
   )
-  const enhancers = [nativeMiddleware]
+  const enhancers = [middleware]
 
+  // Insert dev tools if needed
   if (process.env.NODE_ENV !== 'production') {
     const devTools = require('./devtools')
     const devToolsExtension = devTools.default.instrument({
@@ -33,7 +39,6 @@ export function combine (states, options = {}) {
   const rootReducer = combineReducers(states)
 
   const store = createStore(rootReducer, enhancer)
-  STORE = store
 
   return store
 }

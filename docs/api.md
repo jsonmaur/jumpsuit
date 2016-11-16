@@ -266,3 +266,53 @@ SandboxedCounter.increment()
 
   Render(state, <App/>)
   ```
+
+### Goto <em>({ path, query, hash }, append, replaceHistory)</em>
+Used to navigate programmatically throughout your app's routes
+- Route Object
+  - `path` - the desired pathname eg. `/posts/123/comments/`
+  - `query` - a key-value object of any query params to be serialized into the url. eg `{ hello: 'world', foo: 'bar' }` will serialize to `?hello=world&foo=bar`
+  - `hash` - any hash string you wish to place in the url. eg. `#section-1`
+- `append` - When set to `true`, the current route will updated with any new values you pass, instead of being replaced. You may also set any query params to `null` or `undefined` to have them removed.
+- `replaceHistory` - When set to `true`, the update will replace the current item in the browser history stack.
+
+**Notes:**
+- To remove a hash, you must replace the entire history (don't use the `append` option)
+
+Examples:
+```javascript
+import { Goto } from 'jumpsuit'
+
+// Navigate to a new route
+Goto({
+  path: '/posts/123/comments'
+})
+location === 'https://mysite.com/posts/123/comments'
+
+// Add a query param (without replacing the path)
+Goto({
+  query: {
+    user: 1234,
+    tab: 'friends'
+  }
+}, true)
+location === 'https://mysite.com/posts/123/comments?user=1234&tab=friends'
+
+// Remove a query param (without replacing the path)
+Goto({
+  query: {
+    tab: null
+  }
+}, true)
+location === 'https://mysite.com/posts/123/comments?user=1234'
+
+// Go to a completely new location
+Goto({
+  path: '/users'
+  query: {
+    search: 'myfriend'
+  },
+  hash: 'results'
+})
+location === 'https://mysite.com/users?search=myfriend#results'
+```

@@ -1,32 +1,56 @@
-import { push, go } from 'react-router-redux'
-import { STORE } from './reducer'
+import { syncedHistory } from './render'
+import { getState } from 'jumpstate'
 
-export default function (params = {}) {
-  if (params.back) {
-    const amount = params.back === true ? -1 : -(Math.abs(params.back))
-    return STORE.dispatch(go(amount))
+export default function Goto (params, append = false, shouldReplace = false) {
+  // Utilize the the right push or replace action
+  const action = shouldReplace ? syncedHistory.replace : syncedHistory.push
+
+  // If the params is just a string, dipatch the replacement router state
+  if (typeof params === 'string') {
+    return syncedHistory.push(params)
   }
 
-  if (params.forward) {
-    const amount = params.forward === true ? 1 : Math.abs(params.forward)
-    return STORE.dispatch(go(amount))
+  // Extract params
+  const { path, query, hash } = params
+
+  const prefixedHash = hash ? '#' + hash : undefined
+
+  // If we're not appending, just dispatch the replacement router state
+  if (!append) {
+    return action({
+      pathname: path,
+      query,
+      hash: prefixedHash
+    })
   }
 
-  if (params.replace) {
-    const newParams = { ...params }
-    delete newParams.replace
-
-    return STORE.dispatch(push(newParams))
-  }
-
-  const state = STORE.getState()
+  // If we are appending, then we need to "assign" the new params onto the existing router state
+  const state = getState()
   const location = state.routing.locationBeforeTransitions
+  const newQuery = Object.assign({}, location.query, query)
 
-  const newParams = Object.assign({}, {
-    hash: location.hash,
-    pathname: location.pathname
-  }, params)
+  // Remove any user-set undefined and null keys
+  for (var key in newQuery) {
+    if (newQuery[key] === undefined || newQuery[key] === null) {
+      delete newQuery[key]
+    }
+  }
 
-  newParams.query = Object.assign({}, location.query, newParams.query)
-  return STORE.dispatch(push(newParams))
+  // Construct the new router state
+  const newParams = {
+    pathname: path || location.pathname,
+    query: newQuery,
+    hash: prefixedHash || location.hash
+  }
+
+  // Dispatch
+  return action(newParams)
+}
+
+Goto.back = function (amount = -1) {
+  return syncedHistory.go(-(Math.abs(amount)))
+}
+
+Goto.back = function (amount = 1) {
+  return syncedHistory.go((Math.abs(amount)))
 }

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { combine } from './reducer'
 
-let syncedHistory
+export let syncedHistory
 
 export default function (stores, baseComponent, options = {}) {
   const store = combine({

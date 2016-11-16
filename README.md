@@ -19,7 +19,11 @@ Jumpsuit is a powerful and efficient Javascript framework that helps you build g
 
 ## Documentation
 - [Introduction](https://jumpsuit.io/docs/introduction.html)
-- [Installation](https://jumpsuit.io/docs/installation.html)
+- [Getting Started](https://jumpsuit.io/docs/getting-started.html)
+  - [Learn the Basics](https://jumpsuit.io/docs/learn-the-basics.md)
+  - [Effects](https://jumpsuit.io/docs/effects.md)
+  - [Hooks](https://jumpsuit.io/docs/hooks.md)
+  - [Sandboxed States](https://jumpsuit.io/docs/sandboxed-states.md)
 - [Tutorial](https://jumpsuit.io/docs/tutorial.html)
 - [Examples](https://jumpsuit.io/docs/examples.html)
 - [API](https://jumpsuit.io/docs/api.html)

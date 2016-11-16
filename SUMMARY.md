@@ -2,8 +2,11 @@
 
 - [Read Me](/README.md)
 - [Introduction](/docs/introduction.md)
-- [Installation](/docs/installation.md)
-- [Tutorial](/docs/tutorial.md)
+- [Getting Started](/docs/getting-started.md)
+  - [Learn the Basics](/docs/learn-the-basics.md)
+  - [Effects](/docs/effects.md)
+  - [Hooks](/docs/hooks.md)
+  - [Sandboxed States](/docs/sandboxed-states.md)
 - [Examples](/docs/examples.md)
 - [API](/docs/api.md)
 - [FAQ](/docs/faq.md)
