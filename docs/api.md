@@ -315,4 +315,13 @@ Goto({
   hash: 'results'
 })
 location === 'https://mysite.com/users?search=myfriend#results'
+
+// Replace all queries and hashes, but keep the path
+Goto({
+  query: {
+    search: 'otherfriend'
+  },
+  hash: 'hashtastic'
+})
+location === 'https://mysite.com/users?search=otherfriend#hashtastic'
 ```
