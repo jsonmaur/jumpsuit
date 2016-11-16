@@ -2,6 +2,9 @@ import { syncedHistory } from './render'
 import { getState } from 'jumpstate'
 
 export default function Goto (params, append = false, shouldReplace = false) {
+  const state = getState()
+  const location = state.routing.locationBeforeTransitions
+
   // Utilize the the right push or replace action
   const action = shouldReplace ? syncedHistory.replace : syncedHistory.push
 
@@ -18,15 +21,13 @@ export default function Goto (params, append = false, shouldReplace = false) {
   // If we're not appending, just dispatch the replacement router state
   if (!append) {
     return action({
-      pathname: path,
+      pathname: path || location.pathname,
       query,
       hash: prefixedHash
     })
   }
 
   // If we are appending, then we need to "assign" the new params onto the existing router state
-  const state = getState()
-  const location = state.routing.locationBeforeTransitions
   const newQuery = Object.assign({}, location.query, query)
 
   // Remove any user-set undefined and null keys
