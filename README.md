@@ -28,6 +28,7 @@ Jumpsuit is a powerful and efficient Javascript framework that helps you build g
 - [Examples](https://jumpsuit.io/docs/examples.html)
 - [API](https://jumpsuit.io/docs/api.html)
 - [FAQ](https://jumpsuit.io/docs/faq.html)
+- [Changelog](https://jumpsuit.io/docs/changelog.html)
 
 ## Join us on Slack!
 - [Join Here](https://jumpsuit-slack.herokuapp.com/)
