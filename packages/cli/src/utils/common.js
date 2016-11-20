@@ -1,5 +1,5 @@
 import net from 'net'
-import os from "os";
+import os from 'os'
 
 /**
  * Gets a variable type without using typeof.
