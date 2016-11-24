@@ -10,6 +10,8 @@ const defaults = {
   outputDir: 'dist',
   assetsDir: 'assets', // relative to sourceDir
 
+  extraDirs:[],
+
   assetsIgnoreExtensions: [],
 
   entry: 'app.js', // relative to sourceDir
@@ -53,6 +55,7 @@ export default async function (argv) {
   config.outputDir = convertIfWin32Path(path.resolve(config.outputDir))
   config.assetsDir = convertIfWin32Path(path.resolve(config.sourceDir, config.assetsDir))
   config.entry = convertIfWin32Path(path.resolve(config.sourceDir, config.entry))
+  config.extraDirs = config.extraDirs.map( (f) => convertIfWin32Path(path.resolve(f)))
 
   CONFIG = config
 }
