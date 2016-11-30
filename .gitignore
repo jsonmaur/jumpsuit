@@ -8,9 +8,5 @@ dist
 public
 jumpsuit.js
 
-packages/*/assets
-packages/*/examples
-packages/*/README.md
-packages/*/LICENSE
-
 _book/
+*.log
