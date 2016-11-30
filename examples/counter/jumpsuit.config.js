@@ -12,8 +12,7 @@ module.exports = {
   }
 }
 
-
-function buildStyles(){
+function buildStyles () {
   return new Promise((resolve, reject) => {
     stylus.render(fs.readFileSync(stylusEntry, 'utf8'), {
       'include css': true,
@@ -21,9 +20,9 @@ function buildStyles(){
       compress: process.env.NODE_ENV === 'production',
       paths: [path.resolve('src')],
       use: nib()
-    }, function(err, css){
+    }, (err, css) => {
       if (err) reject(err)
       resolve(css)
-    });
+    })
   })
 }
