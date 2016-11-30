@@ -34,17 +34,33 @@ export default Component({
         const newParams = query.stringify(params)
         const newUrl = location.href.substring(0, location.href.indexOf('?')) +
           (newParams.length ? `?${newParams}` : '')
-
         history.replaceState(null, null, newUrl)
 
-        axios.get(`${this._hsrUrl()}/${ts}`).then((res) => {
-          // We need to set the state outside of the axios stack
-          // so potential stack traces are accurate
-          setTimeout(() => {
-            setDevToolsState(res.data)
-          }, 1)
-          console.info('HSR data loaded')
-        }).catch((err) => console.error(err))
+        axios.get(`${this._hsrUrl()}/${ts}`)
+          .then((res) => {
+            // We need to set the state outside of the axios stack
+            // so potential stack traces are accurate
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                setDevToolsState(res.data)
+                resolve()
+              }, 1)
+              console.info('HSR data loaded')
+            })
+          })
+          .catch((err) => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                console.error(err)
+                resolve()
+              }, 1)
+            })
+          })
+          .then((res) => {
+            this.props.onReady()
+          })
+      } else {
+        this.props.onReady()
       }
 
       console.info('HSR is ready')

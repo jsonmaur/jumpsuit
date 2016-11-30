@@ -4,6 +4,7 @@ import { Router as ReactRouter, browserHistory, hashHistory, createMemoryHistory
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { combine } from './reducer'
+import Component from './component'
 
 export let syncedHistory
 
@@ -26,21 +27,37 @@ export default function (stores, baseComponent, options = {}) {
   syncedHistory = syncHistoryWithStore(history, store)
   const base = baseComponent
 
-  let child = base
+  let WrappedBaseComponent
   if (process.env.NODE_ENV !== 'production') {
     if (global.devToolsExtension) {
       console.warn('Jumpsuit doesn\'t support the Redux Dev Tools browser extension!')
     }
 
-    const Hsr = require('./hsr').default
-    const hsrComponent = process.env.HSR_WS ? <Hsr /> : <div />
+    const Hsr = process.env.HSR_WS ? require('./hsr').default : () => <div />
 
     const DevTools = require('./devtools').default
 
-    child = <div>{base}<DevTools />{hsrComponent}</div>
+    WrappedBaseComponent = Component({
+      getInitialState: () => ({
+        ready: !process.env.HSR_WS
+      }),
+      render () {
+        return (
+          <div>
+            {this.state.ready ? base : <span />}
+            <DevTools />
+            <Hsr onReady={() => this.setState({ready: true})} />
+          </div>
+        )
+      }
+    })
   }
 
-  const root = <Provider store={store}>{child}</Provider>
+  const root = (
+    <Provider store={store}>
+      {WrappedBaseComponent ? <WrappedBaseComponent /> : base}
+    </Provider>
+    )
 
   global.document && render(
     root,
