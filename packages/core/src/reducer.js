@@ -5,9 +5,14 @@ import { browserHistory, hashHistory } from 'react-router'
 import { CreateJumpstateMiddleware } from 'jumpstate'
 
 let userMiddleware = []
+let userEnhancers = []
 
 export function Middleware (...newMiddleware) {
   userMiddleware = [...userMiddleware, ...newMiddleware]
+}
+
+export function Enhancer (...newEnhancers) {
+  userEnhancers = [...userEnhancers, ...newEnhancers]
 }
 
 // Default history to browser history
@@ -23,7 +28,7 @@ export function combine (states, options = {}) {
     ...userMiddleware,
     CreateJumpstateMiddleware()
   )
-  const enhancers = [middleware]
+  const enhancers = [middleware, ...userEnhancers]
 
   // Insert dev tools if needed
   if (process.env.NODE_ENV !== 'production') {

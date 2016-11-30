@@ -11,7 +11,7 @@ import Component from './component'
 import Render, { Router } from './render'
 import { State, Effect, Hook, Actions, StateDefaults, getState, dispatch } from 'jumpstate'
 import Goto from './routing'
-import { Middleware } from './reducer'
+import { Middleware, Enhancer } from './reducer'
 
 module.exports = {
   /* Core */
@@ -34,6 +34,7 @@ module.exports = {
 
   /* Redux */
   Middleware,
+  Enhancer,
   getState,
   dispatch,
 
