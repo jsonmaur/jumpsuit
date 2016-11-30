@@ -151,6 +151,12 @@ Render(globalState, <Counter/>)
 :-:|:-:
 [Jason Maurer](https://github.com/jsonmaur) | [Tanner Linsley](https://github.com/tannerlinsley)
 
+## Used By
+
+<a href='https://nozzle.io'>
+  <img src='https://nozzle.io/img/logo-blue.png' alt='Nozzle Logo' style='width:300px;'/>
+</a>
+
 ## License
 
 [MIT](LICENSE) © Jumpsuit
