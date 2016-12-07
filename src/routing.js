@@ -52,6 +52,6 @@ Goto.back = function (amount = -1) {
   return syncedHistory.go(-(Math.abs(amount)))
 }
 
-Goto.back = function (amount = 1) {
+Goto.forward = function (amount = 1) {
   return syncedHistory.go((Math.abs(amount)))
 }

@@ -8,7 +8,7 @@ import {
 } from 'react-router'
 
 import Component from './component'
-import Render, { Router } from './render'
+import Render, { Router, syncedHistory } from './render'
 import { State, Effect, Hook, Actions, StateDefaults, getState, dispatch } from 'jumpstate'
 import Goto from './routing'
 import { Middleware, Enhancer } from './reducer'
@@ -31,6 +31,7 @@ module.exports = {
   Link,
   IndexLink,
   Goto,
+  syncedHistory,
 
   /* Redux */
   Middleware,
