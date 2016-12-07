@@ -43,7 +43,7 @@
   "dependencies": {
     "axios": "0.14.0",
     "gitbook-cli": "^2.3.0",
-    "jumpstate": "^1.0.0",
+    "jumpstate": "^1.0.7",
     "query-string": "4.2.3",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",

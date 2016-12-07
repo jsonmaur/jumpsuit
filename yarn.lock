@@ -2727,9 +2727,9 @@ jsx-ast-utils@^1.3.3:
     acorn-jsx "^3.0.1"
     object-assign "^4.1.0"
 
-jumpstate@^1.0.0:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/jumpstate/-/jumpstate-1.0.5.tgz#6949643f42e39e3ebb23421685e89f9d262a087c"
+jumpstate@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/jumpstate/-/jumpstate-1.0.7.tgz#a4b867394164596e50512deb78cbcb64f198ce7c"
 
 kind-of@^3.0.2:
   version "3.0.4"
