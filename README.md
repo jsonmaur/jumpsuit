@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://jumpsuit.io"><img src="/assets/banner-skinny.png?raw=true" alt="Jumpsuit Banner" width="100%" /></a>
+  <a href="https://jump.suitstack.com"><img src="/assets/banner-skinny.png?raw=true" alt="Jumpsuit Banner" width="100%" /></a>
   <br />
   <br />
 </div>
@@ -18,17 +18,17 @@ Jumpsuit is a powerful and efficient Javascript framework that helps you build g
 - [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
 
 ## Documentation
-- [Introduction](https://jumpsuit.io/docs/introduction.html)
-- [Getting Started](https://jumpsuit.io/docs/getting-started.html)
-  - [Learn the Basics](https://jumpsuit.io/docs/learn-the-basics.html)
-  - [Effects](https://jumpsuit.io/docs/effects.html)
-  - [Hooks](https://jumpsuit.io/docs/hooks.html)
-  - [Sandboxed States](https://jumpsuit.io/docs/sandboxed-states.html)
-- [Tutorial](https://jumpsuit.io/docs/tutorial.html)
-- [Examples](https://jumpsuit.io/docs/examples.html)
-- [API](https://jumpsuit.io/docs/api.html)
-- [FAQ](https://jumpsuit.io/docs/faq.html)
-- [Changelog](https://jumpsuit.io/docs/changelog.html)
+- [Introduction](https://jump.suitstack.com/docs/introduction.html)
+- [Getting Started](https://jump.suitstack.com/docs/getting-started.html)
+  - [Learn the Basics](https://jump.suitstack.com/docs/learn-the-basics.html)
+  - [Effects](https://jump.suitstack.com/docs/effects.html)
+  - [Hooks](https://jump.suitstack.com/docs/hooks.html)
+  - [Sandboxed States](https://jump.suitstack.com/docs/sandboxed-states.html)
+- [Tutorial](https://jump.suitstack.com/docs/tutorial.html)
+- [Examples](https://jump.suitstack.com/docs/examples.html)
+- [API](https://jump.suitstack.com/docs/api.html)
+- [FAQ](https://jump.suitstack.com/docs/faq.html)
+- [Changelog](https://jump.suitstack.com/docs/changelog.html)
 
 ## Join us on Slack!
 - [Join Here](https://jumpsuit-slack.herokuapp.com/)
@@ -92,7 +92,7 @@ Using Jumpsuit in your project? Show it off!
 [![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```
 
-## [Tutorial](https://jumpsuit.io/docs/tutorial.html)
+## [Tutorial](https://jump.suitstack.com/docs/tutorial.html)
 
 ## Examples
 
