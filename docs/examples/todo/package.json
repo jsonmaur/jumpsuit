@@ -1,0 +1,22 @@
+{
+  "name": "jumpsuit-todo-example",
+  "version": "1.0.0",
+  "description": "Jumpsuit todo example",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumpsuit/jumpsuit.git"
+  },
+  "scripts": {
+    "watch": "jumpsuit watch",
+    "build": "jumpsuit build"
+  },
+  "devDependencies": {
+    "nib": "^1.1.0",
+    "standard": "^8.2.0",
+    "stylus": "^0.54.5"
+  },
+  "dependencies": {
+    "jumpsuit": "^1.0.0"
+  }
+}
