@@ -65,6 +65,6 @@ Effect('contactsFetch', (time) => {
 })
 ```
 
-This example is bit more involved, but you can start seeing how easy it is to orchestrate asynchronous events in Jumpsuit.
+Although it's a bit more involved, this example demonstrates just how easy it is to orchestrate asynchronous events in Jumpsuit.
 
-More Docs on `Event` coming soon!
+At this point, you may ask what happens when your app starts to grow in size. How do you keep track of all of these effects and action namespacing? Read on to [Sandboxed States](/docs/sandboxed-states.md)!

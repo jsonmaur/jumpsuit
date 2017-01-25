@@ -1,80 +1,22 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router as ReactRouter, browserHistory, hashHistory, createMemoryHistory } from 'react-router'
-import { Provider } from 'react-redux'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import { combine } from './reducer'
-import Component from './component'
+//
+import ConnectStore from './connectStore'
 
-export let syncedHistory
+export default function (...params) {
+  // If passed a raw state object, combine/create/connect it to the component
+  const hasState = typeof params[0] === 'object' && typeof params[1] === 'object'
+  const states = hasState && params[0]
+  const userComponent = hasState ? params[1] : params[0]
+  const Comp = ConnectStore(hasState ? states : {
+    _: state => state || null
+  }, userComponent)
 
-export default function (stores, baseComponent, options = {}) {
-  const store = combine({
-    ...stores,
-    routing: routerReducer
-  }, options)
-
-  if (typeof baseComponent === 'function') {
-    baseComponent = baseComponent(store)
-  }
-
-  let history
-  if (global.IS_SERVERSIDE) {
-    history = createMemoryHistory()
-  } else {
-    history = options.useHash ? hashHistory : browserHistory
-  }
-  syncedHistory = syncHistoryWithStore(history, store)
-  const base = baseComponent
-
-  let WrappedBaseComponent
-  if (process.env.NODE_ENV !== 'production') {
-    if (global.devToolsExtension) {
-      console.warn('Jumpsuit doesn\'t support the Redux Dev Tools browser extension!')
-    }
-
-    const Hsr = process.env.HSR_WS ? require('./hsr').default : () => <div />
-
-    const DevTools = require('./devtools').default
-
-    WrappedBaseComponent = Component({
-      getInitialState: () => ({
-        ready: !process.env.HSR_WS
-      }),
-      render () {
-        return (
-          <div>
-            {this.state.ready ? base : <span />}
-            <DevTools />
-            <Hsr onReady={() => this.setState({ready: true})} />
-          </div>
-        )
-      }
-    })
-  }
-
-  const root = (
-    <Provider store={store}>
-      {WrappedBaseComponent ? <WrappedBaseComponent /> : base}
-    </Provider>
-    )
-
+    // If we're in the dom, render to it
   global.document && render(
-    root,
-    global.document.getElementById(options.root || 'app')
+    <Comp />,
+    global.document.getElementById((hasState ? params[2] : params[1]) || 'root')
   )
 
-  return root
+  return Comp
 }
-
-export const Router = React.createClass({
-  propTypes: { children: React.PropTypes.object },
-  getDefaultProps: () => ({ _isRouteWrapper: true }),
-  render: function () {
-    return (
-      <ReactRouter history={syncedHistory}>
-        {this.props.children}
-      </ReactRouter>
-    )
-  }
-})

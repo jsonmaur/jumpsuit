@@ -186,7 +186,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="examples.html">
+        <li class="chapter " data-level="1.4" data-path="hot-state-reloading.html">
+            
+                <a href="hot-state-reloading.html">
+            
+                    
+                    Hot State Reloading (HSR)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="examples.html">
             
                 <a href="examples.html">
             
@@ -199,7 +212,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="api.html">
+        <li class="chapter active" data-level="1.6" data-path="api.html">
             
                 <a href="api.html">
             
@@ -212,7 +225,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="faq.html">
+        <li class="chapter " data-level="1.7" data-path="faq.html">
             
                 <a href="faq.html">
             
@@ -225,7 +238,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="changelog.html">
+        <li class="chapter " data-level="1.8" data-path="changelog.html">
             
                 <a href="changelog.html">
             
@@ -238,7 +251,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" >
+        <li class="chapter " data-level="1.9" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpstate/">
             
@@ -251,7 +264,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" >
+        <li class="chapter " data-level="1.10" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpsuit/">
             
@@ -264,7 +277,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" >
+        <li class="chapter " data-level="1.11" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpsuit/issues">
             
@@ -277,7 +290,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" >
+        <li class="chapter " data-level="1.12" >
             
                 <a target="_blank" href="https://jumpsuit-slack.herokuapp.com/">
             
@@ -392,10 +405,9 @@
 </code></pre>
 </li>
 </ul>
-<h3 id="state">State</h3>
-<p>Creating a state is easy. Pass <code>State()</code> an object with your <code>initial</code> state object and some actions.
-This returns a reducer that should then be passed into your render function&apos;s state object.</p>
-<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> State<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<h2 id="global-states">Global States</h2>
+<p>Creating a global state is easy, and in return you get a reducer that is usable with redux right out of the box.</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> State<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpstate&apos;</span>
 
 <span class="token comment" spellcheck="true">// Use `State` to make a new global state</span>
 <span class="token keyword">const</span> counterReducer <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -410,17 +422,17 @@ This returns a reducer that should then be passed into your render function&apos
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true">// Now you can use the reducer it returned in your state setup</span>
-<span class="token keyword">const</span> states <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">// Now you can use the reducer it returned in your redux setup</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   counter<span class="token punctuation">:</span> counterReducer
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true">// Call global actions using jumpsuit&apos;s `Actions` registry</span>
+<span class="token comment" spellcheck="true">// And call global actions using jumpstate&apos;s `Actions` registry</span>
 Actions<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="state-actions">State Actions</h3>
+<h2 id="state-actions">State Actions</h2>
 <p>When you create a state, you assign action functions that can change that state in some way. When called, each action received the current <code>state</code>, and the <code>payload</code> that was passed with the call.</p>
-<p>It&apos;s important to not mutate the current state in these actions, and that you return how the state has changed.</p>
+<p>It&apos;s important to maintain immutability here, and not mutate the current state in these actions. Doing so will meddle with debugging, time-travel, and the underlying redux instance.</p>
 <pre class="language-"><code class="lang-javascript">increment <span class="token punctuation">(</span>state<span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span>
@@ -428,15 +440,15 @@ Actions<span class="token punctuation">.</span><span class="token function">incr
 <span class="token punctuation">}</span><span class="token punctuation">,</span>
 </code></pre>
 <p>In the example above, we created a new state with our updated count. Win!</p>
-<h3 id="effects">Effects</h3>
+<h2 id="effects">Effects</h2>
 <p>Effects, at their core, are asynchronous actions. They build on the concepts of <a href="https://github.com/gaearon/redux-thunk" target="_blank">thunks</a> and <a href="https://github.com/yelouafi/redux-saga" target="_blank">sagas</a> <strong>but are much easier to understand and use</strong>. Unlike thunks, Effects have their own redux actions, and their callback are executed <strong>because</strong> of those actions. You also gain all of the benefits of a side-effects model, without having to deal with the convoluted api of redux-saga.</p>
 <p>To create an effect:</p>
-<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Effect<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Effect<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpstate&apos;</span>
 
 <span class="token keyword">const</span> postFetchEffect <span class="token operator">=</span> <span class="token function">Effect</span><span class="token punctuation">(</span><span class="token string">&apos;postsFetch&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>payload<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// You can do anything here, but async actions are a great use case:</span>
   Actions<span class="token punctuation">.</span><span class="token function">showLoading</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-  Axios<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">&apos;http://mysite.com/posts&apos;</span><span class="token punctuation">)</span>
+  Axio<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">&apos;http://mysite.com/posts&apos;</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>Actions<span class="token punctuation">.</span>postsFetchSuccess<span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>Actions<span class="token punctuation">.</span>postsFetchError<span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token keyword">finally</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> Actions<span class="token punctuation">.</span><span class="token function">showLoading</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -447,31 +459,37 @@ Actions<span class="token punctuation">.</span><span class="token function">post
 <span class="token comment" spellcheck="true">// or alternatively</span>
 <span class="token function">postFetchEffect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="hooks">Hooks</h3>
+<h2 id="hooks">Hooks</h2>
 <p>A simple hook system that lets you monitor your state for actions or conditions and do just about anything you want.</p>
-<p>To create a global effect:</p>
-<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Hook <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<p>To create a hook:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Hook <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpstate&apos;</span>
 
 <span class="token comment" spellcheck="true">// You can hook into any actions, even ones from external libraries!</span>
-<span class="token keyword">const</span> myHook <span class="token operator">=</span> <span class="token function">Hook</span><span class="token punctuation">(</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> getState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+<span class="token keyword">const</span> formLoadedHook <span class="token operator">=</span> <span class="token function">Hook</span><span class="token punctuation">(</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> getState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">&apos;redux-form/INITIALIZE&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;A Redux-Form was just initialized with this payload&apos;</span><span class="token punctuation">,</span> payload<span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true">// Load google analytics if it is not found</span>
-<span class="token keyword">const</span> analyticsHook <span class="token operator">=</span> <span class="token function">Hook</span><span class="token punctuation">(</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> getState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token function">GoogleAnalytics</span><span class="token punctuation">(</span><span class="token string">&apos;send&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;page&apos;</span><span class="token punctuation">,</span> payload<span class="token punctuation">.</span>pathname<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// Load google analytics if it is not yet loaded</span>
+<span class="token keyword">const</span> analyticsLoadedHook <span class="token operator">=</span> <span class="token function">Hook</span><span class="token punctuation">(</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> getState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>analytics<span class="token punctuation">.</span>loaded<span class="token punctuation">)</span>
+  Actions<span class="token punctuation">.</span>analytics<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// Cancel a hook:</span>
+formLoadedHook<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+analyticsLoadedHook<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="actions">Actions</h3>
-<p>All global actions (including effects) are available via the <code>Actions</code> object.</p>
+<h2 id="actions">Actions</h2>
+<p>All actions (including effects) are available via the <code>Actions</code> object.</p>
 <pre class="language-"><code class="lang-javascript">Actions<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+Actions<span class="token punctuation">.</span>mySandbox<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 Actions<span class="token punctuation">.</span><span class="token function">myEffect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
-<h3 id="sandboxed-states">Sandboxed States</h3>
-<p>Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via their reducer methods. This method returns a reducer that should be passed into your render function&apos;s state object.</p>
-<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> State <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<h2 id="sandboxed-states">Sandboxed States</h2>
+<p>Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via <code>Actions.prefixName.actionName()</code> or directly via their reducer methods. They also return a reducer that is redux-compatible out of the box.</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> State<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpstate&apos;</span>
 
 <span class="token comment" spellcheck="true">// Create a sandboxed state by passing a name as the first parameter</span>
 <span class="token keyword">const</span> SandboxedCounter <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token string">&apos;otherCounter&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
@@ -486,13 +504,25 @@ Actions<span class="token punctuation">.</span><span class="token function">myEf
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true">// Now you can use the reducer it returned in your state</span>
-<span class="token keyword">const</span> states <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">// Now you can use the reducer it returned in your redux setup</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   sandboxedCounter<span class="token punctuation">:</span> SandboxedCounter
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true">// Sandboxed actions are only accessible through the methods on it&apos;s reducer!</span>
+<span class="token comment" spellcheck="true">// Sandboxed actions are accessible through the prefix on Actions or as methods on its reducer!</span>
+Actions<span class="token punctuation">.</span>otherCounter<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// or</span>
 SandboxedCounter<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="removingcancelling-effects-and-hooks">Removing/Cancelling Effects and Hooks</h3>
+<p>If you know you are done with an effect or hook and want to free up some memory, you can cancel them:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment" spellcheck="true">// Effects</span>
+<span class="token keyword">const</span> myEffect <span class="token operator">=</span> <span class="token function">Effect</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+myEffect<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// Hooks</span>
+<span class="token keyword">const</span> myHook <span class="token operator">=</span> <span class="token function">Hook</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+myHook<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 <h3 id="render-state-component--options">Render <em>(state, component [, options])</em></h3>
 <ul>
@@ -542,6 +572,32 @@ SandboxedCounter<span class="token punctuation">.</span><span class="token funct
 </code></pre>
 </li>
 </ul>
+<h3 id="combinestate">CombineState</h3>
+<p>Used to combine a state object into a reducer that jumpsuit can use to create a store. Usually this method isn&apos;t needed, but can become useful in very advanced setups.
+Example:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> CombineState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<span class="token keyword">const</span> reducer <span class="token operator">=</span> <span class="token function">CombineState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  counter<span class="token punctuation">:</span> counterState
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="createstore">CreateStore</h3>
+<p>Used to create an underlying redux store for jumpsuit to use.
+Example:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> CreateStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">CreateStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> initialState<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  middleware<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  enhancers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  history<span class="token punctuation">:</span> undefined <span class="token comment" spellcheck="true">// Used to override the browser history instance to use when composing react-router-redux into the store</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="connectstore">ConnectStore</h3>
+<p>Used to create a connected component from a store and a root component. This also does a lot of other things that would normally take forever to set up in a traditional redux environment.
+Example:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> ConnectStore <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<span class="token keyword">const</span> ConnectedApp <span class="token operator">=</span> <span class="token function">ConnectStore</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// In this case, the state, reducer and store are already connected to the root component, so you only need to pass the component to be rendered.</span>
+<span class="token function">Render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>ConnectedApp <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
+</code></pre>
 <h3 id="router">Router</h3>
 <ul>
 <li><p>Jumpsuit&apos;s built-in router</p>
@@ -663,6 +719,38 @@ location <span class="token operator">===</span> <span class="token string">&apo
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 location <span class="token operator">===</span> <span class="token string">&apos;https://mysite.com/users?search=otherfriend#hashtastic&apos;</span>
 </code></pre>
+<h3 id="rerender">Rerender</h3>
+<p>Call this methods to trigger a hot-state-reload of the app when needed
+Example:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Rerender <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>module<span class="token punctuation">.</span>hot<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token string">&apos;./app&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">Rerender</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="historymode">HistoryMode</h3>
+<p>Use this method to set the History mode to something other than <code>browser</code>.
+Available options are:</p>
+<ul>
+<li><code>browser</code></li>
+<li><code>hash</code></li>
+<li><code>memory</code><pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Render<span class="token punctuation">,</span> HistoryMode <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+<span class="token function">HistoryMode</span><span class="token punctuation">(</span><span class="token string">&apos;hash&apos;</span><span class="token punctuation">)</span>
+<span class="token function">Render</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="devtoolsconfig">devToolsConfig</h3>
+<p>The config object used by redux dev tools. Update it as necessary before rendering your app.
+Example:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Render<span class="token punctuation">,</span> devToolsConfig <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>devToolsConfig<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  maxAge<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+  shouldCatchErrors<span class="token punctuation">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token function">Render</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
+</code></pre>
 
                                 
                                 </section>
@@ -706,7 +794,7 @@ location <span class="token operator">===</span> <span class="token string">&apo
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"API","level":"1.5","depth":1,"next":{"title":"FAQ","level":"1.6","depth":1,"path":"documentation/faq.md","ref":"documentation/faq.md","articles":[]},"previous":{"title":"Examples","level":"1.4","depth":1,"path":"documentation/examples.md","ref":"documentation/examples.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/api.md","mtime":"2016-11-16T22:15:38.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-24T03:33:26.565Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"API","level":"1.6","depth":1,"next":{"title":"FAQ","level":"1.7","depth":1,"path":"documentation/faq.md","ref":"documentation/faq.md","articles":[]},"previous":{"title":"Examples","level":"1.5","depth":1,"path":"documentation/examples.md","ref":"documentation/examples.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/api.md","mtime":"2017-01-25T22:29:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-25T22:47:18.708Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

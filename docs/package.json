@@ -29,24 +29,20 @@
   "scripts": {
     "test:lint": "standard --verbose | snazzy",
     "test": "npm-run-all test:*",
-    "build:node": "rm -rf lib && babel src -d lib --no-comments",
-    "build:umd": "rm -rf jumpsuit.js && browserify lib/index.js -s jumpsuit -tg uglifyify -o jumpsuit.js",
-    "watch": "npm run build:node -- -w -s",
-    "docs:clean": "rm -r -f _book",
-    "docs:prepare": "npm run docs:clean && gitbook install",
+    "build": "rm -rf lib && babel src -d lib --no-comments",
+    "watch": "npm run build -- -w -s",
+    "docs:prepare": "rm -r -f docs && gitbook install",
     "docs:watch": "npm run docs:prepare && gitbook serve",
-    "docs:build": "npm run docs:prepare && gitbook build docs",
-    "docs:publish": "npm run docs:clean && npm run docs:build && cp CNAME _book && cd _book && git init && git config user.email \"$GITHUB_USER@example.com\" && git config user.name 'Travis CI' && git commit --allow-empty -m 'Update Docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push https://$GITHUB_USER:$GITHUB_TOKEN@github.com/jumpsuit/jumpsuit.git gh-pages --force",
-    "docs": "npm run docs:build",
-    "prepublish": "npm-run-all build:*"
+    "docs:build": "npm run docs:prepare && gitbook build . docs",
+    "docs": "npm run docs:build && cp CNAME docs/CNAME",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "axios": "0.14.0",
     "gitbook-cli": "^2.3.0",
-    "jumpstate": "^1.0.7",
+    "jumpstate": "^2.1.0",
+    "pouchdb-browser": "^6.1.1",
     "query-string": "4.2.3",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
     "react-redux": "^4.0.0",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.5",
@@ -54,6 +50,10 @@
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",
@@ -63,6 +63,8 @@
     "babel-preset-stage-2": "6.13.0",
     "browserify": "13.1.0",
     "npm-run-all": "3.1.0",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
     "snazzy": "5.0.0",
     "standard": "8.0.0",
     "uglifyify": "3.0.3"

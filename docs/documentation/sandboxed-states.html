@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="examples.html" />
+    <link rel="next" href="hot-state-reloading.html" />
     
     
     <link rel="prev" href="hooks.html" />
@@ -186,7 +186,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="examples.html">
+        <li class="chapter " data-level="1.4" data-path="hot-state-reloading.html">
+            
+                <a href="hot-state-reloading.html">
+            
+                    
+                    Hot State Reloading (HSR)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="examples.html">
             
                 <a href="examples.html">
             
@@ -199,7 +212,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="api.html">
+        <li class="chapter " data-level="1.6" data-path="api.html">
             
                 <a href="api.html">
             
@@ -212,7 +225,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="faq.html">
+        <li class="chapter " data-level="1.7" data-path="faq.html">
             
                 <a href="faq.html">
             
@@ -225,7 +238,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="changelog.html">
+        <li class="chapter " data-level="1.8" data-path="changelog.html">
             
                 <a href="changelog.html">
             
@@ -238,7 +251,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" >
+        <li class="chapter " data-level="1.9" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpstate/">
             
@@ -251,7 +264,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" >
+        <li class="chapter " data-level="1.10" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpsuit/">
             
@@ -264,7 +277,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" >
+        <li class="chapter " data-level="1.11" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpsuit/issues">
             
@@ -277,7 +290,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" >
+        <li class="chapter " data-level="1.12" >
             
                 <a target="_blank" href="https://jumpsuit-slack.herokuapp.com/">
             
@@ -336,7 +349,73 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="sandboxed-states">Sandboxed States</h1>
-<p>Docs are coming soon!</p>
+<p>Consider the following 2 states:</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> State <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+
+<span class="token keyword">const</span> counterState <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  initial<span class="token punctuation">:</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  increment <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  decrement <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// somewhere in another state...</span>
+
+<span class="token keyword">const</span> threatLevelState <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  initial<span class="token punctuation">:</span> <span class="token punctuation">{</span> level<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  increment <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  decrement <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>We may have just created an unwanted side-effect by colliding on our action names! This means that calling <code>Actions.increment()</code> would trigger both <code>increment</code> actions on both of these states that have nothing in common! Not cool.</p>
+<p>A dirty fix would be to prefix each action name like so: <code>counter_increment</code>, <code>threatLevel_increment</code>. But, this gets annoying and unmanageable really quick.</p>
+<p>Sandboxed States solves this problem with some clever name-spacing :)</p>
+<pre class="language-"><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> State<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
+
+<span class="token keyword">const</span> counterState <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token string">&apos;counter&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  initial<span class="token punctuation">:</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  increment <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  decrement <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// somewhere in another state...</span>
+
+<span class="token keyword">const</span> threatLevelState <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token string">&apos;threatLevel&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  initial<span class="token punctuation">:</span> <span class="token punctuation">{</span> level<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  increment <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  decrement <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+Actions<span class="token punctuation">.</span>counter<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+Actions<span class="token punctuation">.</span>threatLevel<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// or</span>
+counterState<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+threatLevel<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Amazing!  We just <em>sandboxed</em> our states! Now their actions are isolated from each other and won&apos;t collide on actions like <code>Actions.increment()</code></p>
+<h3 id="using-sandboxed-states">Using Sandboxed States</h3>
+<p>As you might have seen in the above example, sandboxed states get their own action list located at <code>Actions[sandboxName]</code>.  This keeps in line with easily being able to access all of the available actions in your app from one place.</p>
+<p>So, to call the <code>increment</code> action on a sandboxed state called <code>myCounter</code>, you could do one of the following:</p>
+<ul>
+<li>Call it via the global Actions object: <code>Actions.myCounter.increment()</code></li>
+<li>Call it via the reducer itself: <code>myCounter.increment()</code></li>
+</ul>
+<p>Sandboxed states are awesome, and help immensely when organizing your state and associated actions :) </p>
 
                                 
                                 </section>
@@ -369,7 +448,7 @@
                 </a>
                 
                 
-                <a href="examples.html" class="navigation navigation-next " aria-label="Next page: Examples">
+                <a href="hot-state-reloading.html" class="navigation navigation-next " aria-label="Next page: Hot State Reloading (HSR)">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -380,7 +459,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Sandboxed States","level":"1.3.4","depth":2,"next":{"title":"Examples","level":"1.4","depth":1,"path":"documentation/examples.md","ref":"documentation/examples.md","articles":[]},"previous":{"title":"Hooks","level":"1.3.3","depth":2,"path":"documentation/hooks.md","ref":"documentation/hooks.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/sandboxed-states.md","mtime":"2016-11-16T20:51:04.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-24T03:33:26.565Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Sandboxed States","level":"1.3.4","depth":2,"next":{"title":"Hot State Reloading (HSR)","level":"1.4","depth":1,"path":"documentation/hot-state-reloading.md","ref":"documentation/hot-state-reloading.md","articles":[]},"previous":{"title":"Hooks","level":"1.3.3","depth":2,"path":"documentation/hooks.md","ref":"documentation/hooks.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/sandboxed-states.md","mtime":"2017-01-25T22:03:59.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-25T22:47:18.708Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -7,6 +7,7 @@
   - [Effects](/documentation/effects.md)
   - [Hooks](/documentation/hooks.md)
   - [Sandboxed States](/documentation/sandboxed-states.md)
+- [Hot State Reloading (HSR)](/documentation/hot-state-reloading.md)
 - [Examples](/documentation/examples.md)
 - [API](/documentation/api.md)
 - [FAQ](/documentation/faq.md)

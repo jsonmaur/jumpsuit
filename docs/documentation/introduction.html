@@ -186,7 +186,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="examples.html">
+        <li class="chapter " data-level="1.4" data-path="hot-state-reloading.html">
+            
+                <a href="hot-state-reloading.html">
+            
+                    
+                    Hot State Reloading (HSR)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="examples.html">
             
                 <a href="examples.html">
             
@@ -199,7 +212,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="api.html">
+        <li class="chapter " data-level="1.6" data-path="api.html">
             
                 <a href="api.html">
             
@@ -212,7 +225,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="faq.html">
+        <li class="chapter " data-level="1.7" data-path="faq.html">
             
                 <a href="faq.html">
             
@@ -225,7 +238,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="changelog.html">
+        <li class="chapter " data-level="1.8" data-path="changelog.html">
             
                 <a href="changelog.html">
             
@@ -238,7 +251,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" >
+        <li class="chapter " data-level="1.9" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpstate/">
             
@@ -251,7 +264,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" >
+        <li class="chapter " data-level="1.10" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpsuit/">
             
@@ -264,7 +277,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" >
+        <li class="chapter " data-level="1.11" >
             
                 <a target="_blank" href="https://github.com/jumpsuit/jumpsuit/issues">
             
@@ -277,7 +290,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" >
+        <li class="chapter " data-level="1.12" >
             
                 <a target="_blank" href="https://jumpsuit-slack.herokuapp.com/">
             
@@ -336,25 +349,19 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="what-is-jumpsuit">What is Jumpsuit?</h1>
-<p>Simply put, Jumpsuit is <a href="https://facebook.github.io/react/" target="_blank">React</a> framework.</p>
-<p>Traditionally, React doesn&apos;t include <em>everything</em> one might need to build a real-world application. After all, it&apos;s a <em>library</em> for building amazing UI interfaces. Out of the gate, you&apos;re going to need more than a few essentials to build a full-fledged application. A few core pieces are:</p>
+<p>Simply put, Jumpsuit is a <a href="https://facebook.github.io/react/" target="_blank">React</a> framework.</p>
+<p>React itself doesn&apos;t include <em>everything</em> you&apos;ll need to build a real-world application. After all, it&apos;s a <em>library</em> for building amazing UI interfaces. Out of the gate, you&apos;re going to need more than a few essentials to build a full-fledged app and Jumpsuit puts these necessary features at your fingertips with a few simple imports and methods:</p>
 <ul>
 <li>State Management</li>
 <li>Routing</li>
-<li>Associated Boilerplate for &quot;hooking up&quot; the two things above</li>
+<li>Associated Boilerplate for &quot;hooking up&quot; everything above</li>
 </ul>
-<p>Jumpsuit puts this core at your command via a few simple imports and methods. In fact, Jumpsuit even comes with it&apos;s own CLI to get you started as quickly as possible. This optional CLI includes things like:</p>
+<p>Other useful features you&apos;d expect from a framework are also included and supported in just about any build system</p>
 <ul>
+<li>Redux Dev Tools Integration</li>
 <li><a href="https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90#.jgbssex2z" target="_blank">Hot State Reloading</a></li>
-<li>Dev and Production Builds</li>
-<li>Getting Started Templates</li>
-<li>Integrated Build System (ES6, Bundler, etc.)</li>
 </ul>
-<p>Obviously you are free to use Jumpsuit with any build system that supports React :)</p>
-<h2 id="but-why-another-framework">But, Why Another Framework?</h2>
-<p>These days, Javascript fatigue is a real thing. With everything moving so quickly, the amount of libraries to choose from is growing every day. React has grown up as a build-your-own-framework community, and this typically works out well if you have the time to find the perfect setup that fits your needs, and continue to find the time to maintain that framework.</p>
-<p>Jumpsuit aims to rid you of fatigue-inducing decisions and give you a stable, integrated react platform. Based on the top standards from the industry, Jumpsuit provides the tools for a developer of any skill level to write great apps both small and large.</p>
-<p>For a more in-depth discussion on why we chose to build Jumpsuit, you can read <a href="https://medium.com/@tannerlinsley/jumpsuit-react-redux-made-simple-e3186ba1b077" target="_blank">our launch article</a>.</p>
+<p>For an in-depth discussion on why we chose to build Jumpsuit, you can read <a href="https://medium.com/@tannerlinsley/jumpsuit-react-redux-made-simple-e3186ba1b077" target="_blank">our original launch article</a>.</p>
 
                                 
                                 </section>
@@ -398,7 +405,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.2","depth":1,"next":{"title":"Getting Started","level":"1.3","depth":1,"path":"documentation/getting-started.md","ref":"documentation/getting-started.md","articles":[{"title":"Learn the Basics","level":"1.3.1","depth":2,"path":"documentation/learn-the-basics.md","ref":"documentation/learn-the-basics.md","articles":[]},{"title":"Effects","level":"1.3.2","depth":2,"path":"documentation/effects.md","ref":"documentation/effects.md","articles":[]},{"title":"Hooks","level":"1.3.3","depth":2,"path":"documentation/hooks.md","ref":"documentation/hooks.md","articles":[]},{"title":"Sandboxed States","level":"1.3.4","depth":2,"path":"documentation/sandboxed-states.md","ref":"documentation/sandboxed-states.md","articles":[]}]},"previous":{"title":"Read Me","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/introduction.md","mtime":"2016-11-10T05:35:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-24T03:33:26.565Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.2","depth":1,"next":{"title":"Getting Started","level":"1.3","depth":1,"path":"documentation/getting-started.md","ref":"documentation/getting-started.md","articles":[{"title":"Learn the Basics","level":"1.3.1","depth":2,"path":"documentation/learn-the-basics.md","ref":"documentation/learn-the-basics.md","articles":[]},{"title":"Effects","level":"1.3.2","depth":2,"path":"documentation/effects.md","ref":"documentation/effects.md","articles":[]},{"title":"Hooks","level":"1.3.3","depth":2,"path":"documentation/hooks.md","ref":"documentation/hooks.md","articles":[]},{"title":"Sandboxed States","level":"1.3.4","depth":2,"path":"documentation/sandboxed-states.md","ref":"documentation/sandboxed-states.md","articles":[]}]},"previous":{"title":"Read Me","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/introduction.md","mtime":"2017-01-25T21:10:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-25T22:47:18.708Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

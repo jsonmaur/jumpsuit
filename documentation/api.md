@@ -47,14 +47,12 @@
   })
   ```
 
-### State
+## Global States
 
-Creating a state is easy. Pass `State()` an object with your `initial` state object and some actions.
-This returns a reducer that should then be passed into your render function's state object.
-
+Creating a global state is easy, and in return you get a reducer that is usable with redux right out of the box.
 
 ```javascript
-import { State, Actions } from 'jumpsuit'
+import { State, Actions } from 'jumpstate'
 
 // Use `State` to make a new global state
 const counterReducer = State({
@@ -69,19 +67,19 @@ const counterReducer = State({
   },
 })
 
-// Now you can use the reducer it returned in your state setup
-const states = {
+// Now you can use the reducer it returned in your redux setup
+const store = createStore({
   counter: counterReducer
-}
+})
 
-// Call global actions using jumpsuit's `Actions` registry
+// And call global actions using jumpstate's `Actions` registry
 Actions.increment()
 ```
 
-### State Actions
+## State Actions
 When you create a state, you assign action functions that can change that state in some way. When called, each action received the current `state`, and the `payload` that was passed with the call.
 
-It's important to not mutate the current state in these actions, and that you return how the state has changed.
+It's important to maintain immutability here, and not mutate the current state in these actions. Doing so will meddle with debugging, time-travel, and the underlying redux instance.
 
 ```javascript
 increment (state, payload) {
@@ -93,17 +91,17 @@ increment (state, payload) {
 
 In the example above, we created a new state with our updated count. Win!
 
-### Effects
+## Effects
 Effects, at their core, are asynchronous actions. They build on the concepts of [thunks](https://github.com/gaearon/redux-thunk) and [sagas](https://github.com/yelouafi/redux-saga) **but are much easier to understand and use**. Unlike thunks, Effects have their own redux actions, and their callback are executed **because** of those actions. You also gain all of the benefits of a side-effects model, without having to deal with the convoluted api of redux-saga.
 
 To create an effect:
 ```javascript
-import { Effect, Actions } from 'jumpsuit'
+import { Effect, Actions } from 'jumpstate'
 
 const postFetchEffect = Effect('postsFetch', (payload) => {
   // You can do anything here, but async actions are a great use case:
   Actions.showLoading(true)
-  Axios.get('http://mysite.com/posts')
+  Axio.get('http://mysite.com/posts')
     .then(Actions.postsFetchSuccess)
     .catch(Actions.postsFetchError)
     .finally(() => Actions.showLoading(false))
@@ -115,38 +113,44 @@ Actions.postsFetch()
 postFetchEffect()
 ```
 
-### Hooks
+## Hooks
 A simple hook system that lets you monitor your state for actions or conditions and do just about anything you want.
 
-To create a global effect:
+To create a hook:
 ```javascript
-import { Hook } from 'jumpsuit'
+import { Hook } from 'jumpstate'
 
 // You can hook into any actions, even ones from external libraries!
-const myHook = Hook((action, getState) => {
+const formLoadedHook = Hook((action, getState) => {
   if (action.type === 'redux-form/INITIALIZE') {
     console.log('A Redux-Form was just initialized with this payload', payload)
   }
 })
 
-// Load google analytics if it is not found
-const analyticsHook = Hook((action, getState) => {
-  GoogleAnalytics('send', 'page', payload.pathname)
+// Load google analytics if it is not yet loaded
+const analyticsLoadedHook = Hook((action, getState) => {
+  if (!getState().analytics.loaded)
+  Actions.analytics.load()
 })
+
+// Cancel a hook:
+formLoadedHook.cancel()
+analyticsLoadedHook.cancel()
 ```
 
-### Actions
-All global actions (including effects) are available via the `Actions` object.
+## Actions
+All actions (including effects) are available via the `Actions` object.
 ```javascript
 Actions.increment()
+Actions.mySandbox.increment()
 Actions.myEffect()
 ```
 
-### Sandboxed States
-Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via their reducer methods. This method returns a reducer that should be passed into your render function's state object.
+## Sandboxed States
+Sandboxed states are namespaced and isolated from global events. Their state can only be modified by calling actions via `Actions.prefixName.actionName()` or directly via their reducer methods. They also return a reducer that is redux-compatible out of the box.
 
 ```javascript
-import { State } from 'jumpsuit'
+import { State, Actions } from 'jumpstate'
 
 // Create a sandboxed state by passing a name as the first parameter
 const SandboxedCounter = State('otherCounter', {
@@ -161,13 +165,28 @@ const SandboxedCounter = State('otherCounter', {
   },
 })
 
-// Now you can use the reducer it returned in your state
-const states = {
+// Now you can use the reducer it returned in your redux setup
+const store = createStore({
   sandboxedCounter: SandboxedCounter
-}
+})
 
-// Sandboxed actions are only accessible through the methods on it's reducer!
+// Sandboxed actions are accessible through the prefix on Actions or as methods on its reducer!
+Actions.otherCounter.increment()
+// or
 SandboxedCounter.increment()
+```
+
+
+### Removing/Cancelling Effects and Hooks
+If you know you are done with an effect or hook and want to free up some memory, you can cancel them:
+```javascript
+// Effects
+const myEffect = Effect(...)
+myEffect.cancel()
+
+// Hooks
+const myHook = Hook(...)
+myHook.cancel()
 ```
 
 ### Render <em>(state, component [, options])</em>
@@ -210,6 +229,38 @@ SandboxedCounter.increment()
 
   Render(state, <App/>)
   ```
+
+### CombineState
+Used to combine a state object into a reducer that jumpsuit can use to create a store. Usually this method isn't needed, but can become useful in very advanced setups.
+Example:
+```javascript
+import { CombineState } from 'jumpsuit'
+const reducer = CombineState({
+  counter: counterState
+})
+```
+
+### CreateStore
+Used to create an underlying redux store for jumpsuit to use.
+Example:
+```javascript
+import { CreateStore } from 'jumpsuit'
+const store = CreateStore(reducer, initialState, {
+  middleware: [],
+  enhancers: [],
+  history: undefined // Used to override the browser history instance to use when composing react-router-redux into the store
+})
+```
+
+### ConnectStore
+Used to create a connected component from a store and a root component. This also does a lot of other things that would normally take forever to set up in a traditional redux environment.
+Example:
+```javascript
+import { ConnectStore } from 'jumpsuit'
+const ConnectedApp = ConnectStore(store, <App />)
+// In this case, the state, reducer and store are already connected to the root component, so you only need to pass the component to be rendered.
+Render(<ConnectedApp />)
+```
 
 ### Router
 - Jumpsuit's built-in router
@@ -324,4 +375,40 @@ Goto({
   hash: 'hashtastic'
 })
 location === 'https://mysite.com/users?search=otherfriend#hashtastic'
+```
+
+### Rerender
+Call this methods to trigger a hot-state-reload of the app when needed
+Example:
+```javascript
+import { Rerender } from 'jumpsuit'
+if (module.hot) {
+  module.hot.accept('./app', () => {
+    Rerender()
+  })
+}
+```
+
+### HistoryMode
+Use this method to set the History mode to something other than `browser`.
+Available options are:
+- `browser`
+- `hash`
+- `memory`
+```javascript
+import { Render, HistoryMode } from 'jumpsuit'
+HistoryMode('hash')
+Render(state, <App />)
+```
+
+### devToolsConfig
+The config object used by redux dev tools. Update it as necessary before rendering your app.
+Example:
+```javascript
+import { Render, devToolsConfig } from 'jumpsuit'
+Object.assign(devToolsConfig, {
+  maxAge: 20,
+  shouldCatchErrors: false
+})
+Render(state, <App />)
 ```

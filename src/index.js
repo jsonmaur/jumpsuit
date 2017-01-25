@@ -1,3 +1,26 @@
+// Core
+import Component from './component'
+import CombineState from './combineState'
+import CreateStore, { store, devToolsConfig } from './createStore'
+import ConnectStore from './connectStore'
+import Render from './render'
+import { Rerender } from './hsr'
+import Router from './router'
+import Goto from './goto'
+import HistoryMode from './historyMode'
+
+// Jumpstate
+import {
+  State,
+  Effect,
+  Hook,
+  Actions,
+  StateDefaults,
+  getState,
+  dispatch
+} from 'jumpstate'
+
+// React Router
 import {
   Route,
   IndexRoute,
@@ -7,38 +30,36 @@ import {
   IndexLink
 } from 'react-router'
 
-import Component from './component'
-import Render, { Router, syncedHistory } from './render'
-import { State, Effect, Hook, Actions, StateDefaults, getState, dispatch } from 'jumpstate'
-import Goto from './routing'
-import { Middleware, Enhancer } from './reducer'
+//
 
 module.exports = {
   /* Core */
-  Render,
   Component,
+  CombineState,
+  CreateStore,
+  ConnectStore,
+  Render,
+  Rerender,
+  HistoryMode,
+  Router,
+  store,
+  devToolsConfig,
+
+  /* Jumpstate */
   State,
   Effect,
   Hook,
   Actions,
+  StateDefaults,
+  getState,
+  dispatch,
 
   /* React Router */
-  Router,
   Route,
   IndexRoute,
   Redirect,
   IndexRedirect,
   Link,
   IndexLink,
-  Goto,
-  syncedHistory,
-
-  /* Redux */
-  Middleware,
-  Enhancer,
-  getState,
-  dispatch,
-
-  /* Other */
-  StateDefaults
+  Goto
 }

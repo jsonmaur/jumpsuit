@@ -224,4 +224,4 @@ Render(globalState, <App />)
 
 Victory! As you can see, it's quick and painless to be productive with Jumpsuit. This is only the beginning, too!
 
-If you're ready to harness the full power of Jumpsuit, you should move on to one of our more sophisticated [examples](/docs/examples.md). Great work!
+Are you curious yet how asynchronous actions work? It's time take a look at [Effects](/docs/effects.md)!
