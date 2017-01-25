@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://jump.suitstack.com"><img src="/assets/banner-skinny.png?raw=true" alt="Jumpsuit Banner" width="100%" /></a>
+  <a href="https://jumpsuit.js.org"><img src="/assets/banner-skinny.png?raw=true" alt="Jumpsuit Banner" width="100%" /></a>
   <br />
   <br />
 </div>
@@ -18,17 +18,17 @@ Jumpsuit is a powerful and efficient Javascript framework that helps you build g
 - [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
 
 ## Documentation
-- [Introduction](https://jump.suitstack.com/docs/introduction.html)
-- [Getting Started](https://jump.suitstack.com/docs/getting-started.html)
-  - [Learn the Basics](https://jump.suitstack.com/docs/learn-the-basics.html)
-  - [Effects](https://jump.suitstack.com/docs/effects.html)
-  - [Hooks](https://jump.suitstack.com/docs/hooks.html)
-  - [Sandboxed States](https://jump.suitstack.com/docs/sandboxed-states.html)
-- [Tutorial](https://jump.suitstack.com/docs/tutorial.html)
-- [Examples](https://jump.suitstack.com/docs/examples.html)
-- [API](https://jump.suitstack.com/docs/api.html)
-- [FAQ](https://jump.suitstack.com/docs/faq.html)
-- [Changelog](https://jump.suitstack.com/docs/changelog.html)
+- [Introduction](https://jumpsuit.js.org/docs/introduction.html)
+- [Getting Started](https://jumpsuit.js.org/docs/getting-started.html)
+  - [Learn the Basics](https://jumpsuit.js.org/docs/learn-the-basics.html)
+  - [Effects](https://jumpsuit.js.org/docs/effects.html)
+  - [Hooks](https://jumpsuit.js.org/docs/hooks.html)
+  - [Sandboxed States](https://jumpsuit.js.org/docs/sandboxed-states.html)
+- [Tutorial](https://jumpsuit.js.org/docs/tutorial.html)
+- [Examples](https://jumpsuit.js.org/docs/examples.html)
+- [API](https://jumpsuit.js.org/docs/api.html)
+- [FAQ](https://jumpsuit.js.org/docs/faq.html)
+- [Changelog](https://jumpsuit.js.org/docs/changelog.html)
 
 ## Join us on Slack!
 - [Join Here](https://jumpsuit-slack.herokuapp.com/)
@@ -92,7 +92,7 @@ Using Jumpsuit in your project? Show it off!
 [![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)](https://github.com/jumpsuit/jumpsuit)
 ```
 
-## [Tutorial](https://jump.suitstack.com/docs/tutorial.html)
+## [Tutorial](https://jumpsuit.js.org/docs/tutorial.html)
 
 ## Examples
 
