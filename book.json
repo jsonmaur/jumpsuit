@@ -1,10 +1,11 @@
 {
   "gitbook": ">=3.2.1",
   "title": "Jumpsuit",
+  "root": "documentation/",
   "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
   "pluginsConfig": {
     "edit-link": {
-      "base": "https://github.com/jumpsuit/jumpsuit/tree/master",
+      "base": "https://github.com/jumpsuit/jumpsuit/tree/master/documentation",
       "label": "Edit This Page"
     },
     "github": {

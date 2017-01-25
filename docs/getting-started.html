@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Hot State Reloading (HSR) · Jumpsuit</title>
+        <title>Getting Started · Jumpsuit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -12,20 +12,20 @@
         
         
     
-    <link rel="stylesheet" href="../gitbook/style.css">
+    <link rel="stylesheet" href="gitbook/style.css">
 
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
                 
             
         
@@ -53,14 +53,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="examples.html" />
+    <link rel="next" href="learn-the-basics.html" />
     
     
-    <link rel="prev" href="sandboxed-states.html" />
+    <link rel="prev" href="introduction.html" />
     
 
     </head>
@@ -89,9 +89,9 @@
         
         
     
-        <li class="chapter " data-level="1.1" data-path="../">
+        <li class="chapter " data-level="1.1" data-path="./">
             
-                <a href="../">
+                <a href="./">
             
                     
                     Read Me
@@ -115,7 +115,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="getting-started.html">
+        <li class="chapter active" data-level="1.3" data-path="getting-started.html">
             
                 <a href="getting-started.html">
             
@@ -186,7 +186,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="hot-state-reloading.html">
+        <li class="chapter " data-level="1.4" data-path="hot-state-reloading.html">
             
                 <a href="hot-state-reloading.html">
             
@@ -333,7 +333,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Hot State Reloading (HSR)</a>
+        <a href="." >Getting Started</a>
     </h1>
 </div>
 
@@ -348,24 +348,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="hot-state-reloading-hsr">Hot State Reloading (HSR)</h1>
-<p>Jumpsuit ships with a lightweight version of hot module reloading and is super easy to setup.</p>
-<p>In contrast to traditional hot module reloading, Jumpsuit efficiently saves your state and <strong>refreshes</strong> your entire app, then restores the previously saved state.</p>
-<p>In the example below, we are using a brand new install of Create-React-App!</p>
-<pre class="language-"><code class="lang-javascript"><span class="token comment" spellcheck="true">// Import the HSR rerenderer from Jumpsuit</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> Rerender <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
-
-<span class="token comment" spellcheck="true">// Import your app</span>
-<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">&apos;./App&apos;</span>
-
-<span class="token comment" spellcheck="true">// For webpack</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>module<span class="token punctuation">.</span>hot<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  module<span class="token punctuation">.</span>hot<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token string">&apos;./App&apos;</span><span class="token punctuation">,</span> Rerender<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// For other build systems you must be able to subscribe to file changes to trigger the Rerender. We will continue to post recipes here for those build systems as we see them.</span>
+                                <h1 id="how-to-install-jumpsuit">How to Install Jumpsuit</h1>
+<p>To install Jumpsuit on an existing project, run:</p>
+<pre class="language-"><code class="lang-bash">$ npm <span class="token function">install</span> jumpsuit --save
 </code></pre>
-<p>Although it may not appear as smooth as traditional HMR, it is very reliable and <strong>much</strong> easier to set up. For anyone wanting support for traditional HMR, file an issue and we can discuss it!</p>
+<p>Once you have a project with <code>jumpsuit</code> installed, you&apos;re ready to build an app!</p>
 
                                 
                                 </section>
@@ -393,12 +380,12 @@
 
             
                 
-                <a href="sandboxed-states.html" class="navigation navigation-prev " aria-label="Previous page: Sandboxed States">
+                <a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page: Introduction">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="examples.html" class="navigation navigation-next " aria-label="Next page: Examples">
+                <a href="learn-the-basics.html" class="navigation navigation-next " aria-label="Next page: Learn the Basics">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -409,21 +396,21 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Hot State Reloading (HSR)","level":"1.4","depth":1,"next":{"title":"Examples","level":"1.5","depth":1,"path":"documentation/examples.md","ref":"documentation/examples.md","articles":[]},"previous":{"title":"Sandboxed States","level":"1.3.4","depth":2,"path":"documentation/sandboxed-states.md","ref":"documentation/sandboxed-states.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"documentation/hot-state-reloading.md","mtime":"2017-01-25T22:50:40.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-25T22:52:28.133Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Getting Started","level":"1.3","depth":1,"next":{"title":"Learn the Basics","level":"1.3.1","depth":2,"path":"learn-the-basics.md","ref":"learn-the-basics.md","articles":[]},"previous":{"title":"Introduction","level":"1.2","depth":1,"path":"introduction.md","ref":"introduction.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"root":"documentation/","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master/documentation"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"getting-started.md","mtime":"2017-01-25T22:50:40.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-25T23:03:12.971Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
 
         
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
         
     
         
@@ -431,31 +418,31 @@
         
     
         
-        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        <script src="gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
         
     
 

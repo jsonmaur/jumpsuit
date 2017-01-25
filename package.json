@@ -31,10 +31,9 @@
     "test": "npm-run-all test:*",
     "build": "rm -rf lib && babel src -d lib --no-comments",
     "watch": "npm run build -- -w -s",
-    "docs:prepare": "rm -r -f docs && gitbook install",
+    "docs:prepare": "rm -r -f docs && gitbook install && cp README.md documentation/README.md",
     "docs:watch": "npm run docs:prepare && gitbook serve",
-    "docs:build": "npm run docs:prepare && gitbook build . docs",
-    "docs": "npm run docs:build && cp CNAME docs/CNAME",
+    "docs": "npm run docs:prepare && gitbook build . docs && cp CNAME docs/CNAME",
     "prepublish": "npm run build"
   },
   "dependencies": {
