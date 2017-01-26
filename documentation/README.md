@@ -9,12 +9,10 @@
 Jumpsuit is a powerful and efficient Javascript framework that helps you build great apps. It is **the fastest way** to write scalable React applications with the least overhead.
 
 - Minimalist API
-- Components by React
 - State Management (powered by [Jumpstate](https://github.com/jumpsuit/jumpstate) and [Redux](http://redux.js.org))
   - Async Side-Effects
   - State/Action Hooks
 - Routing
-- CLI powered by [Browserify](http://browserify.org/)
 - [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
 
 ## Documentation
@@ -42,45 +40,34 @@ Jumpsuit is a powerful and efficient Javascript framework that helps you build g
   - Routing
   - Rendering
   - Associated Boilerplate for "hooking everything up"
-- **What does the CLI do for me?**
   - Hot State Reloading
-  - Dev and Production Builds
-  - Getting Started Templates
-  - Build System (ES6, Bundler, etc.)
-  - Obviously you are free to use Jumpsuit with any build system that supports React.
-- **Why another javascript framework?**
-  - Javascript fatigue is a real thing, especially in the React ecosystem where there are so many options to choose from. Jumpsuit builds on the golden standards from the industry to give you the best developer and user experience. We make it easy for a developer of any skill level to write great apps. For a more in-depth discussion, [read our launch article.](https://medium.com/@tannerlinsley/jumpsuit-react-redux-made-simple-e3186ba1b077)
 - **Can I use it with Create React App?**
-  - You bet! Jumpsuits CLI is optional. We have instructions below on using just the Jumpsuit framework :)
+  - You bet! We have an [example](https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter) you can see or clone!
 - **But I've already built an app! Can I still use Jumpsuit?**
   - Of course! Jumpsuit is not an all or nothing framework. You can easily start migrating small parts of your app to use Jumpsuit.
 - **I love the state management in Jumpsuit, so can I just use that?**
-  - You're probably looking for [Jumpstate](https://github.com/jumpsuit/jumpstate).  We packaged it separately for people just like you :)
+  - Of course! Head over to [Jumpstate](https://github.com/jumpsuit/jumpstate) to get started!
 
 
-## Install
-
-```bash
-$ npm install -g jumpsuit-cli
-```
-
-You can also use Jumpsuit with your own build system if you don't like ours. We'll only cry a little bit.
+## Install to an existin project
 
 ```bash
+$ yarn add jumpsuit
+# or
 $ npm install --save jumpsuit
 ```
 
-## Quick Start
+## Quick Start with Create-React-App
 ```bash
-# Create a new project
-$ jumpsuit new myProjectName
+# Create a new project with create-react-app
+$ create-react-app myProjectName
 $ cd myProjectName
 
-# Watch for changes
-$ jumpsuit watch
+# Install Jumpsuit
+$ yarn add jumpsuit
 
-# View your project
-$ open localhost:8000
+# Start the create-react-app dev server
+$ yarn start
 ```
 
 ## Badge
@@ -96,6 +83,7 @@ Using Jumpsuit in your project? Show it off!
 
 ## Examples
 
+- **[Create React App Starter](https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter)**
 - **[Todo List](https://github.com/jumpsuit/jumpsuit/tree/master/examples/todo/src)**
 - **[Advanced Counter](https://github.com/jumpsuit/jumpsuit/tree/master/examples/counter/src/app.js)**
 
@@ -103,6 +91,7 @@ Using Jumpsuit in your project? Show it off!
 Here is the simplest Counter Example we can show you :)
 ```javascript
 // Import Jumpsuit
+import React from 'react'
 import { Render, State, Actions, Component } from 'jumpsuit'
 
 
@@ -113,11 +102,11 @@ const CounterState = State({
   initial: { count: 0 },
 
   // Actions
-  increment (state, payload) {
-    return { count: ++state.count }
+  increment ({ count }, payload) {
+    return { count: count + 1 }
   },
-  decrement (state, payload) {
-    return { count: --state.count }
+  decrement ({ count }, payload) {
+    return { count: count - 1 }
   },
 })
 
@@ -147,9 +136,9 @@ Render(globalState, <Counter/>)
 
 ## Team
 
-[![Jason Maurer](https://avatars2.githubusercontent.com/u/911274?v=3&s=100)](https://github.com/jsonmaur) | [![Tanner Linsley](https://avatars1.githubusercontent.com/u/5580297?v=3&s=100)](https://github.com/tannerlinsley)
+[![Tanner Linsley](https://avatars1.githubusercontent.com/u/5580297?v=3&s=100)](https://github.com/tannerlinsley) | [![Jason Maurer](https://avatars2.githubusercontent.com/u/911274?v=3&s=100)](https://github.com/jsonmaur)
 :-:|:-:
-[Jason Maurer](https://github.com/jsonmaur) | [Tanner Linsley](https://github.com/tannerlinsley)
+[Tanner Linsley](https://github.com/tannerlinsley) | [Jason Maurer](https://github.com/jsonmaur)
 
 ## Used By
 
