@@ -352,69 +352,35 @@
   <br>
 </div>
 
-<p><a href="https://badge.fury.io/js/jumpsuit" target="_blank"><img src="https://badge.fury.io/js/jumpsuit.svg" alt="npm version"></a> <a href="https://travis-ci.org/jumpsuit/jumpsuit" target="_blank"><img src="https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master" alt="Build Status"></a> <a href=""><img src="https://img.shields.io/librariesio/github/jumpsuit/jumpsuit.svg" alt="Libraries.io for GitHub"></a> <a href="https://jumpsuit-slack.herokuapp.com/" target="_blank"><img src="https://img.shields.io/badge/slack-jumpsuit-blue.svg" alt="Jumpsuit on Slack"></a></p>
-<p>Jumpsuit is a powerful and efficient Javascript framework that helps you build great apps. It is <strong>the fastest way</strong> to write scalable React applications with the least overhead.</p>
-<ul>
-<li>Minimalist API</li>
-<li>State Management (powered by <a href="https://github.com/jumpsuit/jumpstate" target="_blank">Jumpstate</a> and <a href="http://redux.js.org" target="_blank">Redux</a>)<ul>
-<li>Async Side-Effects</li>
-<li>State/Action Hooks</li>
-</ul>
-</li>
-<li>Routing</li>
-<li><a href="https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90" target="_blank">HSR (Hot State Reloading)</a></li>
-</ul>
-<h2 id="documentation">Documentation</h2>
+<p><a href="https://badge.fury.io/js/jumpsuit" target="_blank"><img src="https://badge.fury.io/js/jumpsuit.svg" alt="npm version"></a> <a href="https://travis-ci.org/jumpsuit/jumpsuit" target="_blank"><img src="https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master" alt="Build Status"></a> <a href="https://jumpsuit-slack.herokuapp.com/" target="_blank"><img src="https://img.shields.io/badge/slack-jumpsuit-blue.svg" alt="Jumpsuit on Slack"></a></p>
+<p>Jumpsuit is a React framework for efficiently building powerful web applications.</p>
 <ul>
 <li><a href="https://jumpsuit.js.org/introduction.html" target="_blank">Introduction</a></li>
-<li><a href="https://jumpsuit.js.org/getting-started.html" target="_blank">Getting Started</a><ul>
+<li><a href="https://jumpsuit.js.org/getting-started.html" target="_blank">Getting Started</a></li>
 <li><a href="https://jumpsuit.js.org/learn-the-basics.html" target="_blank">Learn the Basics</a></li>
 <li><a href="https://jumpsuit.js.org/effects.html" target="_blank">Effects</a></li>
 <li><a href="https://jumpsuit.js.org/hooks.html" target="_blank">Hooks</a></li>
 <li><a href="https://jumpsuit.js.org/sandboxed-states.html" target="_blank">Sandboxed States</a></li>
-</ul>
-</li>
+<li><a href="https://jumpsuit.js.org/hot-state-reloading.md" target="_blank">Hot State Reloading (HSR)</a></li>
 <li><a href="https://jumpsuit.js.org/tutorial.html" target="_blank">Tutorial</a></li>
 <li><a href="https://jumpsuit.js.org/examples.html" target="_blank">Examples</a></li>
 <li><a href="https://jumpsuit.js.org/api.html" target="_blank">API</a></li>
 <li><a href="https://jumpsuit.js.org/faq.html" target="_blank">FAQ</a></li>
 <li><a href="https://jumpsuit.js.org/changelog.html" target="_blank">Changelog</a></li>
+<li><a href="https://github.com/jumpsuit/jumpstate" target="_blank">Jumpstate</a></li>
 </ul>
 <h2 id="join-us-on-slack">Join us on Slack!</h2>
 <ul>
 <li><a href="https://jumpsuit-slack.herokuapp.com/" target="_blank">Join Here</a></li>
 <li><a href="https://jumpsuit-js.slack.com/" target="_blank">Chat Here</a></li>
 </ul>
-<h2 id="quick-faq">Quick FAQ</h2>
-<ul>
-<li><strong>What does the Jumpsuit core include?</strong><ul>
-<li>Components</li>
-<li>State Management</li>
-<li>Routing</li>
-<li>Rendering</li>
-<li>Associated Boilerplate for &quot;hooking everything up&quot;</li>
-<li>Hot State Reloading</li>
-</ul>
-</li>
-<li><strong>Can I use it with Create React App?</strong><ul>
-<li>You bet! We have an <a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter" target="_blank">example</a> you can see or clone!</li>
-</ul>
-</li>
-<li><strong>But I&apos;ve already built an app! Can I still use Jumpsuit?</strong><ul>
-<li>Of course! Jumpsuit is not an all or nothing framework. You can easily start migrating small parts of your app to use Jumpsuit.</li>
-</ul>
-</li>
-<li><strong>I love the state management in Jumpsuit, so can I just use that?</strong><ul>
-<li>Of course! Head over to <a href="https://github.com/jumpsuit/jumpstate" target="_blank">Jumpstate</a> to get started!</li>
-</ul>
-</li>
-</ul>
-<h2 id="install-to-an-existin-project">Install to an existin project</h2>
+<h2 id="quick-start">Quick Start</h2>
+<h4 id="install-to-an-existing-project">Install to an existing project</h4>
 <pre class="language-"><code class="lang-bash">$ yarn add jumpsuit
 <span class="token comment" spellcheck="true"># or</span>
 $ npm <span class="token function">install</span> --save jumpsuit
 </code></pre>
-<h2 id="quick-start-with-create-react-app">Quick Start with Create-React-App</h2>
+<h4 id="using-create-react-app">Using Create-React-App</h4>
 <pre class="language-"><code class="lang-bash"><span class="token comment" spellcheck="true"># Create a new project with create-react-app</span>
 $ create-react-app myProjectName
 $ <span class="token function">cd</span> myProjectName
@@ -425,40 +391,30 @@ $ yarn add jumpsuit
 <span class="token comment" spellcheck="true"># Start the create-react-app dev server</span>
 $ yarn start
 </code></pre>
-<h2 id="badge">Badge</h2>
-<p>Using Jumpsuit in your project? Show it off!</p>
-<p><a href="https://github.com/jumpsuit/jumpsuit" target="_blank"><img src="https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg" alt="built with jumpsuit"></a></p>
-<pre class="language-"><code class="lang-markdown"><span class="token url">[![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)</span>](https://github.com/jumpsuit/jumpsuit)
-</code></pre>
-<h2 id="tutorial"><a href="https://jumpsuit.js.org/tutorial.html" target="_blank">Tutorial</a></h2>
-<h2 id="examples">Examples</h2>
-<ul>
-<li><strong><a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter" target="_blank">Create React App Starter</a></strong></li>
-<li><strong><a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/todo/src" target="_blank">Todo List</a></strong></li>
-<li><strong><a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/counter/src/app.js" target="_blank">Advanced Counter</a></strong></li>
-</ul>
-<h2 id="what-does-it-look-like">What does it look like?</h2>
-<p>Here is the simplest Counter Example we can show you :)</p>
+<h4 id="indexjs"><code>index.js</code></h4>
 <pre class="language-"><code class="lang-javascript"><span class="token comment" spellcheck="true">// Import Jumpsuit</span>
 <span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">&apos;react&apos;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Render<span class="token punctuation">,</span> State<span class="token punctuation">,</span> Actions<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;jumpsuit&apos;</span>
 
-
 <span class="token comment" spellcheck="true">// Create a state with some actions</span>
 <span class="token keyword">const</span> CounterState <span class="token operator">=</span> <span class="token function">State</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-
   <span class="token comment" spellcheck="true">// Initial State</span>
   initial<span class="token punctuation">:</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-
   <span class="token comment" spellcheck="true">// Actions</span>
-  increment <span class="token punctuation">(</span><span class="token punctuation">{</span> count <span class="token punctuation">}</span><span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  increment <span class="token punctuation">(</span><span class="token punctuation">{</span> count <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> count <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  decrement <span class="token punctuation">(</span><span class="token punctuation">{</span> count <span class="token punctuation">}</span><span class="token punctuation">,</span> payload<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  decrement <span class="token punctuation">(</span><span class="token punctuation">{</span> count <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">{</span> count<span class="token punctuation">:</span> count <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
+<span class="token comment" spellcheck="true">// Create an async action</span>
+<span class="token function">Effect</span><span class="token punctuation">(</span><span class="token string">&apos;incrementAsync&apos;</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    Actions<span class="token punctuation">.</span><span class="token function">incrementAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment" spellcheck="true">// Create a subscribed component</span>
 <span class="token keyword">const</span> Counter <span class="token operator">=</span> <span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -468,6 +424,8 @@ $ yarn start
         <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token punctuation">{</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>count <span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
         <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> Actions<span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>Increment<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
         <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> Actions<span class="token punctuation">.</span><span class="token function">decrement</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>Decrement<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>br <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> Actions<span class="token punctuation">.</span><span class="token function">incrementAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token operator">&gt;</span>Increment Async<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
       <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
     <span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
@@ -482,6 +440,40 @@ $ yarn start
 <span class="token comment" spellcheck="true">// Render your app!</span>
 <span class="token function">Render</span><span class="token punctuation">(</span>globalState<span class="token punctuation">,</span> <span class="token operator">&lt;</span>Counter<span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
 </code></pre>
+<h2 id="faq">FAQ</h2>
+<ul>
+<li><strong>What does the Jumpsuit core include?</strong><ul>
+<li>State Management powered by Jumpstate &amp; Redux</li>
+<li>Routing (React-Router)</li>
+<li>Rendering/Bootstrapping</li>
+<li>Hot State Reloading</li>
+</ul>
+</li>
+<li><strong>Can I use it with Create React App?</strong><ul>
+<li>You bet! We have an <a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter" target="_blank">example</a> you can view or drop right into your <code>src</code> directory!</li>
+</ul>
+</li>
+<li><strong>But I&apos;ve already built an app! Can I still use Jumpsuit?</strong><ul>
+<li>Of course! Jumpsuit is not an all or nothing framework and has many levels of buy-in for usefulness. You can easily migrating small parts of your app to use Jumpsuit using only the pieces you need.</li>
+</ul>
+</li>
+<li><strong>I love the state management in Jumpsuit, so can I just use that?</strong><ul>
+<li>Of course! Head over to <a href="https://github.com/jumpsuit/jumpstate" target="_blank">Jumpstate</a> to get started!</li>
+</ul>
+</li>
+</ul>
+<h2 id="badge">Badge</h2>
+<p>Using Jumpsuit in your project? Show it off!</p>
+<p><a href="https://github.com/jumpsuit/jumpsuit" target="_blank"><img src="https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg" alt="built with jumpsuit"></a></p>
+<pre class="language-"><code class="lang-markdown"><span class="token url">[![built with jumpsuit](https://img.shields.io/badge/built%20with-jumpsuit-3A54AD.svg)</span>](https://github.com/jumpsuit/jumpsuit)
+</code></pre>
+<h2 id="tutorial"><a href="https://jumpsuit.js.org/tutorial.html" target="_blank">Tutorial</a></h2>
+<h2 id="examples">Examples</h2>
+<ul>
+<li><strong><a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter" target="_blank">Create React App Starter</a></strong></li>
+<li><strong><a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/todo/src" target="_blank">Todo List</a></strong></li>
+<li><strong><a href="https://github.com/jumpsuit/jumpsuit/tree/master/examples/counter/src/app.js" target="_blank">Advanced Counter</a></strong></li>
+</ul>
 <h2 id="team">Team</h2>
 <table>
 <thead>
@@ -542,7 +534,7 @@ $ yarn start
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Read Me","level":"1.1","depth":1,"next":{"title":"Introduction","level":"1.2","depth":1,"path":"introduction.md","ref":"introduction.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"root":"documentation/","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master/documentation"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"README.md","mtime":"2017-01-26T05:22:33.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-26T05:22:35.350Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Read Me","level":"1.1","depth":1,"next":{"title":"Introduction","level":"1.2","depth":1,"path":"introduction.md","ref":"introduction.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"root":"documentation/","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/jumpsuit/jumpsuit/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/jumpsuit/jumpsuit/tree/master/documentation"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Jumpsuit","gitbook":">=3.2.1"},"file":{"path":"README.md","mtime":"2017-01-26T16:54:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-26T16:54:12.771Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,52 +4,30 @@
   <br />
 </div>
 
-[![npm version](https://badge.fury.io/js/jumpsuit.svg)](https://badge.fury.io/js/jumpsuit) [![Build Status](https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master)](https://travis-ci.org/jumpsuit/jumpsuit) [![Libraries.io for GitHub](https://img.shields.io/librariesio/github/jumpsuit/jumpsuit.svg)]() [![Jumpsuit on Slack](https://img.shields.io/badge/slack-jumpsuit-blue.svg)](https://jumpsuit-slack.herokuapp.com/)
+[![npm version](https://badge.fury.io/js/jumpsuit.svg)](https://badge.fury.io/js/jumpsuit) [![Build Status](https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master)](https://travis-ci.org/jumpsuit/jumpsuit) [![Jumpsuit on Slack](https://img.shields.io/badge/slack-jumpsuit-blue.svg)](https://jumpsuit-slack.herokuapp.com/)
 
-Jumpsuit is a powerful and efficient Javascript framework that helps you build great apps. It is **the fastest way** to write scalable React applications with the least overhead.
+Jumpsuit is a React framework for efficiently building powerful web applications.
 
-- Minimalist API
-- State Management (powered by [Jumpstate](https://github.com/jumpsuit/jumpstate) and [Redux](http://redux.js.org))
-  - Async Side-Effects
-  - State/Action Hooks
-- Routing
-- [HSR (Hot State Reloading)](https://medium.com/@tannerlinsley/introducing-hsr-the-hot-state-reloader-behind-jumpsuit-js-42498712ac90)
-
-## Documentation
 - [Introduction](https://jumpsuit.js.org/introduction.html)
 - [Getting Started](https://jumpsuit.js.org/getting-started.html)
-  - [Learn the Basics](https://jumpsuit.js.org/learn-the-basics.html)
-  - [Effects](https://jumpsuit.js.org/effects.html)
-  - [Hooks](https://jumpsuit.js.org/hooks.html)
-  - [Sandboxed States](https://jumpsuit.js.org/sandboxed-states.html)
+- [Learn the Basics](https://jumpsuit.js.org/learn-the-basics.html)
+- [Effects](https://jumpsuit.js.org/effects.html)
+- [Hooks](https://jumpsuit.js.org/hooks.html)
+- [Sandboxed States](https://jumpsuit.js.org/sandboxed-states.html)
+- [Hot State Reloading (HSR)](https://jumpsuit.js.org/hot-state-reloading.md)
 - [Tutorial](https://jumpsuit.js.org/tutorial.html)
 - [Examples](https://jumpsuit.js.org/examples.html)
 - [API](https://jumpsuit.js.org/api.html)
 - [FAQ](https://jumpsuit.js.org/faq.html)
 - [Changelog](https://jumpsuit.js.org/changelog.html)
+- [Jumpstate](https://github.com/jumpsuit/jumpstate)
 
 ## Join us on Slack!
 - [Join Here](https://jumpsuit-slack.herokuapp.com/)
 - [Chat Here](https://jumpsuit-js.slack.com/)
 
-## Quick FAQ
-
-- **What does the Jumpsuit core include?**
-  - Components
-  - State Management
-  - Routing
-  - Rendering
-  - Associated Boilerplate for "hooking everything up"
-  - Hot State Reloading
-- **Can I use it with Create React App?**
-  - You bet! We have an [example](https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter) you can see or clone!
-- **But I've already built an app! Can I still use Jumpsuit?**
-  - Of course! Jumpsuit is not an all or nothing framework. You can easily start migrating small parts of your app to use Jumpsuit.
-- **I love the state management in Jumpsuit, so can I just use that?**
-  - Of course! Head over to [Jumpstate](https://github.com/jumpsuit/jumpstate) to get started!
-
-
-## Install to an existin project
+## Quick Start
+#### Install to an existing project
 
 ```bash
 $ yarn add jumpsuit
@@ -57,7 +35,7 @@ $ yarn add jumpsuit
 $ npm install --save jumpsuit
 ```
 
-## Quick Start with Create-React-App
+#### Using Create-React-App
 ```bash
 # Create a new project with create-react-app
 $ create-react-app myProjectName
@@ -69,6 +47,70 @@ $ yarn add jumpsuit
 # Start the create-react-app dev server
 $ yarn start
 ```
+#### `index.js`
+```javascript
+// Import Jumpsuit
+import React from 'react'
+import { Render, State, Actions, Component } from 'jumpsuit'
+
+// Create a state with some actions
+const CounterState = State({
+  // Initial State
+  initial: { count: 0 },
+  // Actions
+  increment ({ count }) {
+    return { count: count + 1 }
+  },
+  decrement ({ count }) {
+    return { count: count - 1 }
+  },
+})
+
+// Create an async action
+Effect('incrementAsync' () => {
+  setTimeout(() => {
+    Actions.incrementAsync()
+  }), 1000)
+}
+
+// Create a subscribed component
+const Counter = Component({
+  render() {
+    return (
+      <div>
+        <h1>{ this.props.count }</h1>
+        <button onClick={ () => Actions.increment() }>Increment</button>
+        <button onClick={ () => Actions.decrement() }>Decrement</button>
+        <br />
+        <button onClick={ () => Actions.incrementAsync() }>Increment Async</button>
+      </div>
+    )
+  }
+}, (state) => ({
+  // Subscribe to the counter state (will be available via this.props.counter)
+  count: state.counter.count
+}))
+
+// Compose the global state
+const globalState = { counter: CounterState }
+
+// Render your app!
+Render(globalState, <Counter/>)
+```
+
+## FAQ
+
+- **What does the Jumpsuit core include?**
+  - State Management powered by Jumpstate & Redux
+  - Routing (React-Router)
+  - Rendering/Bootstrapping
+  - Hot State Reloading
+- **Can I use it with Create React App?**
+  - You bet! We have an [example](https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter) you can view or drop right into your `src` directory!
+- **But I've already built an app! Can I still use Jumpsuit?**
+  - Of course! Jumpsuit is not an all or nothing framework and has many levels of buy-in for usefulness. You can easily migrating small parts of your app to use Jumpsuit using only the pieces you need.
+- **I love the state management in Jumpsuit, so can I just use that?**
+  - Of course! Head over to [Jumpstate](https://github.com/jumpsuit/jumpstate) to get started!
 
 ## Badge
 
@@ -86,53 +128,6 @@ Using Jumpsuit in your project? Show it off!
 - **[Create React App Starter](https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter)**
 - **[Todo List](https://github.com/jumpsuit/jumpsuit/tree/master/examples/todo/src)**
 - **[Advanced Counter](https://github.com/jumpsuit/jumpsuit/tree/master/examples/counter/src/app.js)**
-
-## What does it look like?
-Here is the simplest Counter Example we can show you :)
-```javascript
-// Import Jumpsuit
-import React from 'react'
-import { Render, State, Actions, Component } from 'jumpsuit'
-
-
-// Create a state with some actions
-const CounterState = State({
-
-  // Initial State
-  initial: { count: 0 },
-
-  // Actions
-  increment ({ count }, payload) {
-    return { count: count + 1 }
-  },
-  decrement ({ count }, payload) {
-    return { count: count - 1 }
-  },
-})
-
-
-// Create a subscribed component
-const Counter = Component({
-  render() {
-    return (
-      <div>
-        <h1>{ this.props.count }</h1>
-        <button onClick={ () => Actions.increment() }>Increment</button>
-        <button onClick={ () => Actions.decrement() }>Decrement</button>
-      </div>
-    )
-  }
-}, (state) => ({
-  // Subscribe to the counter state (will be available via this.props.counter)
-  count: state.counter.count
-}))
-
-// Compose the global state
-const globalState = { counter: CounterState }
-
-// Render your app!
-Render(globalState, <Counter/>)
-```
 
 ## Team
 
