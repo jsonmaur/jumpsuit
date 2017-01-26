@@ -108,7 +108,7 @@ Render(globalState, <Counter/>)
 - **Can I use it with Create React App?**
   - You bet! We have an [example](https://github.com/jumpsuit/jumpsuit/tree/master/examples/create-react-app-starter) you can view or drop right into your `src` directory!
 - **But I've already built an app! Can I still use Jumpsuit?**
-  - Of course! Jumpsuit is not an all or nothing framework and has many levels of buy-in for usefulness. You can easily migrating small parts of your app to use Jumpsuit using only the pieces you need.
+  - Of course! Jumpsuit is not an all or nothing framework and has many levels of buy-in for usefulness. You can easily migrate small parts of your app to use Jumpsuit using only the pieces you need.
 - **I love the state management in Jumpsuit, so can I just use that?**
   - Of course! Head over to [Jumpstate](https://github.com/jumpsuit/jumpstate) to get started!
 
