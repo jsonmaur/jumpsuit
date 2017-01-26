@@ -40,7 +40,7 @@
   "dependencies": {
     "axios": "0.14.0",
     "gitbook-cli": "^2.3.0",
-    "jumpstate": "^2.1.0",
+    "jumpstate": "^2.1.1",
     "pouchdb-browser": "^6.1.1",
     "query-string": "4.2.3",
     "react-redux": "^4.0.0",
