@@ -27,7 +27,7 @@ export default function (store, base) {
       }),
       render () {
         return (
-          <div>
+          <div className='jumpsuit-root'>
             <Hsr>
               {base}
             </Hsr>
@@ -42,7 +42,11 @@ export default function (store, base) {
     <Provider
       store={store}
     >
-      {WrappedBaseComponent ? <WrappedBaseComponent /> : base}
+      {WrappedBaseComponent ? <WrappedBaseComponent /> : (
+        <div className='jumpsuit-root'>
+          {base}
+        </div>
+      )}
     </Provider>
   )
 }
