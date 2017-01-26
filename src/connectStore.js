@@ -12,7 +12,12 @@ export default function (store, base) {
     store = CreateStore(reducer)
   }
 
-  let WrappedBaseComponent
+  let WrappedBaseComponent = () => (
+    <div className='jumpsuit-root'>
+      {base}
+    </div>
+  )
+
   if (process.env.NODE_ENV !== 'production') {
     const Hsr = require('./hsr').default
 
@@ -39,14 +44,8 @@ export default function (store, base) {
   }
 
   return () => (
-    <Provider
-      store={store}
-    >
-      {WrappedBaseComponent ? <WrappedBaseComponent /> : (
-        <div className='jumpsuit-root'>
-          {base}
-        </div>
-      )}
+    <Provider store={store}>
+      <WrappedBaseComponent />
     </Provider>
   )
 }
