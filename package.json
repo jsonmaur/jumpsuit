@@ -38,8 +38,6 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "axios": "0.14.0",
-    "gitbook-cli": "^2.3.0",
     "jumpstate": "^2.1.1",
     "pouchdb-browser": "^6.1.1",
     "query-string": "4.2.3",
@@ -56,6 +54,7 @@
     "react-dom": "^15.0.0"
   },
   "devDependencies": {
+    "gitbook-cli": "^2.3.0",
     "babel-cli": "6.14.0",
     "babel-eslint": "6.1.2",
     "babel-preset-es2015": "6.14.0",

@@ -1,6 +1,5 @@
 import React from 'react'
 import query from 'query-string'
-// import axios from 'axios'
 import hsrPouch from './hsrPouch'
 import { store } from './createStore'
 
