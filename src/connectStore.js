@@ -12,8 +12,8 @@ export default function (store, base) {
     store = CreateStore(reducer)
   }
 
-  let WrappedBaseComponent = () => (
-    <div className='jumpsuit-root'>
+  let Root = () => (
+    <div id='jumpsuit-root'>
       {base}
     </div>
   )
@@ -26,13 +26,13 @@ export default function (store, base) {
       DevTools = () => <span />
     }
 
-    WrappedBaseComponent = React.createClass({
+    Root = React.createClass({
       getInitialState: () => ({
         ready: false
       }),
       render () {
         return (
-          <div className='jumpsuit-root'>
+          <div id='jumpsuit-root'>
             <Hsr>
               {base}
             </Hsr>
@@ -45,7 +45,7 @@ export default function (store, base) {
 
   return () => (
     <Provider store={store}>
-      <WrappedBaseComponent />
+      <Root />
     </Provider>
   )
 }
