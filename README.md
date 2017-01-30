@@ -69,7 +69,7 @@ const CounterState = State({
 // Create an async action
 Effect('incrementAsync' () => {
   setTimeout(() => {
-    Actions.incrementAsync()
+    Actions.increment()
   }), 1000)
 }
 
