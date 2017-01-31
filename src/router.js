@@ -5,11 +5,13 @@ import { Router } from 'react-router'
 import { GetHistory } from './historyMode'
 import { store } from './createStore'
 
-export let syncedHistory
+let syncedHistory
+
+export const getSyncedHistory = () => syncedHistory
 
 export default React.createClass({
   render () {
-    const { history, syncedHistory: preSyncedHistory } = this.props
+    const { history, syncedHistory: customSyncedHistory } = this.props
 
     let resolvedHistory
     if (history) {
@@ -18,7 +20,7 @@ export default React.createClass({
       resolvedHistory = GetHistory()
     }
 
-    syncedHistory = preSyncedHistory || syncHistoryWithStore(resolvedHistory, store)
+    syncedHistory = customSyncedHistory || syncHistoryWithStore(resolvedHistory, store)
 
     return (
       <Router history={syncedHistory}>

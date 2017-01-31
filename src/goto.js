@@ -1,8 +1,9 @@
-import { syncedHistory } from './router'
+import { getSyncedHistory } from './router'
 import { getState } from 'jumpstate'
 
 export default function Goto (params, append = false, shouldReplace = false) {
   const state = getState()
+  const syncedHistory = getSyncedHistory()
   const location = state.routing.locationBeforeTransitions
 
   // Utilize the the right push or replace action
