@@ -49,13 +49,3 @@ export default function (store, base) {
     </Provider>
   )
 }
-
-// export const Router = React.createClass({
-//   render () {
-//     return (
-//       <Router history={syncedHistory}>
-//         {this.props.children}
-//       </Router>
-//     )
-//   }
-// })

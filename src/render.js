@@ -8,9 +8,7 @@ export default function (...params) {
   const hasState = typeof params[0] === 'object' && typeof params[1] === 'object'
   const states = hasState && params[0]
   const userComponent = hasState ? params[1] : params[0]
-  const Comp = ConnectStore(hasState ? states : {
-    _: state => state || null
-  }, userComponent)
+  const Comp = hasState ? ConnectStore(states, userComponent) : userComponent
 
     // If we're in the dom, render to it
   global.document && render(
