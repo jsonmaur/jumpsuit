@@ -1,4 +1,4 @@
-import { syncedHistory } from './render'
+import { syncedHistory } from './router'
 import { getState } from 'jumpstate'
 
 export default function Goto (params, append = false, shouldReplace = false) {
