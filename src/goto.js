@@ -50,9 +50,9 @@ export default function Goto (params, append = false, shouldReplace = false) {
 }
 
 Goto.back = function (amount = -1) {
-  return syncedHistory.go(-(Math.abs(amount)))
+  return getSyncedHistory().go(-(Math.abs(amount)))
 }
 
 Goto.forward = function (amount = 1) {
-  return syncedHistory.go((Math.abs(amount)))
+  return getSyncedHistory().go((Math.abs(amount)))
 }
