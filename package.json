@@ -38,7 +38,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "jumpstate": "^2.1.1",
+    "jumpstate": "^2.2.0",
     "pouchdb-browser": "^6.1.1",
     "query-string": "4.2.3",
     "react-redux": "^4.0.0",

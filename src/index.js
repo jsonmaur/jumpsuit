@@ -15,6 +15,7 @@ import {
   Effect,
   Hook,
   Actions,
+  ActionCreators,
   StateDefaults,
   getState,
   dispatch
@@ -50,6 +51,7 @@ module.exports = {
   Effect,
   Hook,
   Actions,
+  ActionCreators,
   StateDefaults,
   getState,
   dispatch,
