@@ -3,29 +3,23 @@ import PouchDB from 'pouchdb-browser'
 
 const db = new PouchDB('jumpsuit_hsr')
 
-let ready = Promise.resolve(db)
-
 export default {
   save,
   restore
 }
 
 function save (ts, state) {
-  return ready
-    .then((res) => {
-      return db.put({
-        _id: String(ts),
-        state
-      })
-    })
+  return db.put({
+    _id: String(ts),
+    state: JSON.stringify(state)
+  })
 }
 
 function restore (ts) {
-  return ready
-    .then(() => db.get(ts))
+  return db.get(ts)
     .then(doc => {
       cleanDB()
-      return doc.state
+      return JSON.parse(doc.state)
     })
 }
 
@@ -33,7 +27,7 @@ function cleanDB () {
   return db.allDocs()
     .then((res) => {
       if (res.rows.length < 20) return Promise.resolve(db)
-      console.info('Compacting...')
+      console.info('Cleaning HSR Pouch history...')
       const docs = res.rows.map(d => {
         return {
           id: d.id,
@@ -47,7 +41,7 @@ function cleanDB () {
       return db.compact()
     })
     .then(() => {
-      console.info('Compacted.')
+      console.info('Cleaned.')
       return db
     })
 }
