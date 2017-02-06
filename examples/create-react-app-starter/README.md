@@ -7,8 +7,6 @@
   create-react-app my-app
   cd my-app/
   ```
-2. Copy these files to the `src` directory
-3. Start the server!
-  ```bash
-  npm start
-  ```
+1. Install jumpsuit `npm install jumpsuit --save`
+1. Copy these files to the `src` directory
+1. Start the server! `npm start`

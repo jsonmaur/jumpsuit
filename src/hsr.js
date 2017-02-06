@@ -25,7 +25,7 @@ export const Rerender = () => {
   const ts = Date.now()
   const state = getDevToolsState()
 
-  Promise.resolve(hsrAPI.save(ts, state))
+  return Promise.resolve(hsrAPI.save(ts, state))
     .then((res) => {
       const params = query.parse(location.search)
       params.hsr = ts
@@ -58,6 +58,7 @@ export default React.createClass({
           console.error(err)
         })
         .then((res) => {
+          console.log('ready')
           this.setState({ready: true})
         })
     } else {

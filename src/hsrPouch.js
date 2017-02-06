@@ -22,9 +22,7 @@ function save (ts, state) {
 
 function restore (ts) {
   return ready
-    .then((res) => {
-      return db.get(ts)
-    })
+    .then(() => db.get(ts))
     .then(doc => {
       ready = cleanDB()
       return doc.state
@@ -32,7 +30,7 @@ function restore (ts) {
 }
 
 function cleanDB () {
-  db.allDocs()
+  return db.allDocs()
     .then((res) => {
       const docs = res.rows.map(d => {
         return {
