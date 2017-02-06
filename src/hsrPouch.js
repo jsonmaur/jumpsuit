@@ -24,7 +24,7 @@ function restore (ts) {
   return ready
     .then(() => db.get(ts))
     .then(doc => {
-      ready = cleanDB()
+      cleanDB()
       return doc.state
     })
 }
