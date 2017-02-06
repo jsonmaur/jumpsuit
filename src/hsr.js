@@ -1,7 +1,8 @@
 import React from 'react'
 import query from 'query-string'
-import hsrPouch from './hsrPouch'
+import hsrAPI from './hsrPersistent'
 import { store } from './createStore'
+
 
 const setDevToolsState = state => {
   const { liftedStore } = store
@@ -19,25 +20,15 @@ const getDevToolsState = () => {
 
 const { location, history } = global
 
-export let hsrAPI = hsrPouch
-
 export const Rerender = () => {
   const ts = Date.now()
-  const state = getDevToolsState()
-
-  Promise.resolve(hsrAPI.save(ts, state))
-    .then((res) => {
-      const params = query.parse(location.search)
-      params.hsr = ts
-      location.search = query.stringify(params)
-    })
-    .catch((err) => console.error(err))
+  hsrAPI.save(ts, getDevToolsState())
+  const params = query.parse(location.search)
+  params.hsr = ts
+  location.search = query.stringify(params)
 }
 
 export default React.createClass({
-  getInitialState () {
-    return {ready: false}
-  },
   componentWillMount () {
     const params = query.parse(location.search)
 
@@ -48,23 +39,11 @@ export default React.createClass({
       const newParams = query.stringify(params)
       const newUrl = location.href.substring(0, location.href.indexOf('?')) + (newParams.length ? `?${newParams}` : '')
       history.replaceState(null, null, newUrl)
-
-      Promise.resolve(hsrAPI.restore(ts))
-        .then((res) => {
-          setDevToolsState(res)
-          console.info('Jumpsuit State Imported')
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-        .then((res) => {
-          this.setState({ready: true})
-        })
-    } else {
-      this.setState({ready: true})
+      setDevToolsState(hsrAPI.restore(ts))
+      console.info("Jumpsuit State Imported")
     }
   },
   render () {
-    return this.state.ready ? this.props.children : <span />
+    return this.props.children;
   }
 })
