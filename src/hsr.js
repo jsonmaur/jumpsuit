@@ -25,8 +25,10 @@ export const Rerender = () => {
   const ts = Date.now()
   const state = getDevToolsState()
 
+  console.info('Saving state...')
   return Promise.resolve(hsrAPI.save(ts, state))
     .then((res) => {
+      console.info('Saved state.')
       const params = query.parse(location.search)
       params.hsr = ts
       location.search = query.stringify(params)
@@ -49,16 +51,16 @@ export default React.createClass({
       const newUrl = location.href.substring(0, location.href.indexOf('?')) + (newParams.length ? `?${newParams}` : '')
       history.replaceState(null, null, newUrl)
 
+      console.info('Restoring state...')
       Promise.resolve(hsrAPI.restore(ts))
         .then((res) => {
           setDevToolsState(res)
-          console.info('Jumpsuit State Imported')
+          console.info('Restored state.')
         })
         .catch((err) => {
           console.error(err)
         })
         .then((res) => {
-          console.log('ready')
           this.setState({ready: true})
         })
     } else {
