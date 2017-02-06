@@ -32,7 +32,8 @@ function restore (ts) {
 function cleanDB () {
   return db.allDocs()
     .then((res) => {
-      if (res.rows < 20) return Promise.resolve(db)
+      if (res.rows.length < 20) return Promise.resolve(db)
+      console.info('Compacting...')
       const docs = res.rows.map(d => {
         return {
           id: d.id,
@@ -45,5 +46,8 @@ function cleanDB () {
     .then((res) => {
       return db.compact()
     })
-    .then(() => db)
+    .then(() => {
+      console.info('Compacted.')
+      return db
+    })
 }
