@@ -89,10 +89,10 @@ const Counter = Component({
 const globalState = { counter: CounterState }
 
 // Render your app!
-Render(globalState, <Counter/>)
+Render(globalState, <Counter/>, 'app')
 ```
 
-[Live Example on WebpackBin](http://www.webpackbin.com/V1Q_BpCdf)
+[Live Example on WebpackBin](http://www.webpackbin.com/EkIGrlyYM)
 
 ## FAQ
 
