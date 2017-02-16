@@ -51,27 +51,21 @@ $ yarn start
 ```javascript
 // Import Jumpsuit
 import React from 'react'
-import { Render, State, Actions, Component } from 'jumpsuit'
+import { Render, State, Actions, Component, Effect } from 'jumpsuit'
 
 // Create a state with some actions
 const CounterState = State({
   // Initial State
   initial: { count: 0 },
   // Actions
-  increment ({ count }) {
-    return { count: count + 1 }
-  },
-  decrement ({ count }) {
-    return { count: count - 1 }
-  },
+  increment: ({ count }) => ({ count: count + 1 }),
+  decrement: ({ count }) => ({ count: count - 1 })
 })
 
 // Create an async action
-Effect('incrementAsync' () => {
-  setTimeout(() => {
-    Actions.increment()
-  }), 1000)
-}
+Effect('incrementAsync', () => {
+  setTimeout(() => Actions.increment(), 1000)
+})
 
 // Create a subscribed component
 const Counter = Component({
@@ -79,10 +73,10 @@ const Counter = Component({
     return (
       <div>
         <h1>{ this.props.count }</h1>
-        <button onClick={ () => Actions.increment() }>Increment</button>
-        <button onClick={ () => Actions.decrement() }>Decrement</button>
+        <button onClick={ Actions.increment }>Increment</button>
+        <button onClick={ Actions.decrement }>Decrement</button>
         <br />
-        <button onClick={ () => Actions.incrementAsync() }>Increment Async</button>
+        <button onClick={ Actions.incrementAsync }>Increment Async</button>
       </div>
     )
   }
@@ -97,6 +91,8 @@ const globalState = { counter: CounterState }
 // Render your app!
 Render(globalState, <Counter/>)
 ```
+
+[Live Example on WebpackBin](http://www.webpackbin.com/V1Q_BpCdf)
 
 ## FAQ
 
