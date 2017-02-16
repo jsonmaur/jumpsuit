@@ -22,6 +22,8 @@ Jumpsuit is a React framework for efficiently building powerful web applications
 - [Changelog](https://jumpsuit.js.org/changelog.html)
 - [Jumpstate](https://github.com/jumpsuit/jumpstate)
 
+## [Demo](http://www.webpackbin.com/EkIGrlyYM)
+
 ## Join us on Slack!
 - [Join Here](https://jumpsuit-slack.herokuapp.com/)
 - [Chat Here](https://jumpsuit-js.slack.com/)
