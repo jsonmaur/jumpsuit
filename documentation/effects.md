@@ -1,6 +1,6 @@
 # Effects
 
-Effects are jumpsuit flexible and powerful way of performing asynchronous actions. Unlike the synchronous actions you place on your `State`, effects do not change any state directly.  However, they are able to call state actions that do.  In fact, they are able to do anything asynchronous you can dream up!
+Effects are jumpsuit's flexible and powerful way of performing asynchronous actions. Unlike the synchronous actions you place on your `State`, effects do not change any state directly.  However, they are able to call state actions that do.  In fact, they are able to do anything asynchronous you can dream up!
 
 A couple of common use cases for Effects:
 - Fetching Data for your `States`
