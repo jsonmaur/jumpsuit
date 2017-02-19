@@ -98,7 +98,7 @@ To create an effect:
 ```javascript
 import { Effect, Actions } from 'jumpstate'
 
-const postFetchEffect = Effect('postsFetch', (payload) => {
+const postFetchEffect = Effect('postsFetch', (payload, getState, dispatch) => {
   // You can do anything here, but async actions are a great use case:
   Actions.showLoading(true)
   Axio.get('http://mysite.com/posts')
@@ -112,6 +112,11 @@ Actions.postsFetch()
 // or alternatively
 postFetchEffect()
 ```
+
+Effects' Function paramters
+* `payload` is the first paramter sent when calling the effect. ie Actions.doAsyncStuff(payload).
+* `getState()` can be used to obtain the global state
+* `dispatch()` can be used to dispatch redux actions 
 
 ## Hooks
 A simple hook system that lets you monitor your state for actions or conditions and do just about anything you want.
