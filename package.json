@@ -31,12 +31,13 @@
     "test:lint": "standard --verbose | snazzy",
     "build": "rm -rf lib && babel src -d lib --no-comments",
     "build-dist": "rm -rf dist && webpack --config webpack.config.umd.js -p --output-filename jumpsuit-umd.min.js",
+    "build-all": "npm run build && npm run build-dist",
     "watch": "npm run build -- -w -s",
     "docs:clean": "rm -r -f docs",
     "docs:prepare": "gitbook install && cp -r assets/ documentation/assets && cp README.md documentation/README.md",
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs": "npm run docs:clean && npm run docs:prepare && gitbook build . docs && cp CNAME docs/CNAME",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build-all"
   },
   "dependencies": {
     "jumpstate": "^2.2.0",
