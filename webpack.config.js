@@ -1,10 +1,10 @@
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: './dist',
-    filename: 'jumpsuit-umd.js',
+    path: './lib',
+    filename: 'jumpsuit.js',
     library: 'jumpsuit',
-    libraryTarget:'umd'
+    libraryTarget: 'umd'
   },
   module: {
     loaders: [
@@ -15,7 +15,7 @@ module.exports = {
         query: {
           presets: [
             ['es2015', {modules: false}],
-            'stage-2',
+            'stage-2'
           ]
         }
       }
@@ -26,6 +26,6 @@ module.exports = {
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM',
+    'react-dom': 'ReactDOM'
   }
-};
+}
