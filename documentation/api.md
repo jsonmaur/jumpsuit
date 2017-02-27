@@ -113,8 +113,8 @@ Actions.postsFetch()
 postFetchEffect()
 ```
 
-Effects' Function paramters
-* `payload` is the first paramter sent when calling the effect. ie Actions.doAsyncStuff(payload).
+Effects' Function parameters
+* `payload` is the first parameter sent when calling the effect. ie Actions.doAsyncStuff(payload).
 * `getState()` can be used to obtain the global state
 * `dispatch()` can be used to dispatch redux actions 
 
