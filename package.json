@@ -31,7 +31,7 @@
     "test": "npm-run-all test:*",
     "test:lint": "standard --verbose | snazzy",
     "build": "rm -rf lib && babel src -d lib --no-comments",
-    "bundle": "webpack --config webpack.config.js -p --output-filename jumpsuit.min.js",
+    "bundle": "webpack && webpack -p --output-filename jumpsuit.min.js",
     "build-all": "npm run build && npm run bundle",
     "watch": "npm run build -- -w -s",
     "docs:clean": "rm -r -f docs",
