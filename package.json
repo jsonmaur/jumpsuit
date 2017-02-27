@@ -23,6 +23,7 @@
     "bin/",
     "lib/",
     "jumpsuit.js",
+    "jumpsuit.min.js",
     "LICENSE",
     "README.md"
   ],

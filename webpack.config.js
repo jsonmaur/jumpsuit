@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: './lib',
+    path: './',
     filename: 'jumpsuit.js',
     library: 'jumpsuit',
     libraryTarget: 'umd'
