@@ -23,6 +23,7 @@
     "bin/",
     "lib/",
     "jumpsuit.js",
+    "jumpsuit.min.js",
     "LICENSE",
     "README.md"
   ],
@@ -30,12 +31,14 @@
     "test": "npm-run-all test:*",
     "test:lint": "standard --verbose | snazzy",
     "build": "rm -rf lib && babel src -d lib --no-comments",
+    "bundle": "webpack && webpack -p --output-filename jumpsuit.min.js",
+    "build-all": "npm run build && npm run bundle",
     "watch": "npm run build -- -w -s",
     "docs:clean": "rm -r -f docs",
     "docs:prepare": "gitbook install && cp -r assets/ documentation/assets && cp README.md documentation/README.md",
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs": "npm run docs:clean && npm run docs:prepare && gitbook build . docs && cp CNAME docs/CNAME",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build-all"
   },
   "dependencies": {
     "jumpstate": "^2.2.0",
@@ -54,19 +57,21 @@
     "react-dom": "^15.0.0"
   },
   "devDependencies": {
-    "gitbook-cli": "^2.3.0",
     "babel-cli": "6.14.0",
     "babel-eslint": "6.1.2",
+    "babel-loader": "^6.3.2",
     "babel-preset-es2015": "6.14.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-2": "6.13.0",
     "browserify": "13.1.0",
+    "gitbook-cli": "^2.3.0",
     "npm-run-all": "3.1.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "snazzy": "5.0.0",
     "standard": "8.0.0",
-    "uglifyify": "3.0.3"
+    "uglifyify": "3.0.3",
+    "webpack": "^2.2.1"
   },
   "standard": {
     "parser": "babel-eslint",
