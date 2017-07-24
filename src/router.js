@@ -1,4 +1,5 @@
 import React from 'react'
+import createReactClass from 'create-react-class'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Router } from 'react-router'
 //
@@ -9,7 +10,7 @@ let syncedHistory
 
 export const getSyncedHistory = () => syncedHistory
 
-export default React.createClass({
+export default createReactClass({
   render () {
     const { history, syncedHistory: customSyncedHistory } = this.props
 

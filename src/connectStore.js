@@ -1,4 +1,5 @@
 import React from 'react'
+import createReactClass from 'create-react-class'
 import { Provider } from 'react-redux'
 // import { Router } from 'react-router'
 //
@@ -26,7 +27,7 @@ export default function (store, base) {
       DevTools = () => <span />
     }
 
-    Root = React.createClass({
+    Root = createReactClass({
       getInitialState: () => ({
         ready: false
       }),

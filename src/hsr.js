@@ -1,4 +1,5 @@
 import React from 'react'
+import createReactClass from 'create-react-class'
 import query from 'query-string'
 import hsrPouch from './hsrPouch'
 import { store } from './createStore'
@@ -36,7 +37,7 @@ export const Rerender = () => {
     .catch((err) => console.error(err))
 }
 
-export default React.createClass({
+export default createReactClass({
   getInitialState () {
     return {ready: false}
   },
