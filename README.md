@@ -4,7 +4,7 @@
   <br />
 </div>
 
-[![npm version](https://badge.fury.io/js/jumpsuit.svg)](https://badge.fury.io/js/jumpsuit) [![Build Status](https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master)](https://travis-ci.org/jumpsuit/jumpsuit) [![npm](https://img.shields.io/npm/dm/jumpsuit.svg)]() [![Jumpsuit on Slack](https://img.shields.io/badge/slack-jumpsuit-blue.svg)](https://jumpsuit-slack.herokuapp.com/)
+[![npm version](https://badge.fury.io/js/jumpsuit.svg)](https://badge.fury.io/js/jumpsuit) [![Build Status](https://travis-ci.org/jumpsuit/jumpsuit.svg?branch=master)](https://travis-ci.org/jumpsuit/jumpsuit) [![npm](https://img.shields.io/npm/dm/jumpsuit.svg)]() [![Jumpsuit on Slack](https://img.shields.io/badge/slack-react--tools-blue.svg)](https://react-chat-signup.herokuapp.com/)
 
 Jumpsuit is a React framework for efficiently building powerful web applications.
 
@@ -25,8 +25,8 @@ Jumpsuit is a React framework for efficiently building powerful web applications
 ## [Demo](http://www.webpackbin.com/EkIGrlyYM)
 
 ## Join us on Slack!
-- [Join Here](https://jumpsuit-slack.herokuapp.com/)
-- [Chat Here](https://jumpsuit-js.slack.com/)
+- [Join Here](https://react-chat-signup.herokuapp.com/)
+- [Chat Here](https://react-tools.slack.com/)
 
 ## Quick Start
 #### Install to an existing project
