@@ -11,7 +11,7 @@ import Home from './screens/Home'
 import Counter from './screens/Counter'
 
 // Simple Routing
-Render(states, (
+export default Render(states, (
   <Router>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
