@@ -51,7 +51,7 @@ $ yarn start
 ```javascript
 // Import Jumpsuit
 import React from 'react'
-import { Render, State, Actions, Component } from 'jumpsuit'
+import { Render, State, Actions, Effect, Component } from 'jumpsuit'
 
 // Create a state with some actions
 const CounterState = State({
@@ -67,11 +67,11 @@ const CounterState = State({
 })
 
 // Create an async action
-Effect('incrementAsync' () => {
+Effect('incrementAsync', () => {
   setTimeout(() => {
-    Actions.incrementAsync()
-  }), 1000)
-}
+    Actions.increment()
+  }, 1000)
+})
 
 // Create a subscribed component
 const Counter = Component({
