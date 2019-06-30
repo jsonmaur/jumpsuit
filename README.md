@@ -1,5 +1,5 @@
 # Announcement
-### Jumpsuit is now offically *DEPRECATED*. Thanks for your support over the life of Jumpsuit. It served a great purpose, but we now are strongly urging you to use idiomatic (vanilla) redux in conjunction with redux-thunk. It will most certainly improve your apps testability, stability, and scalability.
+### Jumpsuit is now officially *DEPRECATED*. Thanks for your support over the life of Jumpsuit. It served a great purpose, but we now are strongly urging you to use idiomatic (vanilla) redux in conjunction with redux-thunk. It will most certainly improve your apps testability, stability, and scalability.
 
 ### Documentation is still provided for your convenience:
 
