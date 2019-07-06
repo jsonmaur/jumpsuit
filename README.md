@@ -9,7 +9,7 @@
 - [Effects](https://jumpsuit.js.org/effects.html)
 - [Hooks](https://jumpsuit.js.org/hooks.html)
 - [Sandboxed States](https://jumpsuit.js.org/sandboxed-states.html)
-- [Hot State Reloading (HSR)](https://jumpsuit.js.org/hot-state-reloading.md)
+- [Hot State Reloading (HSR)](https://jumpsuit.js.org/hot-state-reloading.html)
 - [Tutorial](https://jumpsuit.js.org/tutorial.html)
 - [Examples](https://jumpsuit.js.org/examples.html)
 - [API](https://jumpsuit.js.org/api.html)
